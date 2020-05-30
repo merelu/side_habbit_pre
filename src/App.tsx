@@ -1,8 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { History } from "history";
 
-function App() {
+interface AppProps {
+  history: History;
+}
+
+const App = ({ history }: AppProps) => {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,6 +26,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
