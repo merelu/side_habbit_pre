@@ -1,0 +1,30 @@
+.header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size:30px;
+    text-align: left;
+    border-bottom:1px solid gray; 
+}
+
+.main{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.button{
+   text-align: right;
+}
+
+.callender {
+    border-right:1px solid gray;
+}
+
+.habbitList{
+    padding-left: 10px;
+}
+@media(max-width:800px){
+    .main{
+        display: block;
+    }
+}
+
+
