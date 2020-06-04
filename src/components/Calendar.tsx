@@ -5,7 +5,6 @@ const Calendar: React.FC = () => {
     const month: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     let generatorCalendar = () => {
-        console.log(_date.getMonth());
         const firstdayName: number = new Date(_date.getFullYear(), _date.getMonth(), 1).getDay();
 
         const lastday: number = new Date(_date.getFullYear(), _date.getMonth() + 1, 0).getDate();
@@ -15,40 +14,42 @@ const Calendar: React.FC = () => {
         let startDayCount: number = 1;
         let lastDayCount: number = 1;
         let calendarList = [];
+        let calkey =0;
 
         for (let i = 0; i < 6; i++) {
             for (let j = 0; j < 7; j++) {
                 if (i === 0 && j < firstdayName) {
-                    calendarList.push(
-                        <div className="dayBox">
+                    calendarList.push([,
+                        <div className="dateBox" key = {calkey++}>
                             <span className="text">{preLastday - (firstdayName - 1) + j}</span>
                             <span id={_date.getFullYear().toString()+setFixNum(_date.getMonth()) + setFixNum(preLastday - (firstdayName - 1) + j)}></span>
                         </div>
+                    ]
                     )
                 } else if (i === 0 && j === firstdayName) {
                     calendarList.push(
-                        <div className="dayBox">
+                       <div className="dateBox" key = {calkey++}>
                             <span className="text">{startDayCount++}</span>
                             <span id={_date.getFullYear().toString()+setFixNum(_date.getMonth()+1) + setFixNum(startDayCount)}></span>
                         </div>
                     )
                 } else if (i === 0 && j > firstdayName) {
                     calendarList.push(
-                        <div className="dayBox">
+                       <div className="dateBox" key = {calkey++}>
                             <span className="text">{startDayCount++}</span>
                             <span id={_date.getFullYear().toString()+setFixNum(_date.getMonth()+1) + setFixNum(startDayCount)}></span>
                         </div>
                     )
                 } else if (i > 0 && startDayCount <= lastday) {
                     calendarList.push(
-                        <div className="dayBox">
+                       <div className="dateBox" key = {calkey++}>
                             <span className="text">{startDayCount++}</span>
                             <span id={_date.getFullYear().toString()+setFixNum(_date.getMonth()+1) + setFixNum(startDayCount)}></span>
                         </div>
                     )
                 } else if (startDayCount > lastday) {
                     calendarList.push(
-                        <div className="dayBox">
+                       <div className="dateBox" key = {calkey++}>
                             <span className="text">{lastDayCount++}</span>
                             <span id={_date.getFullYear().toString()+setFixNum(_date.getMonth()+2) + setFixNum(lastDayCount)}></span>
                         </div>
