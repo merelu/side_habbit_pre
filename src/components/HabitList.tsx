@@ -1,10 +1,7 @@
-import React from 'react';
+import React from "react";
+
 const HabitList: React.FC = () => {
-    return (
-        <div className="habbitList">
-            hahahah
-        </div>
-    );
-}
+  return <div>Hello!</div>;
+};
 
 export default HabitList;

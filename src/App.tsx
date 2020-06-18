@@ -1,25 +1,20 @@
 import React from "react";
-import "./App.css";
-import "./temp/callenderStyle.css"
-import "./temp/style.css"
-import Subject from "./components/Subject"
-import Calendar from "./components/Calendar"
-import HabitList from "./components/HabitList"
+import Header from "./components/Header";
+import Main from "./components/Main";
 import { History } from "history";
-
+import { Route } from "react-router";
+import { ConnectedRouter } from "connected-react-router";
+// import routes from "./router";
 interface AppProps {
-  history?: History;
+  history: History;
 }
 
 const App = ({ history }: AppProps) => {
   return (
-    <div className="App">
-      <Subject></Subject>
-      <div className="main">
-        <Calendar></Calendar>
-        <HabitList></HabitList>
-      </div>
-    </div>
+    <ConnectedRouter history={history}>
+      <Route path="/" component={Header} />
+      <Route path="/calender" component={Main} />
+    </ConnectedRouter>
   );
 };
 
