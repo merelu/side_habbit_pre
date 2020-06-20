@@ -13,7 +13,7 @@ const App = ({ history }: AppProps) => {
   return (
     <ConnectedRouter history={history}>
       <Route path="/" component={Header} />
-      <Route path="/calender" component={Main} />
+      <Route path="/" component={Main} />
     </ConnectedRouter>
   );
 };

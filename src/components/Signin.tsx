@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FC } from "react";
 
-const Signin: React.FC = () => {
+const Signin: FC = () => {
   return (
     <form className="form-signin" method="post">
       <fieldset>

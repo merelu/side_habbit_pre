@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import "../css/Header.css";
 // const MenuItem = ({active, children, to}) => (
 //     <div className="menu-item">
@@ -6,7 +6,7 @@ import "../css/Header.css";
 //     </div>
 // )
 
-const Header: React.FC = () => {
+const Header: FC = () => {
   return (
     <div className="Header_grid">
       <div className="title">Habit</div>

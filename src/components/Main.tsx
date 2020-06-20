@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import "../css/Main.css";
 import Calendar from "./Calendar";
 import HabitList from "./HabitList";
 
-const Main: React.FC = () => {
+const Main: FC = () => {
   return (
     <div className="main_grid">
       <Calendar />

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import "../css/Calendar.css";
+import GenerateCalendar from "./GenerateCalendar";
 
-const Calendar: React.FC = () => {
-  let [_date, setDate] = useState<Date>(new Date());
+const Calendar: FC = () => {
+  const [_date, setDate] = useState<Date>(new Date());
   const month: string[] = [
     "Jan",
     "Feb",
@@ -18,114 +19,6 @@ const Calendar: React.FC = () => {
     "Dec",
   ];
 
-  let generatorCalendar = () => {
-    const firstdayName: number = new Date(
-      _date.getFullYear(),
-      _date.getMonth(),
-      1
-    ).getDay();
-
-    const lastday: number = new Date(
-      _date.getFullYear(),
-      _date.getMonth() + 1,
-      0
-    ).getDate();
-
-    const preLastday: number = new Date(
-      _date.getFullYear(),
-      _date.getMonth(),
-      0
-    ).getDate();
-
-    let startDayCount: number = 1;
-    let lastDayCount: number = 1;
-    let calendarList = [];
-    let calkey = 0;
-
-    for (let i = 0; i < 6; i++) {
-      for (let j = 0; j < 7; j++) {
-        if (i === 0 && j < firstdayName) {
-          calendarList.push([
-            ,
-            <div className="dateBox" key={calkey++}>
-              <span className="text">
-                {preLastday - (firstdayName - 1) + j}
-              </span>
-              <span
-                id={
-                  _date.getFullYear().toString() +
-                  setFixNum(_date.getMonth()) +
-                  setFixNum(preLastday - (firstdayName - 1) + j)
-                }
-              ></span>
-            </div>,
-          ]);
-        } else if (i === 0 && j === firstdayName) {
-          calendarList.push(
-            <div className="dateBox" key={calkey++}>
-              <span className="text">{startDayCount++}</span>
-              <span
-                id={
-                  _date.getFullYear().toString() +
-                  setFixNum(_date.getMonth() + 1) +
-                  setFixNum(startDayCount)
-                }
-              ></span>
-            </div>
-          );
-        } else if (i === 0 && j > firstdayName) {
-          calendarList.push(
-            <div className="dateBox" key={calkey++}>
-              <span className="text">{startDayCount++}</span>
-              <span
-                id={
-                  _date.getFullYear().toString() +
-                  setFixNum(_date.getMonth() + 1) +
-                  setFixNum(startDayCount)
-                }
-              ></span>
-            </div>
-          );
-        } else if (i > 0 && startDayCount <= lastday) {
-          calendarList.push(
-            <div className="dateBox" key={calkey++}>
-              <span className="text">{startDayCount++}</span>
-              <span
-                id={
-                  _date.getFullYear().toString() +
-                  setFixNum(_date.getMonth() + 1) +
-                  setFixNum(startDayCount)
-                }
-              ></span>
-            </div>
-          );
-        } else if (startDayCount > lastday) {
-          calendarList.push(
-            <div className="dateBox" key={calkey++}>
-              <span className="text">{lastDayCount++}</span>
-              <span
-                id={
-                  _date.getFullYear().toString() +
-                  setFixNum(_date.getMonth() + 2) +
-                  setFixNum(lastDayCount)
-                }
-              ></span>
-            </div>
-          );
-        }
-      }
-    }
-    return calendarList;
-  };
-  const setFixNum = (num: number): string => {
-    let fixNum: string = "";
-    if (num < 10) {
-      fixNum = "0" + num.toString();
-    } else {
-      fixNum = num.toString();
-    }
-    return fixNum;
-  };
   return (
     <div className="callender">
       <div className="month">
@@ -177,7 +70,7 @@ const Calendar: React.FC = () => {
           <span className="text">Sat</span>
         </div>
 
-        {generatorCalendar()}
+        <GenerateCalendar date={_date} />
       </div>
     </div>
   );
