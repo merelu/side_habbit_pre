@@ -1,24 +1,39 @@
 import React, { FC } from "react";
-import "../css/Header.css";
-// const MenuItem = ({active, children, to}) => (
-//     <div className="menu-item">
-//         {children}
-//     </div>
-// )
-
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
+import InputIcon from "@material-ui/icons/Input";
+import SettingsIcon from "@material-ui/icons/Settings";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    right: {
+      marginLeft: "auto",
+    },
+  })
+);
 const Header: FC = () => {
+  const classes = useStyles();
   return (
-    <div className="Header_grid">
-      <div className="title">Habit</div>
-      <div className="menu">
-        {/* <MenuItem>로그인</MenuItem>
-        <MenuItem>습관추가</MenuItem>
-        <MenuItem>설정</MenuItem> */}
-        <div className="menu-item">로그인</div>
-        <div className="menu-item">습관추가</div>
-        <div className="menu-item">설정</div>
-      </div>
-    </div>
+    <>
+      <Grid container alignItems="center">
+        <Grid>
+          <Button color="primary">Habit</Button>
+        </Grid>
+        <Grid className={classes.right}>
+          <IconButton color="primary">
+            <InputIcon />
+          </IconButton>
+          <IconButton color="primary">
+            <AddIcon />
+          </IconButton>
+          <IconButton color="primary">
+            <SettingsIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 

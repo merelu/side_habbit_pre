@@ -14,18 +14,19 @@ const setFixNum = (num: number): string => {
 };
 
 const GenerateCalendar: FC<GenerateCalendarProps> = ({ date }) => {
+  //Sunday - Saturday : 0 - 6
   const firstday: number = new Date(
     date.getFullYear(),
     date.getMonth(),
     1
   ).getDay();
-
+  //이달 말일
   const lastdate: number = new Date(
     date.getFullYear(),
     date.getMonth() + 1,
     0
   ).getDate();
-
+  //지난달 말일
   const preLastdate: number = new Date(
     date.getFullYear(),
     date.getMonth(),
@@ -40,18 +41,7 @@ const GenerateCalendar: FC<GenerateCalendarProps> = ({ date }) => {
   for (let i = 0; i < 6; i++) {
     for (let j = 0; j < 7; j++) {
       if (i === 0 && j < firstday) {
-        calendarList.push(
-          <div className="dateBox" key={calkey++}>
-            <span className="text">{preLastdate - (firstday - 1) + j}</span>
-            <span
-              id={
-                date.getFullYear().toString() +
-                setFixNum(date.getMonth()) +
-                setFixNum(preLastdate - (firstday - 1) + j)
-              }
-            ></span>
-          </div>
-        );
+        calendarList.push(<div className="dateBox" key={calkey++}></div>);
       } else if (i === 0 && j === firstday) {
         calendarList.push(
           <div className="dateBox" key={calkey++}>

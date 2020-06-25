@@ -1,13 +1,12 @@
 import React, { FC } from "react";
-import "../css/Main.css";
-import Calendar from "./Calendar";
-import HabitList from "./HabitList";
+import Contents from "./Contents";
+import Generate_Calendar from "./Generate_Calendar";
 
 const Main: FC = () => {
   return (
     <div className="main_grid">
-      <Calendar />
-      <HabitList />
+      <Generate_Calendar />
+      <Contents />
     </div>
   );
 };
