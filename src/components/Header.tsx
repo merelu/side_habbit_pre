@@ -6,6 +6,8 @@ import InputIcon from "@material-ui/icons/Input";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import Signin from "./Signin";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     right: {
@@ -15,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 const Header: FC = () => {
   const classes = useStyles();
+  const handleClick = (event: MouseEvent, comp: FC) => {
+    return comp;
+  };
   return (
     <>
       <Grid container alignItems="center">
@@ -22,9 +27,7 @@ const Header: FC = () => {
           <Button color="primary">Habit</Button>
         </Grid>
         <Grid className={classes.right}>
-          <IconButton color="primary">
-            <InputIcon />
-          </IconButton>
+          <Signin />
           <IconButton color="primary">
             <AddIcon />
           </IconButton>
