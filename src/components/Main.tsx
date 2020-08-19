@@ -1,12 +1,10 @@
-import React, { FC } from "react";
-import Contents from "./Contents";
-import Generate_Calendar from "./Generate_Calendar";
+import React, { FC, useState } from "react";
+import Header from "./Header";
 
 const Main: FC = () => {
   return (
-    <div className="main_grid">
-      <Generate_Calendar />
-      <Contents />
+    <div>
+      <div className="main_grid">로그인해주세요</div>
     </div>
   );
 };

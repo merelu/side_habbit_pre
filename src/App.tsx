@@ -1,11 +1,13 @@
 import React from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import UserMain from "./components/UserMain";
 import { History } from "history";
 import { Route } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import Generate_Calendar from "./components/Generate_Calendar";
 // import routes from "./router";
 interface AppProps {
   history: History;
@@ -16,7 +18,9 @@ const App = ({ history }: AppProps) => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <ConnectedRouter history={history}>
         <Route path="/" component={Header} />
-        <Route path="/" component={Main} />
+        <Route exact path="/" component={Main} />
+        <Route path="/home" component={UserMain} />
+        <Route path="/calendar" component={Generate_Calendar} />
       </ConnectedRouter>
     </MuiPickersUtilsProvider>
   );

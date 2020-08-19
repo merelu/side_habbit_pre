@@ -1,12 +1,13 @@
-import React, { FC } from "react";
+import React from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
-import InputIcon from "@material-ui/icons/Input";
 import SettingsIcon from "@material-ui/icons/Settings";
+import TodayIcon from "@material-ui/icons/Today";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Signin from "./Signin";
+import LoginDialog from "./auth/LoginDialog";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,19 +16,27 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-const Header: FC = () => {
+
+function Header() {
   const classes = useStyles();
-  const handleClick = (event: MouseEvent, comp: FC) => {
-    return comp;
-  };
   return (
     <>
       <Grid container alignItems="center">
         <Grid>
-          <Button color="primary">Habit</Button>
+          <Link to="/home">
+            <Button color="primary">Habit</Button>
+          </Link>
         </Grid>
         <Grid className={classes.right}>
-          <Signin />
+          <Link to="/login">
+            <LoginDialog />
+          </Link>
+          {/* 다이얼로그를 링크써서 해야되나?????? */}
+          <Link to="/calendar">
+            <IconButton color="primary">
+              <TodayIcon />
+            </IconButton>
+          </Link>
           <IconButton color="primary">
             <AddIcon />
           </IconButton>
@@ -38,6 +47,6 @@ const Header: FC = () => {
       </Grid>
     </>
   );
-};
+}
 
 export default Header;
