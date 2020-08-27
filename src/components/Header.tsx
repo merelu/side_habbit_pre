@@ -6,7 +6,7 @@ import AddIcon from "@material-ui/icons/Add";
 import SettingsIcon from "@material-ui/icons/Settings";
 import TodayIcon from "@material-ui/icons/Today";
 import Grid from "@material-ui/core/Grid";
-import LoginDialog from "./auth/LoginDialog";
+import AuthDialog from "./auth/AuthDialog";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,10 +28,7 @@ function Header() {
           </Link>
         </Grid>
         <Grid className={classes.right}>
-          <Link to="/login">
-            <LoginDialog />
-          </Link>
-          {/* 다이얼로그를 링크써서 해야되나?????? */}
+          <AuthDialog />
           <Link to="/calendar">
             <IconButton color="primary">
               <TodayIcon />

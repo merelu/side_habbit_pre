@@ -1,18 +1,12 @@
 import { History } from "history";
-import { combineReducers, Reducer } from "redux";
-import { RouterState, connectRouter } from "connected-react-router";
-import loginReducer from "./login_reducers";
-import { LoginState } from "../reducers/login_reducers";
+import { combineReducers } from "redux";
+import { connectRouter } from "connected-react-router";
+import registerReducer from "./register.reducers";
 
-export type RootState = {
-  loginReducer: LoginState;
-  router: RouterState;
-};
-
-const rootReducer = (history: History): Reducer<RootState> =>
+const rootReducer = (history: History) =>
   combineReducers({
     router: connectRouter(history),
-    loginReducer,
+    registerReducer,
   });
 
 export default rootReducer;

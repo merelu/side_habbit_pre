@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./components/Header";
-import Main from "./components/Main";
-import UserMain from "./components/UserMain";
+// import Main from "./components/Main";
+// import UserMain from "./components/UserMain";
 import { History } from "history";
 import { Route } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
@@ -18,8 +18,6 @@ const App = ({ history }: AppProps) => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <ConnectedRouter history={history}>
         <Route path="/" component={Header} />
-        <Route exact path="/" component={Main} />
-        <Route path="/home" component={UserMain} />
         <Route path="/calendar" component={Generate_Calendar} />
       </ConnectedRouter>
     </MuiPickersUtilsProvider>

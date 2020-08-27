@@ -162,5 +162,8 @@
   },
   "devDependencies": {
     "@types/redux-logger": "^3.0.8"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/HeoJeongBo/side_habbit.git",
+  "license": "MIT"
 }
