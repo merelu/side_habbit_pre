@@ -1,16 +1,18 @@
 import { AxiosError } from "axios";
 
-export const LOGIN_REQUEST = "USERS_LOGIN_REQUEST" as const;
-export const LOGIN_SUCCESS = "USERS_LOGIN_SUCCESS" as const;
-export const LOGIN_FAILURE = "USERS_LOGIN_FAILURE" as const;
+export const LOGIN_REQUEST = "LOGIN_REQUEST" as const;
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS" as const;
+export const LOGIN_FAILURE = "LOGIN_FAILURE" as const;
 
-export const loginRequest = (username: string) => ({
+export const loginRequest = (username: string, password: string) => ({
   type: LOGIN_REQUEST,
-  payload: username,
+  payload: {
+    username,
+    password,
+  },
 });
-export const loginSuccess = (data: string) => ({
+export const loginSuccess = () => ({
   type: LOGIN_SUCCESS,
-  payload: data,
 });
 export const loginError = (e: AxiosError) => ({
   type: LOGIN_FAILURE,

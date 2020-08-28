@@ -1,6 +1,6 @@
 import axios from "axios";
 
-function authenticate(user: User, data: User[]) {
+function checkUsername(user: User, data: User[]) {
   return new Promise(function (resolve, reject) {
     const exist = data.find((x) => x.username === user.username);
     if (exist) {
@@ -9,11 +9,28 @@ function authenticate(user: User, data: User[]) {
     resolve(user);
   });
 }
+
+function checkLogin(username: string, password: string, data: User[]) {
+  return new Promise(function (resolve, reject) {
+    const exist = data.find(
+      (x) => x.username === username && x.password === password
+    );
+    if (!exist) {
+      reject(new Error(`Username or Password is incorrect`));
+    }
+    resolve(true);
+  });
+}
+
 export async function authRegister(user: User) {
   const response = await axios.get<User[]>(`http://localhost:8000/users`);
-  console.log(response.data);
-  const test = await authenticate(user, response.data);
+  const test = await checkUsername(user, response.data);
   await axios.post(`http://localhost:8000/users`, test);
+}
+
+export async function authLogin(username: string, password: string) {
+  const response = await axios.get<User[]>(`http://localhost:8000/users`);
+  await checkLogin(username, password, response.data);
 }
 
 export interface User {

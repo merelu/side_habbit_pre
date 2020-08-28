@@ -8,5 +8,4 @@ export type loginAction =
 export type LoginState = {
   loggingIn: boolean;
   loggedIn: boolean;
-  user: string | null;
 };
