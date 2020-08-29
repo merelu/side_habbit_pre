@@ -18,7 +18,9 @@ function checkLogin(username: string, password: string, data: User[]) {
     if (!exist) {
       reject(new Error(`Username or Password is incorrect`));
     }
-    resolve(true);
+    localStorage.setItem("user", JSON.stringify(exist));
+    //로그인한 정보를 sessionStorage에 저장
+    resolve(exist);
   });
 }
 
@@ -30,7 +32,8 @@ export async function authRegister(user: User) {
 
 export async function authLogin(username: string, password: string) {
   const response = await axios.get<User[]>(`http://localhost:8000/users`);
-  await checkLogin(username, password, response.data);
+  const user = await checkLogin(username, password, response.data);
+  return user;
 }
 
 export interface User {

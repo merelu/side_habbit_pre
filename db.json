@@ -11,6 +11,12 @@
       "username": "heo",
       "password": "4321",
       "name": "허정보"
+    },
+    {
+      "username": "hwang1",
+      "password": "1234",
+      "name": "ㅇㅇ",
+      "id": 3
     }
   ]
 }

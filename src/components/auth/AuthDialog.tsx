@@ -5,17 +5,20 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Dialog from "@material-ui/core/Dialog";
 import Login from "./Login";
 import Register from "./Register";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/reducers";
+import { logout } from "../../store/actions/auth.actions";
 
 function AuthDialog() {
   const [open, setOpen] = useState(false);
-  //true: login / false: register
+  //mode - true: login / false: register
   const [mode, setMode] = useState(true);
   const loggedIn = useSelector(
     (state: RootState) => state.loginReducer.loggedIn
   );
+  const dispatch = useDispatch();
 
+  console.log(localStorage.getItem("user"));
   const toggleOpen = () => {
     setOpen(!open);
     setMode(true);
@@ -26,10 +29,16 @@ function AuthDialog() {
   const handleClose = () => {
     setOpen(false);
   };
+  console.log(loggedIn);
   return (
     <>
       {loggedIn ? (
-        <IconButton color="primary">
+        <IconButton
+          color="primary"
+          onClick={() => {
+            dispatch(logout());
+          }}
+        >
           <ExitToAppIcon />
         </IconButton>
       ) : (

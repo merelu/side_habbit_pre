@@ -5,8 +5,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useSelector, useDispatch } from "react-redux";
-import { loginRequest } from "../../store/actions/login.actions";
+import { loginRequest } from "../../store/actions/auth.actions";
 import { RootState } from "../../store/reducers";
+import { CircularProgress } from "@material-ui/core";
 
 type LoginProps = {
   toggleOpen: () => void;
@@ -17,7 +18,7 @@ function Login({ toggleOpen, toggleMode }: LoginProps) {
     username: "",
     password: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
   const { loggingIn, loggedIn } = useSelector(
     (state: RootState) => state.loginReducer
   );
@@ -27,14 +28,15 @@ function Login({ toggleOpen, toggleMode }: LoginProps) {
     if (loggedIn) {
       toggleOpen();
     }
-  }, [loggedIn]);
+  }, [toggleOpen, loggedIn]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [id]: value }));
   };
   //trigger를 만들어서
   const handleSubmit = () => {
-    setSubmitted(true);
+    //setSubmitted(true);
     dispatch(loginRequest(inputs.username, inputs.password));
   };
 
@@ -65,6 +67,7 @@ function Login({ toggleOpen, toggleMode }: LoginProps) {
           Register
         </Button>
         <Button color="primary" onClick={handleSubmit}>
+          {loggingIn && <CircularProgress size={30} />}
           Login
         </Button>
         <Button color="primary" onClick={toggleOpen}>

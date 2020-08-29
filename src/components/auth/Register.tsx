@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useSelector, useDispatch } from "react-redux";
-import { RegisterState } from "../../store/types/register.types";
 import { User } from "../../services/api";
 import { registerRequest } from "../../store/actions/register.acitons";
+import { RootState } from "../../store/reducers";
 type RegisterProps = {
   toggleMode: () => void;
   toggleOpen: () => void;
@@ -19,8 +19,16 @@ function Register({ toggleMode, toggleOpen }: RegisterProps) {
     name: "",
     id: 0,
   });
-  const { loading, error } = useSelector((state: RegisterState) => state);
+  const { registered } = useSelector(
+    (state: RootState) => state.registerReducer
+  );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (registered) {
+      toggleMode();
+    }
+  }, [toggleMode, registered]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;

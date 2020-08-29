@@ -23,7 +23,7 @@ function Header() {
     <>
       <Grid container alignItems="center">
         <Grid>
-          <Link to="/home">
+          <Link to="/">
             <Button color="primary">Habit</Button>
           </Link>
         </Grid>

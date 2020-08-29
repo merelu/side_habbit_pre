@@ -5,8 +5,9 @@ import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 
 function Generate_Calendar() {
   const [value, handleDateChange] = useState<MaterialUiPickersDate>(new Date());
-
-  // you can past mostly all available props, like minDate, maxDate, autoOk and so on
+  ////////////////////////////////////test//////////////////////////////////////////////
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  ////////////////////////////////////test////////////////////////////////////////////
   const { pickerProps, wrapperProps } = useStaticState({
     value,
     onChange: handleDateChange,
@@ -25,6 +26,7 @@ function Generate_Calendar() {
           value?.getMonth()!,
           value?.getDate()!
         )}
+        {user.username}
       </div>
     </>
   );

@@ -3,16 +3,15 @@ import {
   LOGIN_REQUEST,
   loginSuccess,
   loginError,
-} from "../actions/login.actions";
+} from "../actions/auth.actions";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { authLogin } from "../../services/api";
-import { history } from "../../configureStore";
 
 function* loginRequestSaga(action: ReturnType<typeof loginRequest>) {
   const { payload } = action;
   try {
-    yield call(authLogin, payload.username, payload.password);
-    yield put(loginSuccess());
+    const response = yield call(authLogin, payload.username, payload.password);
+    yield put(loginSuccess(response));
   } catch (e) {
     yield put(loginError(e));
   }

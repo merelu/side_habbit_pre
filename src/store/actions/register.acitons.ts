@@ -11,7 +11,9 @@ export const registerRequest = (user: User) => ({
   type: AUTH_REGISTER_REQUEST,
   payload: { ...user, id: nextId++ },
 });
-export const registerSuccess = () => ({ type: AUTH_REGISTER_SUCCESS });
+export const registerSuccess = () => ({
+  type: AUTH_REGISTER_SUCCESS,
+});
 export const registerFailure = (e: AxiosError) => ({
   type: AUTH_REGISTER_FAILURE,
   error: true,
