@@ -28,7 +28,7 @@ function Login({ toggleOpen, toggleMode }: LoginProps) {
     if (loggedIn) {
       toggleOpen();
     }
-  }, [toggleOpen, loggedIn]);
+  }, [loggedIn]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;

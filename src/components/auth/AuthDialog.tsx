@@ -18,10 +18,8 @@ function AuthDialog() {
   );
   const dispatch = useDispatch();
 
-  console.log(localStorage.getItem("user"));
   const toggleOpen = () => {
     setOpen(!open);
-    setMode(true);
   };
   const toggleMode = () => {
     setMode(!mode);
@@ -29,7 +27,6 @@ function AuthDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(loggedIn);
   return (
     <>
       {loggedIn ? (

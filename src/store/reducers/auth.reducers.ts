@@ -1,7 +1,11 @@
 import { authState, authAction } from "../types/auth.types";
 import * as actions from "../actions/auth.actions";
 
-const user = JSON.parse(localStorage.getItem("user") || "{}");
+let user = "";
+let test = localStorage.getItem("user");
+if (typeof test === "string") {
+  user = JSON.parse(test);
+}
 
 const initialState: authState = user
   ? {
@@ -16,7 +20,7 @@ const initialState: authState = user
       user: null,
       error: null,
     };
-console.log(initialState.loggedIn);
+
 function authReducer(state: authState = initialState, action: authAction) {
   switch (action.type) {
     case actions.LOGIN_REQUEST:
