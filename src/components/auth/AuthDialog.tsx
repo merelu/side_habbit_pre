@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -18,14 +18,18 @@ function AuthDialog() {
   );
   const dispatch = useDispatch();
 
-  const toggleOpen = () => {
-    setOpen(!open);
+  const dialogOpen = () => {
+    setOpen(true);
+    changeLoginMode();
   };
-  const toggleMode = () => {
-    setMode(!mode);
-  };
-  const handleClose = () => {
+  const dialogClose = () => {
     setOpen(false);
+  };
+  const changeLoginMode = () => {
+    setMode(true);
+  };
+  const changeRegiseterMode = () => {
+    setMode(false);
   };
   return (
     <>
@@ -34,21 +38,28 @@ function AuthDialog() {
           color="primary"
           onClick={() => {
             dispatch(logout());
+            alert("로그아웃");
           }}
         >
           <ExitToAppIcon />
         </IconButton>
       ) : (
-        <IconButton color="primary" onClick={toggleOpen}>
+        <IconButton color="primary" onClick={dialogOpen}>
           <AccountCircle />
         </IconButton>
       )}
 
-      <Dialog open={open} onClose={handleClose} aria-labelledby="Login-dialog">
+      <Dialog open={open} onClose={dialogClose} aria-labelledby="Login-dialog">
         {mode ? (
-          <Login toggleOpen={toggleOpen} toggleMode={toggleMode} />
+          <Login
+            dialogClose={dialogClose}
+            changeRegisterMode={changeRegiseterMode}
+          />
         ) : (
-          <Register toggleOpen={toggleOpen} toggleMode={toggleMode} />
+          <Register
+            dialogClose={dialogClose}
+            changeLoginMode={changeLoginMode}
+          />
         )}
       </Dialog>
     </>

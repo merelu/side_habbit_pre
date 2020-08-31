@@ -10,10 +10,10 @@ import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
 
 type LoginProps = {
-  toggleOpen: () => void;
-  toggleMode: () => void;
+  dialogClose: () => void;
+  changeRegisterMode: () => void;
 };
-function Login({ toggleOpen, toggleMode }: LoginProps) {
+function Login({ dialogClose, changeRegisterMode }: LoginProps) {
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -26,9 +26,9 @@ function Login({ toggleOpen, toggleMode }: LoginProps) {
 
   useEffect(() => {
     if (loggedIn) {
-      toggleOpen();
+      dialogClose();
     }
-  }, [loggedIn]);
+  }, [dialogClose, loggedIn]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -63,14 +63,14 @@ function Login({ toggleOpen, toggleMode }: LoginProps) {
         />
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={toggleMode}>
+        <Button color="primary" onClick={changeRegisterMode}>
           Register
         </Button>
         <Button color="primary" onClick={handleSubmit}>
           {loggingIn && <CircularProgress size={30} />}
           Login
         </Button>
-        <Button color="primary" onClick={toggleOpen}>
+        <Button color="primary" onClick={dialogClose}>
           Cancel
         </Button>
       </DialogActions>

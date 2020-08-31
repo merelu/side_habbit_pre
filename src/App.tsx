@@ -8,6 +8,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import Generate_Calendar from "./components/Generate_Calendar";
+import AddHabit from "./components/addHabit/AddHabit";
 // import routes from "./router";
 interface AppProps {
   history: History;
@@ -19,6 +20,7 @@ const App = ({ history }: AppProps) => {
       <ConnectedRouter history={history}>
         <Route path="/" component={Header} />
         <Route path="/calendar" component={Generate_Calendar} />
+        <Route path="/add" component={AddHabit} />
       </ConnectedRouter>
     </MuiPickersUtilsProvider>
   );

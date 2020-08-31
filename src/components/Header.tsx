@@ -34,9 +34,11 @@ function Header() {
               <TodayIcon />
             </IconButton>
           </Link>
-          <IconButton color="primary">
-            <AddIcon />
-          </IconButton>
+          <Link to="/add">
+            <IconButton color="primary">
+              <AddIcon />
+            </IconButton>
+          </Link>
           <IconButton color="primary">
             <SettingsIcon />
           </IconButton>

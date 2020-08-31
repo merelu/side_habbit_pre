@@ -1,25 +1,22 @@
 import { authState, authAction } from "../types/auth.types";
 import * as actions from "../actions/auth.actions";
 
-let user = "";
-let test = localStorage.getItem("user");
-if (typeof test === "string") {
-  user = JSON.parse(test);
-}
+let user = localStorage.getItem("user");
 
-const initialState: authState = user
-  ? {
-      loggingIn: false,
-      loggedIn: true,
-      user: null,
-      error: null,
-    }
-  : {
-      loggingIn: false,
-      loggedIn: false,
-      user: null,
-      error: null,
-    };
+const initialState: authState =
+  user !== null
+    ? {
+        loggingIn: false,
+        loggedIn: true,
+        user: null,
+        error: null,
+      }
+    : {
+        loggingIn: false,
+        loggedIn: false,
+        user: null,
+        error: null,
+      };
 
 function authReducer(state: authState = initialState, action: authAction) {
   switch (action.type) {

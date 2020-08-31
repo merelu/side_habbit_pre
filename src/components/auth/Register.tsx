@@ -8,27 +8,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { User } from "../../services/api";
 import { registerRequest } from "../../store/actions/register.acitons";
 import { RootState } from "../../store/reducers";
+import { CircularProgress } from "@material-ui/core";
 type RegisterProps = {
-  toggleMode: () => void;
-  toggleOpen: () => void;
+  changeLoginMode: () => void;
+  dialogClose: () => void;
 };
-function Register({ toggleMode, toggleOpen }: RegisterProps) {
+function Register({ changeLoginMode, dialogClose }: RegisterProps) {
   const [inputs, setInputs] = useState<User>({
     username: "",
     password: "",
     name: "",
     id: 0,
   });
-  const { registered } = useSelector(
-    (state: RootState) => state.registerReducer
+  const loading = useSelector(
+    (state: RootState) => state.registerReducer.loading
   );
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (registered) {
-      toggleMode();
-    }
-  }, [toggleMode, registered]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -37,6 +32,7 @@ function Register({ toggleMode, toggleOpen }: RegisterProps) {
 
   const registerSubmit = () => {
     dispatch(registerRequest(inputs));
+    changeLoginMode();
   };
 
   return (
@@ -72,9 +68,10 @@ function Register({ toggleMode, toggleOpen }: RegisterProps) {
       </DialogContent>
       <DialogActions>
         <Button color="primary" onClick={registerSubmit}>
-          Register
+          {loading && <CircularProgress size={30} />}
+          confirm
         </Button>
-        <Button color="primary" onClick={toggleOpen}>
+        <Button color="primary" onClick={changeLoginMode}>
           Cancel
         </Button>
       </DialogActions>

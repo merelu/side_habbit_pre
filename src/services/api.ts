@@ -18,7 +18,7 @@ function checkLogin(username: string, password: string, data: User[]) {
     if (!exist) {
       reject(new Error(`Username or Password is incorrect`));
     }
-    localStorage.setItem("user", JSON.stringify(exist));
+    localStorage.setItem("user", JSON.stringify(exist?.username));
     //로그인한 정보를 sessionStorage에 저장
     resolve(exist);
   });

@@ -15,8 +15,16 @@
     {
       "username": "hwang1",
       "password": "1234",
-      "name": "ㅇㅇ",
-      "id": 3
+      "name": "dd",
+      "id": 4
+    }
+  ],
+  "habits": [
+    {
+      "userId": 1,
+      "id": 1,
+      "title": "delectus aut autem",
+      "completed": false
     }
   ]
 }
