@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -35,7 +35,6 @@ function AuthDialog() {
     <>
       {loggedIn ? (
         <IconButton
-          color="primary"
           onClick={() => {
             dispatch(logout());
             alert("로그아웃");
@@ -44,7 +43,7 @@ function AuthDialog() {
           <ExitToAppIcon />
         </IconButton>
       ) : (
-        <IconButton color="primary" onClick={dialogOpen}>
+        <IconButton onClick={dialogOpen}>
           <AccountCircle />
         </IconButton>
       )}

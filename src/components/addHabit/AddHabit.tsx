@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -7,7 +7,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { makeStyles } from "@material-ui/core/styles";
-import { InputAdornment, MenuItem } from "@material-ui/core";
+import { InputAdornment, MenuItem, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   layout: {
@@ -29,29 +29,68 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(3),
     },
   },
+  buttons: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 const colors = [
   {
     value: "red",
-    label: "r",
   },
   {
     value: "green",
-    label: "g",
   },
   {
     value: "blue",
-    label: "b",
   },
+];
+
+const dayOfWeek = [
+  { id: 0, value: "Mon" },
+  { id: 1, value: "Tue" },
+  { id: 2, value: "Wed" },
+  { id: 3, value: "Thu" },
+  { id: 4, value: "Fri" },
+  { id: 5, value: "Sat" },
+  { id: 6, value: "Sun" },
 ];
 
 function AddHabit() {
   const classes = useStyles();
+  const [inputs, setInputs] = useState({
+    habbit_Name: "",
+    habbit_days: 0,
+    habbit_color: "",
+    dayOfWeek: [false, false, false, false, false, false, false],
+  });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setInputs((inputs) => ({ ...inputs, [id]: value }));
+  };
+  const handleColor = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs((inputs) => ({ ...inputs, habbit_color: e.target.value }));
+  };
+  const handlCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs((inputs) => ({
+      ...inputs,
+      dayOfWeek: inputs.dayOfWeek.map((x, index) =>
+        index === Number(e.target.name) ? e.target.checked : x
+      ),
+    }));
+  };
+  const handleSubmit = () => {
+    console.log(inputs);
+  };
   return (
     <>
       <main className={classes.layout}>
-        <Paper className={classes.paper} elevation={0}>
+        <Paper className={classes.paper} elevation={5}>
           <Typography variant="h4" gutterBottom>
             Create Habit
           </Typography>
@@ -59,17 +98,16 @@ function AddHabit() {
             <Grid item xs={12}>
               <TextField
                 required
-                id="habitName"
-                name="habitName"
+                id="habbit_Name"
                 label="Habbit name"
                 fullWidth
+                onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item sm={6}>
               <TextField
                 required
-                id="days"
-                name="days"
+                id="habbit_days"
                 label="How long?"
                 InputProps={{
                   endAdornment: (
@@ -78,18 +116,18 @@ function AddHabit() {
                 }}
                 type="number"
                 fullWidth
+                onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              {/* value 스테이트로 만들어야뎀 */}
+            <Grid item sm={6}>
               <TextField
-                id="outlined-select-currency"
                 select
                 label="color"
-                value="red"
+                value={inputs.habbit_color}
                 helperText="Please select color"
                 variant="outlined"
                 required
+                onChange={handleColor}
               >
                 {colors.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -103,51 +141,33 @@ function AddHabit() {
             </Grid>
             <Grid item xs={12}>
               <FormGroup aria-label="position" row>
-                <FormControlLabel
-                  value="Sun"
-                  control={<Checkbox color="primary" />}
-                  label="Sun"
-                  labelPlacement="top"
-                />
-                <FormControlLabel
-                  value="Mon"
-                  control={<Checkbox color="primary" />}
-                  label="Mon"
-                  labelPlacement="top"
-                />
-                <FormControlLabel
-                  value="Tue"
-                  control={<Checkbox color="primary" />}
-                  label="Tue"
-                  labelPlacement="top"
-                />
-                <FormControlLabel
-                  value="Wed"
-                  control={<Checkbox color="primary" />}
-                  label="Wed"
-                  labelPlacement="top"
-                />
-                <FormControlLabel
-                  value="Thu"
-                  control={<Checkbox color="primary" />}
-                  label="Thu"
-                  labelPlacement="top"
-                />
-                <FormControlLabel
-                  value="Fri"
-                  control={<Checkbox color="primary" />}
-                  label="Fri"
-                  labelPlacement="top"
-                />
-                <FormControlLabel
-                  value="Sat"
-                  control={<Checkbox color="primary" />}
-                  label="Sat"
-                  labelPlacement="top"
-                />
+                {dayOfWeek.map((day) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={inputs.dayOfWeek[day.id]}
+                        name={day.id.toString()}
+                        onChange={handlCheckbox}
+                      />
+                    }
+                    label={day.value}
+                    key={day.id}
+                    labelPlacement="top"
+                  />
+                ))}
               </FormGroup>
             </Grid>
           </Grid>
+          <div className={classes.buttons}>
+            <Button
+              className={classes.button}
+              variant="contained"
+              onClick={handleSubmit}
+              color="primary"
+            >
+              SAVE
+            </Button>
+          </div>
         </Paper>
       </main>
     </>

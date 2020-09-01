@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -44,7 +44,7 @@ function Register({ changeLoginMode, dialogClose }: RegisterProps) {
           margin="dense"
           id="username"
           label="username"
-          type="name"
+          type="text"
           fullWidth
           onChange={handleChange}
         />
@@ -61,19 +61,17 @@ function Register({ changeLoginMode, dialogClose }: RegisterProps) {
           margin="dense"
           id="name"
           label="name"
-          type="name"
+          type="text"
           fullWidth
           onChange={handleChange}
         />
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={registerSubmit}>
+        <Button onClick={registerSubmit}>
           {loading && <CircularProgress size={30} />}
           confirm
         </Button>
-        <Button color="primary" onClick={changeLoginMode}>
-          Cancel
-        </Button>
+        <Button onClick={changeLoginMode}>Cancel</Button>
       </DialogActions>
     </>
   );

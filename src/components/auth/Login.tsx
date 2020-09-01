@@ -49,7 +49,7 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
           margin="dense"
           id="username"
           label="username"
-          type="name"
+          type="text"
           fullWidth
           onChange={handleChange}
         />
@@ -63,16 +63,12 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
         />
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={changeRegisterMode}>
-          Register
-        </Button>
-        <Button color="primary" onClick={handleSubmit}>
+        <Button onClick={changeRegisterMode}>Register</Button>
+        <Button onClick={handleSubmit}>
           {loggingIn && <CircularProgress size={30} />}
           Login
         </Button>
-        <Button color="primary" onClick={dialogClose}>
-          Cancel
-        </Button>
+        <Button onClick={dialogClose}>Cancel</Button>
       </DialogActions>
     </>
   );

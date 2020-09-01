@@ -1,7 +1,5 @@
 import React from "react";
 import Header from "./components/Header";
-// import Main from "./components/Main";
-// import UserMain from "./components/UserMain";
 import { History } from "history";
 import { Route } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
