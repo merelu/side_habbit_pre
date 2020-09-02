@@ -9,17 +9,17 @@ const registerReducer = (
   action: RegisterAction
 ) => {
   switch (action.type) {
-    case actions.AUTH_REGISTER_REQUEST:
+    case actions.REGISTER_REQUEST:
       return {
         loading: true,
         error: null,
       };
-    case actions.AUTH_REGISTER_SUCCESS:
+    case actions.REGISTER_SUCCESS:
       return {
         loading: false,
         error: null,
       };
-    case actions.AUTH_REGISTER_FAILURE:
+    case actions.REGISTER_FAILURE:
       return {
         loading: false,
         error: action.payload,

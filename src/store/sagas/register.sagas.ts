@@ -1,6 +1,6 @@
 import { put, call, takeLatest } from "redux-saga/effects";
 import {
-  AUTH_REGISTER_REQUEST,
+  REGISTER_REQUEST,
   registerRequest,
   registerFailure,
   registerSuccess,
@@ -18,5 +18,5 @@ function* registerRequestSaga(action: ReturnType<typeof registerRequest>) {
 }
 
 export function* registerSaga() {
-  yield takeLatest(AUTH_REGISTER_REQUEST, registerRequestSaga);
+  yield takeLatest(REGISTER_REQUEST, registerRequestSaga);
 }

@@ -1,21 +1,21 @@
 import { AxiosError } from "axios";
 import { User } from "../../services/api";
 
-export const AUTH_REGISTER_REQUEST = "AUTH_REGISTER_REQUEST" as const;
-export const AUTH_REGISTER_SUCCESS = "AUTH_REGISTER_SUCCESS" as const;
-export const AUTH_REGISTER_FAILURE = "AUTH_REGISTER_FAILURE" as const;
+export const REGISTER_REQUEST = "REGISTER_REQUEST" as const;
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS" as const;
+export const REGISTER_FAILURE = "REGISTER_FAILURE" as const;
 
 let nextId = 3;
 
 export const registerRequest = (user: User) => ({
-  type: AUTH_REGISTER_REQUEST,
+  type: REGISTER_REQUEST,
   payload: { ...user, id: nextId++ },
 });
 export const registerSuccess = () => ({
-  type: AUTH_REGISTER_SUCCESS,
+  type: REGISTER_SUCCESS,
 });
 export const registerFailure = (e: AxiosError) => ({
-  type: AUTH_REGISTER_FAILURE,
+  type: REGISTER_FAILURE,
   error: true,
   payload: e,
 });

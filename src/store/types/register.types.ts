@@ -1,5 +1,4 @@
 import * as actions from "../actions/register.acitons";
-import { User } from "../../services/api";
 
 export type RegisterAction =
   | ReturnType<typeof actions.registerRequest>

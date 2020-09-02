@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import { connectRouter, RouterState } from "connected-react-router";
 import registerReducer from "./register.reducers";
 import loginReducer from "./auth.reducers";
+import addHabitReducer from "./addHabit.reducers";
 import { RegisterState } from "../types/register.types";
 import { authState } from "../types/auth.types";
 
@@ -11,6 +12,7 @@ const rootReducer = (history: History) =>
     router: connectRouter(history),
     registerReducer,
     loginReducer,
+    addHabitReducer,
   });
 
 export default rootReducer;

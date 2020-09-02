@@ -84,6 +84,7 @@ function AddHabit() {
       ),
     }));
   };
+  //작성해야할것
   const handleSubmit = () => {
     console.log(inputs);
   };

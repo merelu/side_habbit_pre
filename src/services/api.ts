@@ -10,6 +10,12 @@ function checkUsername(user: User, data: User[]) {
   });
 }
 
+export async function authRegister(user: User) {
+  const response = await axios.get<User[]>(`http://localhost:8000/users`);
+  const test = await checkUsername(user, response.data);
+  await axios.post(`http://localhost:8000/users`, test);
+}
+
 function checkLogin(username: string, password: string, data: User[]) {
   return new Promise(function (resolve, reject) {
     const exist = data.find(
@@ -19,15 +25,9 @@ function checkLogin(username: string, password: string, data: User[]) {
       reject(new Error(`Username or Password is incorrect`));
     }
     localStorage.setItem("user", JSON.stringify(exist?.username));
-    //로그인한 정보를 sessionStorage에 저장
+    localStorage.setItem("userId", JSON.stringify(exist?.id));
     resolve(exist);
   });
-}
-
-export async function authRegister(user: User) {
-  const response = await axios.get<User[]>(`http://localhost:8000/users`);
-  const test = await checkUsername(user, response.data);
-  await axios.post(`http://localhost:8000/users`, test);
 }
 
 export async function authLogin(username: string, password: string) {
@@ -36,9 +36,23 @@ export async function authLogin(username: string, password: string) {
   return user;
 }
 
+export async function addHabit(habit: Habit) {
+  //구현해야함
+  //디비구조 잡아야할듯
+}
 export interface User {
   id: number;
   username: string;
   password: string;
   name: string;
+}
+
+export interface Habit {
+  id: number;
+  userid: number;
+  username: string;
+  habbit_Name: string;
+  habbit_days: number;
+  habbit_color: string;
+  dayOfWeek: boolean[];
 }
