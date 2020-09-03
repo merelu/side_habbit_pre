@@ -9,10 +9,11 @@ import { User } from "../../services/api";
 import { registerRequest } from "../../store/actions/register.acitons";
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
-type RegisterProps = {
+
+interface RegisterProps {
   changeLoginMode: () => void;
   dialogClose: () => void;
-};
+}
 function Register({ changeLoginMode, dialogClose }: RegisterProps) {
   const [inputs, setInputs] = useState<User>({
     username: "",

@@ -9,10 +9,10 @@ import { loginRequest } from "../../store/actions/auth.actions";
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
 
-type LoginProps = {
+interface LoginProps {
   dialogClose: () => void;
   changeRegisterMode: () => void;
-};
+}
 function Login({ dialogClose, changeRegisterMode }: LoginProps) {
   const [inputs, setInputs] = useState({
     username: "",

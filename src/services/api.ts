@@ -36,10 +36,49 @@ export async function authLogin(username: string, password: string) {
   return user;
 }
 
-export async function addHabit(habit: Habit) {
-  //구현해야함
-  //디비구조 잡아야할듯
+//알고리즘 검증 필요 현재요일고려?, period로 홀수지정했을시 하루 오차 있음
+function calEndDate(
+  checkedDayOfweek: boolean[],
+  startDate: Date,
+  period: number
+) {
+  return new Promise(function (resolve, reject) {
+    let endDate = new Date(startDate);
+    const trues = checkedDayOfweek.filter((x) => x === true).length;
+    const weeks = period / trues;
+    const rest = period % trues;
+    const dates = weeks * 7 + n_indexof(checkedDayOfweek, rest, true) - 1;
+    endDate.setDate(endDate.getDate() + dates);
+    resolve(endDate);
+  });
 }
+
+function n_indexof(
+  checkedDayofweek: boolean[],
+  nth: number,
+  searchValue: boolean
+) {
+  let times = 0,
+    num = 0;
+  while (times < nth) {
+    num = checkedDayofweek.indexOf(searchValue, num++);
+    times++;
+  }
+  return num;
+}
+
+export async function addHabit(habit: Habit) {
+  const beHabit = {
+    ...habit,
+    endDate: await calEndDate(
+      habit.checkedDayOfWeek,
+      habit.startDate,
+      habit.period
+    ),
+  };
+  await axios.post(`http://localhost:8000/habits`, beHabit);
+}
+
 export interface User {
   id: number;
   username: string;
@@ -49,10 +88,10 @@ export interface User {
 
 export interface Habit {
   id: number;
-  userid: number;
-  username: string;
+  userId: number;
   habbit_Name: string;
-  habbit_days: number;
+  period: number;
   habbit_color: string;
-  dayOfWeek: boolean[];
+  checkedDayOfWeek: boolean[];
+  startDate: Date;
 }

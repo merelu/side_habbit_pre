@@ -25,5 +25,6 @@ export const loginError = (e: AxiosError) => ({
 
 export const logout = () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("userId");
   return { type: LOGOUT };
 };

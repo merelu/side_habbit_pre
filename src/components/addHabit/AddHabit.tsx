@@ -8,6 +8,8 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { makeStyles } from "@material-ui/core/styles";
 import { InputAdornment, MenuItem, Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { addHabitRequest } from "../../store/actions/addHabit.actions";
 
 const useStyles = makeStyles((theme) => ({
   layout: {
@@ -60,15 +62,21 @@ const dayOfWeek = [
   { id: 5, value: "Sat" },
   { id: 6, value: "Sun" },
 ];
-
+export interface AddHabitInputs {
+  habbit_Name: string;
+  period: number;
+  habbit_color: string;
+  checkedDayOfWeek: boolean[];
+}
 function AddHabit() {
   const classes = useStyles();
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState<AddHabitInputs>({
     habbit_Name: "",
-    habbit_days: 0,
+    period: 0,
     habbit_color: "",
-    dayOfWeek: [false, false, false, false, false, false, false],
+    checkedDayOfWeek: [false, false, false, false, false, false, false],
   });
+  const dispatch = useDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [id]: value }));
@@ -79,21 +87,27 @@ function AddHabit() {
   const handlCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((inputs) => ({
       ...inputs,
-      dayOfWeek: inputs.dayOfWeek.map((x, index) =>
+      checkedDayOfWeek: inputs.checkedDayOfWeek.map((x, index) =>
         index === Number(e.target.name) ? e.target.checked : x
       ),
     }));
   };
   //작성해야할것
   const handleSubmit = () => {
-    console.log(inputs);
+    const userId = localStorage.getItem("userId");
+    if (userId !== null) {
+      let startDate = new Date();
+      dispatch(addHabitRequest(inputs, parseInt(userId), startDate));
+    } else {
+      alert("로그인 해주세요");
+    }
   };
   return (
     <>
       <main className={classes.layout}>
         <Paper className={classes.paper} elevation={5}>
           <Typography variant="h4" gutterBottom>
-            Create Habit
+            Create habit
           </Typography>
           <Grid container spacing={4}>
             <Grid item xs={12}>
@@ -108,7 +122,7 @@ function AddHabit() {
             <Grid item sm={6}>
               <TextField
                 required
-                id="habbit_days"
+                id="period"
                 label="How long?"
                 InputProps={{
                   endAdornment: (
@@ -146,7 +160,7 @@ function AddHabit() {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={inputs.dayOfWeek[day.id]}
+                        checked={inputs.checkedDayOfWeek[day.id]}
                         name={day.id.toString()}
                         onChange={handlCheckbox}
                       />
