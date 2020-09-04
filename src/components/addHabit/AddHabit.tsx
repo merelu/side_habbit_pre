@@ -10,58 +10,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { InputAdornment, MenuItem, Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { addHabitRequest } from "../../store/actions/addHabit.actions";
+import { paperStyle } from "../../styles/styles";
 
-const useStyles = makeStyles((theme) => ({
-  layout: {
-    width: "auto",
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
-  },
-  paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
-    padding: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginBottom: theme.spacing(6),
-      padding: theme.spacing(3),
-    },
-  },
-  buttons: {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
-  },
-}));
-
-const colors = [
-  {
-    value: "red",
-  },
-  {
-    value: "green",
-  },
-  {
-    value: "blue",
-  },
-];
-
-const dayOfWeek = [
-  { id: 0, value: "Mon" },
-  { id: 1, value: "Tue" },
-  { id: 2, value: "Wed" },
-  { id: 3, value: "Thu" },
-  { id: 4, value: "Fri" },
-  { id: 5, value: "Sat" },
-  { id: 6, value: "Sun" },
-];
+const useStyles = makeStyles(paperStyle);
 export interface AddHabitInputs {
   habbit_Name: string;
   period: number;
@@ -76,10 +27,33 @@ function AddHabit() {
     habbit_color: "",
     checkedDayOfWeek: [false, false, false, false, false, false, false],
   });
+  const dayOfWeek = [
+    { id: 0, value: "Sun" },
+    { id: 1, value: "Mon" },
+    { id: 2, value: "Tue" },
+    { id: 3, value: "Wed" },
+    { id: 4, value: "Thu" },
+    { id: 5, value: "Fri" },
+    { id: 6, value: "Sat" },
+  ];
+  const colors = [
+    {
+      value: "red",
+    },
+    {
+      value: "green",
+    },
+    {
+      value: "blue",
+    },
+  ];
   const dispatch = useDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setInputs((inputs) => ({ ...inputs, [id]: value }));
+    const { id, value, type } = e.target;
+    setInputs((inputs) => ({
+      ...inputs,
+      [id]: type === "number" ? parseInt(value) : value,
+    }));
   };
   const handleColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((inputs) => ({ ...inputs, habbit_color: e.target.value }));

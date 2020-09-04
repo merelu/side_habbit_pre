@@ -1,4 +1,5 @@
 import axios from "axios";
+import { resolveCname } from "dns";
 
 function checkUsername(user: User, data: User[]) {
   return new Promise(function (resolve, reject) {
@@ -35,50 +36,30 @@ export async function authLogin(username: string, password: string) {
   const user = await checkLogin(username, password, response.data);
   return user;
 }
-
-//알고리즘 검증 필요 현재요일고려?, period로 홀수지정했을시 하루 오차 있음
-function calEndDate(
-  checkedDayOfweek: boolean[],
-  startDate: Date,
-  period: number
-) {
+function calEndDate(startDate: Date, period: number) {
   return new Promise(function (resolve, reject) {
     let endDate = new Date(startDate);
-    const trues = checkedDayOfweek.filter((x) => x === true).length;
-    const weeks = period / trues;
-    const rest = period % trues;
-    const dates = weeks * 7 + n_indexof(checkedDayOfweek, rest, true) - 1;
-    endDate.setDate(endDate.getDate() + dates);
+    endDate.setDate(endDate.getDate() + period);
+
     resolve(endDate);
   });
-}
-
-function n_indexof(
-  checkedDayofweek: boolean[],
-  nth: number,
-  searchValue: boolean
-) {
-  let times = 0,
-    num = 0;
-  while (times < nth) {
-    num = checkedDayofweek.indexOf(searchValue, num++);
-    times++;
-  }
-  return num;
 }
 
 export async function addHabit(habit: Habit) {
   const beHabit = {
     ...habit,
-    endDate: await calEndDate(
-      habit.checkedDayOfWeek,
-      habit.startDate,
-      habit.period
-    ),
+    endDate: await calEndDate(habit.startDate, habit.period),
   };
   await axios.post(`http://localhost:8000/habits`, beHabit);
 }
 
+export async function callHabit(userId: number, today: Date) {
+  const response = await axios.get<Habit[]>(
+    `http://localhost:8000/habits?userId=${userId}`
+  );
+  //금일에 해야하는 습관만 가져올 promise 함수 하나 정의해야함
+  return response.data;
+}
 export interface User {
   id: number;
   username: string;
@@ -94,4 +75,5 @@ export interface Habit {
   habbit_color: string;
   checkedDayOfWeek: boolean[];
   startDate: Date;
+  endDate?: Date;
 }

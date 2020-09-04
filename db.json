@@ -16,39 +16,21 @@
   "habits": [
     {
       "habbit_Name": "dd",
-      "period": "6",
-      "habbit_color": "",
+      "period": 2,
+      "habbit_color": "green",
       "checkedDayOfWeek": [
-        true,
+        false,
         false,
         true,
-        false,
         true,
+        false,
         false,
         false
       ],
       "userId": 1,
-      "id": 4,
-      "startDate": "2020-09-03T14:38:58.424Z",
-      "endDate": "2020-09-16T14:38:58.424Z"
-    },
-    {
-      "habbit_Name": "dd",
-      "period": "5",
-      "habbit_color": "",
-      "checkedDayOfWeek": [
-        true,
-        false,
-        true,
-        false,
-        true,
-        false,
-        false
-      ],
-      "userId": 1,
-      "id": 5,
-      "startDate": "2020-09-03T14:39:27.908Z",
-      "endDate": "2020-09-13T14:39:27.908Z"
+      "id": 1,
+      "startDate": "2020-09-04T10:58:58.163Z",
+      "endDate": "2020-09-06T10:58:58.163Z"
     }
   ]
 }
