@@ -1,4 +1,3 @@
-import { History } from "history";
 import { combineReducers } from "redux";
 import { connectRouter, RouterState } from "connected-react-router";
 import registerReducer from "./register.reducers";
@@ -9,6 +8,7 @@ import { RegisterState } from "../types/register.types";
 import { authState } from "../types/auth.types";
 import { AddHabitState } from "../types/addHabit.types";
 import { HabitsState } from "../types/Habits.types";
+import { History } from "history";
 
 const rootReducer = (history: History) =>
   combineReducers({
@@ -26,5 +26,5 @@ export type RootState = {
   registerReducer: RegisterState;
   loginReducer: authState;
   addHabitReducer: AddHabitState;
-  habitReducer: HabitsState;
+  habitsReducer: HabitsState;
 };

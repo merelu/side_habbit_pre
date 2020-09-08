@@ -3,19 +3,19 @@ import { List, makeStyles } from "@material-ui/core";
 import { listStyle } from "../../styles/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/reducers";
-import { callHabitRequest } from "../../store/actions/callHabit.actions";
 import HabitItem from "./HabitItem";
+import { getHabitsRequest } from "../../store/actions";
 
 function HabitList() {
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
   const useStyles = makeStyles(listStyle);
   const classes = useStyles();
-  const { habits } = useSelector((state: RootState) => state.callHabitReducer);
+  const { habits } = useSelector((state: RootState) => state.habitsReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (typeof userId === "string")
-      dispatch(callHabitRequest(userId, new Date()));
+      dispatch(getHabitsRequest(userId, new Date()));
   }, [dispatch, userId]);
 
   return (

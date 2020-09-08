@@ -8,16 +8,17 @@ import {
   getHabitsFailure,
 } from "../actions";
 
-function* habitsRequestSaga(action: ReturnType<typeof getHabitsRequest>) {
+function* getHabitsSaga(action: ReturnType<typeof getHabitsRequest>) {
   const { payload } = action;
   try {
     const response = yield call(callHabit, payload.userId, payload.today);
+    console.log(response);
     yield put(getHabitsSuccess(response));
   } catch (e) {
     yield put(getHabitsFailure(e));
   }
 }
 
-export function* callHabitSaga() {
-  yield takeLatest(GET_HABITS_REQUEST, habitsRequestSaga);
+export function* habitsSaga() {
+  yield takeLatest(GET_HABITS_REQUEST, getHabitsSaga);
 }

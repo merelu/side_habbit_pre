@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { makeStyles, Paper } from "@material-ui/core";
 import { paperStyle } from "../../styles/styles";
 import HabitList from "./HabitList";

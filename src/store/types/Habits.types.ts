@@ -1,10 +1,20 @@
-import * as getactions from "../actions/getHabits.actions";
 import { Habit } from "../../services/api";
+import {
+  getHabitsRequest,
+  getHabitsSuccess,
+  getHabitsFailure,
+  removeHabitSuccess,
+  removeHabitRequest,
+  removeHabitFailure,
+} from "../actions";
 
 export type HabitsAction =
-  | ReturnType<typeof getactions.getHabitsRequest>
-  | ReturnType<typeof getactions.getHabitsSuccess>
-  | ReturnType<typeof getactions.getHabitsFailure>;
+  | ReturnType<typeof getHabitsRequest>
+  | ReturnType<typeof getHabitsSuccess>
+  | ReturnType<typeof getHabitsFailure>
+  | ReturnType<typeof removeHabitRequest>
+  | ReturnType<typeof removeHabitSuccess>
+  | ReturnType<typeof removeHabitFailure>;
 
 export type HabitsState = {
   loading?: boolean;

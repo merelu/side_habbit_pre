@@ -1,5 +1,4 @@
 import axios from "axios";
-import { resolveCname } from "dns";
 
 function checkUsername(user: User, data: User[]) {
   return new Promise(function (resolve, reject) {
