@@ -15,22 +15,24 @@
   ],
   "habits": [
     {
-      "habbit_Name": "dd",
-      "period": 2,
-      "habbit_color": "green",
-      "checkedDayOfWeek": [
-        false,
-        false,
-        true,
-        true,
-        false,
-        false,
-        false
-      ],
+      "habbit_Name": "아침 9시에 일어나기",
+      "period": 10,
+      "habbit_color": "red",
+      "checkedDayOfWeek": [true, true, true, true, true, true, true],
       "userId": 1,
       "id": 1,
-      "startDate": "2020-09-04T10:58:58.163Z",
-      "endDate": "2020-09-06T10:58:58.163Z"
+      "startDate": "2020-09-08T09:00:06.580Z",
+      "endDate": "2020-09-18T09:00:06.580Z"
+    },
+    {
+      "habbit_Name": "12시 전에 자기",
+      "period": 10,
+      "habbit_color": "blue",
+      "checkedDayOfWeek": [true, true, true, true, true, true, true],
+      "userId": 1,
+      "id": 2,
+      "startDate": "2020-09-08T10:43:39.078Z",
+      "endDate": "2020-09-18T10:43:39.078Z"
     }
   ]
 }

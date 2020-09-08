@@ -30,10 +30,16 @@ export const paperStyle = (theme: Theme) => ({
   },
 });
 
-export const listStyle = (theme: Theme) => ({
+export const listStyle = (theme: Theme, color?: string) => ({
   list: {
     width: "100%",
     maxWidth: 600,
     backgroundColor: theme.palette.background.paper,
+  },
+  listItem: {
+    backgroundColor:
+      color === "red"
+        ? theme.palette.secondary.light
+        : theme.palette.primary.light,
   },
 });

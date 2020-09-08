@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux";
 import { addHabitRequest } from "../../store/actions/addHabit.actions";
 import { paperStyle } from "../../styles/styles";
 
-const useStyles = makeStyles(paperStyle);
 export interface AddHabitInputs {
   habbit_Name: string;
   period: number;
@@ -20,6 +19,7 @@ export interface AddHabitInputs {
   checkedDayOfWeek: boolean[];
 }
 function AddHabit() {
+  const useStyles = makeStyles(paperStyle);
   const classes = useStyles();
   const [inputs, setInputs] = useState<AddHabitInputs>({
     habbit_Name: "",
@@ -38,13 +38,10 @@ function AddHabit() {
   ];
   const colors = [
     {
-      value: "red",
-    },
-    {
-      value: "green",
-    },
-    {
       value: "blue",
+    },
+    {
+      value: "red",
     },
   ];
   const dispatch = useDispatch();

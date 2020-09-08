@@ -6,17 +6,28 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
+  useTheme,
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
+import { listStyle } from "../../styles/styles";
 
-function HabitItem() {
+type HabitItemProps = {
+  habbitName: string;
+  habbitColor: string;
+};
+
+function HabitItem({ habbitName, habbitColor }: HabitItemProps) {
+  const theme = useTheme();
+  const useStyles = makeStyles(listStyle(theme, habbitColor));
+  const classes = useStyles();
   return (
     <>
-      <ListItem dense button>
-        <ListItemText />
+      <ListItem className={classes.listItem} dense button>
         <ListItemIcon>
-          <Checkbox />
+          <Checkbox edge="start" />
         </ListItemIcon>
+        <ListItemText primary={habbitName} />
         <ListItemSecondaryAction>
           <IconButton edge="end">
             <MenuIcon />
