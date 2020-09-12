@@ -11,7 +11,7 @@ import {
 function* getHabitsSaga(action: ReturnType<typeof getHabitsRequest>) {
   const { payload } = action;
   try {
-    const response = yield call(callHabit, payload.userId, payload.today);
+    const response = yield call(callHabit, payload.username, payload.today);
     console.log(response);
     yield put(getHabitsSuccess(response));
   } catch (e) {

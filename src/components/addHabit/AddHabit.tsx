@@ -7,18 +7,23 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { makeStyles } from "@material-ui/core/styles";
-import { InputAdornment, MenuItem, Button } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import {
+  InputAdornment,
+  MenuItem,
+  Button,
+  CircularProgress,
+} from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
 import { addHabitRequest } from "../../store/actions/addHabit.actions";
 import { paperStyle } from "../../styles/styles";
+import { RootState } from "../../store/reducers";
+import { AddHabitInputs } from "../../store/types";
+import { History } from "history";
 
-export interface AddHabitInputs {
-  habbit_Name: string;
-  period: number;
-  habbit_color: string;
-  checkedDayOfWeek: boolean[];
-}
-function AddHabit() {
+type AddHabitProps = {
+  history: History;
+};
+function AddHabit({ history }: AddHabitProps) {
   const useStyles = makeStyles(paperStyle);
   const classes = useStyles();
   const [inputs, setInputs] = useState<AddHabitInputs>({
@@ -27,6 +32,10 @@ function AddHabit() {
     habbit_color: "",
     checkedDayOfWeek: [false, false, false, false, false, false, false],
   });
+  const { loading } = useSelector((state: RootState) => state.addHabitReducer);
+  const { loggedIn, username } = useSelector(
+    (state: RootState) => state.loginReducer
+  );
   const dayOfWeek = [
     { id: 0, value: "Sun" },
     { id: 1, value: "Mon" },
@@ -65,14 +74,15 @@ function AddHabit() {
   };
   //작성해야할것
   const handleSubmit = () => {
-    const userId = localStorage.getItem("userId");
-    if (userId !== null) {
+    if (loggedIn && username) {
       let startDate = new Date();
-      dispatch(addHabitRequest(inputs, parseInt(userId), startDate));
+      dispatch(addHabitRequest(inputs, username, startDate));
+      history.push("/");
     } else {
       alert("로그인 해주세요");
     }
   };
+
   return (
     <>
       <main className={classes.layout}>
@@ -145,6 +155,7 @@ function AddHabit() {
             </Grid>
           </Grid>
           <div className={classes.buttons}>
+            {loading && <CircularProgress size={30} />}
             <Button
               className={classes.button}
               variant="contained"

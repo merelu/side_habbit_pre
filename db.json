@@ -15,24 +15,22 @@
   ],
   "habits": [
     {
-      "habbit_Name": "아침 9시에 일어나기",
-      "period": 10,
+      "habbit_Name": "무슨 습관이 좋을까?",
+      "period": 60,
       "habbit_color": "red",
-      "checkedDayOfWeek": [true, true, true, true, true, true, true],
-      "userId": 1,
+      "checkedDayOfWeek": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "username": "hwang",
       "id": 1,
-      "startDate": "2020-09-08T09:00:06.580Z",
-      "endDate": "2020-09-18T09:00:06.580Z"
-    },
-    {
-      "habbit_Name": "12시 전에 자기",
-      "period": 10,
-      "habbit_color": "blue",
-      "checkedDayOfWeek": [true, true, true, true, true, true, true],
-      "userId": 1,
-      "id": 2,
-      "startDate": "2020-09-08T10:43:39.078Z",
-      "endDate": "2020-09-18T10:43:39.078Z"
+      "startDate": "2020-09-12T13:39:33.088Z",
+      "endDate": "2020-11-11T13:39:33.088Z"
     }
   ]
 }

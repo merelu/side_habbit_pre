@@ -1,11 +1,11 @@
 import { put, call, takeLatest } from "redux-saga/effects";
+import { addHabit } from "../../services/api";
 import {
   ADDHABIT_REQUEST,
   addHabitRequest,
   addHabitFailure,
   addHabitSuccess,
 } from "../actions/addHabit.actions";
-import { addHabit } from "../../services/api";
 
 function* addHabitRequestSaga(action: ReturnType<typeof addHabitRequest>) {
   const { payload } = action;

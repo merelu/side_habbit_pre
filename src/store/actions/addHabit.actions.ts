@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { AddHabitInputs } from "../../components/addHabit/AddHabit";
+import { AddHabitInputs } from "../types";
 
 export const ADDHABIT_REQUEST = "ADDHABIT_REQUEST" as const;
 export const ADDHABIT_SUCCESS = "ADDHABIT_SUCCESS" as const;
@@ -10,13 +10,13 @@ let nextId = 1;
 
 export const addHabitRequest = (
   habit: AddHabitInputs,
-  userId: number,
+  username: string,
   startDate: Date
 ) => ({
   type: ADDHABIT_REQUEST,
   payload: {
     ...habit,
-    userId: userId,
+    username: username,
     id: nextId++,
     startDate: startDate,
   },

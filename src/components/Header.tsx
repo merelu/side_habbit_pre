@@ -5,7 +5,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import SettingsIcon from "@material-ui/icons/Settings";
-import TodayIcon from "@material-ui/icons/Today";
+//import TodayIcon from "@material-ui/icons/Today";
 import Grid from "@material-ui/core/Grid";
 import AuthDialog from "./auth/AuthDialog";
 import { Link } from "react-router-dom";
@@ -42,11 +42,11 @@ function Header({ history }: HeaderProps) {
         </Grid>
         <Grid className={classes.right}>
           <AuthDialog />
-          <Link to="/calendar">
+          {/* <Link to="/calendar">
             <IconButton>
               <TodayIcon />
             </IconButton>
-          </Link>
+          </Link> */}
           <Link to="/add">
             <IconButton>
               <AddIcon />

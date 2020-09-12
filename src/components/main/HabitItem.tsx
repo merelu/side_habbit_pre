@@ -25,7 +25,7 @@ function HabitItem({ habbitName, habbitColor }: HabitItemProps) {
     <>
       <ListItem className={classes.listItem} dense button>
         <ListItemIcon>
-          <Checkbox edge="start" />
+          <Checkbox edge="end" />
         </ListItemIcon>
         <ListItemText primary={habbitName} />
         <ListItemSecondaryAction>

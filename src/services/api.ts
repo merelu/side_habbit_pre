@@ -23,10 +23,10 @@ function checkLogin(username: string, password: string, data: User[]) {
     );
     if (!exist) {
       reject(new Error(`Username or Password is incorrect`));
+    } else {
+      localStorage.setItem("username", JSON.stringify(exist.username));
+      resolve(exist.username);
     }
-    localStorage.setItem("user", JSON.stringify(exist?.username));
-    localStorage.setItem("userId", JSON.stringify(exist?.id));
-    resolve(exist);
   });
 }
 
@@ -35,6 +35,7 @@ export async function authLogin(username: string, password: string) {
   const user = await checkLogin(username, password, response.data);
   return user;
 }
+
 function calEndDate(startDate: Date, period: number) {
   return new Promise(function (resolve, reject) {
     let endDate = new Date(startDate);
@@ -52,10 +53,11 @@ export async function addHabit(habit: Habit) {
   await axios.post(`http://localhost:8000/habits`, beHabit);
 }
 
-export async function callHabit(userId: number, today: Date) {
+export async function callHabit(username: string, today: Date) {
   const response = await axios.get<Habit[]>(
-    `http://localhost:8000/habits?userId=${userId}`
+    `http://localhost:8000/habits?username=${username}`
   );
+  console.log(response);
   //금일에 해야하는 습관만 가져올 promise 함수 하나 정의해야함
   return response.data;
 }
@@ -68,7 +70,7 @@ export interface User {
 
 export interface Habit {
   id: number;
-  userId: number;
+  username: string;
   habbit_Name: string;
   period: number;
   habbit_color: string;

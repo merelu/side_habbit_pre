@@ -6,6 +6,6 @@ export type RegisterAction =
   | ReturnType<typeof actions.registerFailure>;
 
 export type RegisterState = {
-  loading: boolean;
-  error: Error | null;
+  loading?: boolean;
+  error?: Error;
 };

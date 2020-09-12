@@ -5,18 +5,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/reducers";
 import HabitItem from "./HabitItem";
 import { getHabitsRequest } from "../../store/actions";
-
-function HabitList() {
-  const [userId, setUserId] = useState(localStorage.getItem("userId"));
+type HabitListProps = {
+  username: string;
+};
+function HabitList({ username }: HabitListProps) {
   const useStyles = makeStyles(listStyle);
   const classes = useStyles();
   const { habits } = useSelector((state: RootState) => state.habitsReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (typeof userId === "string")
-      dispatch(getHabitsRequest(userId, new Date()));
-  }, [dispatch, userId]);
+    dispatch(getHabitsRequest(username, new Date()));
+  }, [dispatch, username]);
 
   return (
     <List className={classes.list}>

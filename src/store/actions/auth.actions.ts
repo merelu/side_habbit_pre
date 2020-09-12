@@ -1,5 +1,4 @@
 import { AxiosError } from "axios";
-import { User } from "../../services/api";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST" as const;
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS" as const;
@@ -13,9 +12,9 @@ export const loginRequest = (username: string, password: string) => ({
     password,
   },
 });
-export const loginSuccess = (user: User) => ({
+export const loginSuccess = (username: string) => ({
   type: LOGIN_SUCCESS,
-  payload: user,
+  payload: username,
 });
 export const loginError = (e: AxiosError) => ({
   type: LOGIN_FAILURE,

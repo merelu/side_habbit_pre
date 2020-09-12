@@ -1,27 +1,16 @@
 import { RegisterState, RegisterAction } from "../types/register.types";
 import * as actions from "../actions/register.acitons";
-const initialState: RegisterState = {
-  loading: false,
-  error: null,
-};
-const registerReducer = (
-  state: RegisterState = initialState,
-  action: RegisterAction
-) => {
+
+const registerReducer = (state: RegisterState = {}, action: RegisterAction) => {
   switch (action.type) {
     case actions.REGISTER_REQUEST:
       return {
         loading: true,
-        error: null,
       };
     case actions.REGISTER_SUCCESS:
-      return {
-        loading: false,
-        error: null,
-      };
+      return {};
     case actions.REGISTER_FAILURE:
       return {
-        loading: false,
         error: action.payload,
       };
     default:

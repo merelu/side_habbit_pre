@@ -5,7 +5,7 @@ import { Route } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import Generate_Calendar from "./components/Generate_Calendar";
+//import Generate_Calendar from "./components/Generate_Calendar";
 import AddHabit from "./components/addHabit/AddHabit";
 import HabitMain from "./components/main/HabitMain";
 // import routes from "./router";
@@ -19,7 +19,7 @@ const App = ({ history }: AppProps) => {
       <ConnectedRouter history={history}>
         <Route path="/" component={Header} />
         <Route path="/" component={HabitMain} exact />
-        <Route path="/calendar" component={Generate_Calendar} />
+        {/* <Route path="/calendar" component={Generate_Calendar} /> */}
         <Route path="/add" component={AddHabit} />
       </ConnectedRouter>
     </MuiPickersUtilsProvider>

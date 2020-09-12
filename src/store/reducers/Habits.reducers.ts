@@ -10,17 +10,13 @@ const habitsReducer = (state: HabitsState = {}, action: HabitsAction) => {
     case GET_HABITS_REQUEST:
       return {
         loading: true,
-        error: null,
       };
     case GET_HABITS_SUCCESS:
       return {
-        loading: false,
-        error: null,
         habits: action.payload,
       };
     case GET_HABITS_FAILURE:
       return {
-        loading: false,
         error: action.payload,
       };
     default:
