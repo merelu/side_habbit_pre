@@ -18,17 +18,19 @@
       "habbit_Name": "무슨 습관이 좋을까?",
       "period": 60,
       "habbit_color": "red",
-      "checkedDayOfWeek": [
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
+      "checkedDayOfWeek": [true, true, false, false, false, false, false],
       "username": "hwang",
       "id": 1,
+      "startDate": "2020-09-12T13:39:33.088Z",
+      "endDate": "2020-11-11T13:39:33.088Z"
+    },
+    {
+      "habbit_Name": "무슨 습관이 좋을까?",
+      "period": 60,
+      "habbit_color": "red",
+      "checkedDayOfWeek": [true, true, false, false, false, false, false],
+      "username": "hwang",
+      "id": 2,
       "startDate": "2020-09-12T13:39:33.088Z",
       "endDate": "2020-11-11T13:39:33.088Z"
     }

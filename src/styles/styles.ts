@@ -41,5 +41,6 @@ export const listStyle = (theme: Theme, color?: string) => ({
       color === "red"
         ? theme.palette.secondary.light
         : theme.palette.primary.light,
+    marginBottom: theme.spacing(1),
   },
 });

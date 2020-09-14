@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/reducers";
 import HabitItem from "./HabitItem";
 import { getHabitsRequest } from "../../store/actions";
+
 type HabitListProps = {
   username: string;
 };
