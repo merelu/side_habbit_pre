@@ -53,7 +53,7 @@ export async function addHabit(habit: Habit) {
   await axios.post(`http://localhost:8000/habits`, beHabit);
 }
 
-//오늘 해야하는 습관만 습관목록에서 가져옴
+//오늘 해야하는 습관만 습관목록에서 가져옴.
 function checkTodayHabit(data: any, today: Date) {
   return new Promise((resolve, reject) => {
     let habits: Habit[] = data.map((habit: any) => ({
