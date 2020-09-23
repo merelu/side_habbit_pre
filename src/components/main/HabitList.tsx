@@ -25,6 +25,8 @@ function HabitList({ username }: HabitListProps) {
         habits.map((state) => (
           <HabitItem
             key={state.id}
+            id={state.id}
+            username={username}
             habbitName={state.habbit_Name}
             habbitColor={state.habbit_color}
           ></HabitItem>

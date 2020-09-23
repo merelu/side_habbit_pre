@@ -4,8 +4,13 @@ import React from "react";
 type HabitItemMenuProps = {
   anchorEl: null | HTMLElement;
   handleClose: () => void;
+  handleDelete: () => void;
 };
-function HabitItemMenu({ anchorEl, handleClose }: HabitItemMenuProps) {
+function HabitItemMenu({
+  anchorEl,
+  handleClose,
+  handleDelete,
+}: HabitItemMenuProps) {
   return (
     <>
       <Menu
@@ -17,7 +22,7 @@ function HabitItemMenu({ anchorEl, handleClose }: HabitItemMenuProps) {
       >
         <MenuItem onClick={handleClose}>Check</MenuItem>
         <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem onClick={handleClose}>Delete</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
     </>
   );
