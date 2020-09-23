@@ -53,12 +53,40 @@ export async function addHabit(habit: Habit) {
   await axios.post(`http://localhost:8000/habits`, beHabit);
 }
 
+//오늘 해야하는 습관만 습관목록에서 가져옴
+function checkTodayHabit(data: any, today: Date) {
+  return new Promise((resolve, reject) => {
+    let habits: Habit[] = data.map((habit: any) => ({
+      ...habit,
+      startDate: new Date(habit.startDate),
+      endDate: new Date(habit.endDate),
+    }));
+    console.log(habits);
+    habits = habits.filter(
+      (habit: Habit) =>
+        habit.endDate!.getTime() > today.getTime() &&
+        habit.checkedDayOfWeek[today.getDay()]
+    );
+    resolve(habits);
+  });
+}
 export async function callHabit(username: string, today: Date) {
-  const response = await axios.get<Habit[]>(
+  const response = await axios.get(
     `http://localhost:8000/habits?username=${username}`
   );
-  console.log(response);
-  //금일에 해야하는 습관만 가져올 promise 함수 하나 정의해야함
+  let habits = await checkTodayHabit(response.data, today);
+
+  return habits;
+}
+
+// 수정 필요 db.json 형식 변화 하거나 delete를 안쓰거나
+export async function removeHabit(username: string, id: number) {
+  await axios.delete(`http://localhost:8000/habits`, {
+    params: { id: String(id), username: username },
+  });
+  const response = await axios.get(
+    `http://localhost:8000/habits?username=${username}`
+  );
   return response.data;
 }
 export interface User {
