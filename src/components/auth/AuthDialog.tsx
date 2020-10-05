@@ -37,7 +37,6 @@ function AuthDialog() {
         <IconButton
           onClick={() => {
             dispatch(logout());
-            alert("로그아웃");
           }}
         >
           <ExitToAppIcon />

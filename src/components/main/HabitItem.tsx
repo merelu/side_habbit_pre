@@ -17,14 +17,13 @@ import { removeHabitRequest } from "../../store/actions";
 
 type HabitItemProps = {
   id: number;
-  username: string;
-  habbitName: string;
-  habbitColor: string;
+  habitName: string;
+  color?: string;
 };
 
-function HabitItem({ id, username, habbitName, habbitColor }: HabitItemProps) {
+function HabitItem({ id, habitName, color }: HabitItemProps) {
   const theme = useTheme();
-  const useStyles = makeStyles(listStyle(theme, habbitColor));
+  const useStyles = makeStyles(listStyle(theme, color));
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const dispatch = useDispatch();
@@ -35,7 +34,7 @@ function HabitItem({ id, username, habbitName, habbitColor }: HabitItemProps) {
     setAnchorEl(null);
   };
   const handleDelete = () => {
-    dispatch(removeHabitRequest(username, id));
+    //dispatch(removeHabitRequest(username, id));
     setAnchorEl(null);
   };
   return (
@@ -44,7 +43,7 @@ function HabitItem({ id, username, habbitName, habbitColor }: HabitItemProps) {
         <ListItemIcon>
           <Checkbox edge="end" />
         </ListItemIcon>
-        <ListItemText primary={habbitName} />
+        <ListItemText primary={habitName} />
         <ListItemSecondaryAction>
           <IconButton edge="end" aria-haspopup="true" onClick={handleClick}>
             <MenuIcon />

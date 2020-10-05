@@ -10,5 +10,5 @@ export type authState = {
   loggingIn?: boolean;
   loggedIn?: boolean;
   error?: Error;
-  username?: string;
+  token?: string;
 };

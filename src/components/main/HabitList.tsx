@@ -6,29 +6,26 @@ import { RootState } from "../../store/reducers";
 import HabitItem from "./HabitItem";
 import { getHabitsRequest } from "../../store/actions";
 
-type HabitListProps = {
-  username: string;
-};
-function HabitList({ username }: HabitListProps) {
+type HabitListProps = {};
+function HabitList() {
   const useStyles = makeStyles(listStyle);
   const classes = useStyles();
   const { habits } = useSelector((state: RootState) => state.habitsReducer);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getHabitsRequest(username, new Date()));
-  }, [dispatch, username]);
+  // useEffect(() => {
+  //   dispatch(getHabitsRequest(username, new Date()));
+  // }, [dispatch, username]);
 
   return (
     <List className={classes.list}>
       {habits &&
-        habits.map((state) => (
+        habits.map((state, index) => (
           <HabitItem
-            key={state.id}
-            id={state.id}
-            username={username}
-            habbitName={state.habbit_Name}
-            habbitColor={state.habbit_color}
+            key={index}
+            id={index}
+            habitName={state.habit_Name}
+            color={state.color}
           ></HabitItem>
         ))}
     </List>

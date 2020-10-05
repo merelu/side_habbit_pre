@@ -20,9 +20,8 @@ function HabitItemMenu({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Check</MenuItem>
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem onClick={handleDelete}>Delete</MenuItem>
+        <MenuItem onClick={handleClose}>Challenge</MenuItem>
+        <MenuItem onClick={handleDelete}>Forgive</MenuItem>
       </Menu>
     </>
   );

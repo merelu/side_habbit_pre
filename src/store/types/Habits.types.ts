@@ -1,4 +1,4 @@
-import { Habit } from "../../services/api";
+import { Habit } from "../../services";
 import {
   getHabitsRequest,
   getHabitsSuccess,

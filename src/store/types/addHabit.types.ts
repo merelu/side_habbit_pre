@@ -10,9 +10,9 @@ export type AddHabitState = {
   error?: Error | null;
 };
 
-export type AddHabitInputs = {
-  habbit_Name: string;
+export type AddHabitInputsType = {
+  habit_Name: string;
   period: number;
-  habbit_color: string;
+  color: string;
   checkedDayOfWeek: boolean[];
 };

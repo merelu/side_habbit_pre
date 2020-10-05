@@ -15,7 +15,7 @@ interface LoginProps {
 }
 function Login({ dialogClose, changeRegisterMode }: LoginProps) {
   const [inputs, setInputs] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   // const [submitted, setSubmitted] = useState(false);
@@ -37,7 +37,7 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
   //trigger를 만들어서
   const handleSubmit = () => {
     //setSubmitted(true);
-    dispatch(loginRequest(inputs.username, inputs.password));
+    dispatch(loginRequest(inputs.email, inputs.password));
   };
 
   return (
@@ -47,9 +47,9 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
         <TextField
           autoFocus
           margin="dense"
-          id="username"
-          label="username"
-          type="text"
+          id="email"
+          label="email"
+          type="email"
           fullWidth
           onChange={handleChange}
         />

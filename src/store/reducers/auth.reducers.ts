@@ -1,15 +1,14 @@
 import { authState, authAction } from "../types/auth.types";
 import * as actions from "../actions/auth.actions";
+import { getCookie } from "../../services";
 
-let username;
-let test = localStorage.getItem("username");
-if (typeof test === "string") username = JSON.parse(test);
+let token = getCookie("auth");
 
 const initialState: authState =
-  username !== null
+  token !== null
     ? {
         loggedIn: true,
-        username,
+        token,
       }
     : {};
 
@@ -23,7 +22,6 @@ function authReducer(state: authState = initialState, action: authAction) {
     case actions.LOGIN_SUCCESS:
       return {
         loggedIn: true,
-        username: action.payload,
       };
     case actions.LOGIN_FAILURE:
       return {

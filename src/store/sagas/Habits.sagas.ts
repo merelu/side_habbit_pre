@@ -1,6 +1,6 @@
 import { put, call, takeLatest } from "redux-saga/effects";
 
-import { callHabit, removeHabit } from "../../services/api";
+import { callHabit, removeHabit } from "../../services";
 import {
   GET_HABITS_REQUEST,
   REMOVE_HABIT_REQUEST,

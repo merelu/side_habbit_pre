@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { Habit } from "../../services/api";
+import { Habit } from "../../services";
 
 export const GET_HABITS_REQUEST = "GET_HABITS_REQUEST" as const;
 export const GET_HABITS_SUCCESS = "GET_HABITS_SUCCESS" as const;

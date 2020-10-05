@@ -1,24 +1,16 @@
 import { AxiosError } from "axios";
-import { AddHabitInputs } from "../types";
+import { Habit } from "../../services";
+import { AddHabitInputsType } from "../types";
 
 export const ADDHABIT_REQUEST = "ADDHABIT_REQUEST" as const;
 export const ADDHABIT_SUCCESS = "ADDHABIT_SUCCESS" as const;
 export const ADDHABIT_FAILURE = "ADDHABIT_FAILURE" as const;
 
-//임시 습관 생성할시 새로고침하면 에러발생 이것때문
-let nextId = 1;
-
-export const addHabitRequest = (
-  habit: AddHabitInputs,
-  username: string,
-  startDate: Date
-) => ({
+export const addHabitRequest = (inputs: AddHabitInputsType) => ({
   type: ADDHABIT_REQUEST,
   payload: {
-    ...habit,
-    username: username,
-    id: nextId++,
-    startDate: startDate,
+    ...inputs,
+    startDate: new Date(),
   },
 });
 export const addHabitSuccess = () => ({

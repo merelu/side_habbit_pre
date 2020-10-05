@@ -5,7 +5,7 @@ import {
   registerFailure,
   registerSuccess,
 } from "../actions/register.acitons";
-import { authRegister } from "../../services/api";
+import { authRegister } from "../../services";
 
 function* registerRequestSaga(action: ReturnType<typeof registerRequest>) {
   const { payload } = action;

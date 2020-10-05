@@ -15,34 +15,22 @@
   ],
   "habits": [
     {
-      "habbit_Name": "무슨 습관이 좋을까?1",
-      "period": 60,
+      "habbit_Name": "ddd",
+      "period": 14,
       "habbit_color": "red",
-      "checkedDayOfWeek": [true, true, false, false, false, false, false],
+      "checkedDayOfWeek": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
       "username": "hwang",
       "id": 1,
-      "startDate": "2020-09-12T13:39:33.088Z",
-      "endDate": "2020-11-11T13:39:33.088Z"
-    },
-    {
-      "habbit_Name": "무슨 습관이 좋을까?2",
-      "period": 60,
-      "habbit_color": "red",
-      "checkedDayOfWeek": [true, true, false, false, true, false, false],
-      "username": "hwang",
-      "id": 2,
-      "startDate": "2020-09-12T13:39:33.088Z",
-      "endDate": "2020-09-25T13:39:33.088Z"
-    },
-    {
-      "habbit_Name": "123123",
-      "period": 60,
-      "habbit_color": "red",
-      "checkedDayOfWeek": [true, true, false, false, false, false, false],
-      "username": "heo",
-      "id": 1,
-      "startDate": "2020-09-12T13:39:33.088Z",
-      "endDate": "2020-11-11T13:39:33.088Z"
+      "startDate": "2020-09-26T07:50:00.439Z",
+      "endDate": "2020-10-10T07:50:00.439Z"
     }
   ]
 }

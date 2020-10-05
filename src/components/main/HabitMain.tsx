@@ -8,23 +8,18 @@ import { useSelector } from "react-redux";
 const useStyles = makeStyles(paperStyle);
 function HabitMain() {
   const classes = useStyles();
-  const { loggedIn, username } = useSelector(
-    (state: RootState) => state.loginReducer
-  );
+  const { loggedIn } = useSelector((state: RootState) => state.loginReducer);
   return (
     <>
-      {loggedIn && username ? (
+      {loggedIn ? (
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-            <HabitList username={username} />
+            <HabitList />
           </Paper>
         </main>
       ) : (
         <>
           <div>로그인해주세요</div>
-          <div>로그인안됨 링크들가서 깔고 터미널에 입력</div>
-          <p>$json-server --watch db.json --port 8000</p>
-          <a href="https://www.npmjs.com/package/json-server">링크</a>
         </>
       )}
     </>

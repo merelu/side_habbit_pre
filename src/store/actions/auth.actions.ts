@@ -1,20 +1,21 @@
 import { AxiosError } from "axios";
+import { setCookie } from "../../services";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST" as const;
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS" as const;
 export const LOGIN_FAILURE = "LOGIN_FAILURE" as const;
 export const LOGOUT = "LOGOUT" as const;
 
-export const loginRequest = (username: string, password: string) => ({
+export const loginRequest = (email: string, password: string) => ({
   type: LOGIN_REQUEST,
   payload: {
-    username,
+    email,
     password,
   },
 });
-export const loginSuccess = (username: string) => ({
+export const loginSuccess = (email: string) => ({
   type: LOGIN_SUCCESS,
-  payload: username,
+  payload: email,
 });
 export const loginError = (e: AxiosError) => ({
   type: LOGIN_FAILURE,
@@ -23,7 +24,6 @@ export const loginError = (e: AxiosError) => ({
 });
 
 export const logout = () => {
-  localStorage.removeItem("user");
-  localStorage.removeItem("userId");
+  setCookie("auth", "", -1);
   return { type: LOGOUT };
 };

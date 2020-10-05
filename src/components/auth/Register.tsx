@@ -5,7 +5,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useSelector, useDispatch } from "react-redux";
-import { User } from "../../services/api";
+import { User } from "../../services";
 import { registerRequest } from "../../store/actions/register.acitons";
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
@@ -16,10 +16,9 @@ interface RegisterProps {
 }
 function Register({ changeLoginMode, dialogClose }: RegisterProps) {
   const [inputs, setInputs] = useState<User>({
-    username: "",
+    email: "",
     password: "",
-    name: "",
-    id: 0,
+    full_name: "",
   });
   const loading = useSelector(
     (state: RootState) => state.registerReducer.loading
@@ -43,9 +42,9 @@ function Register({ changeLoginMode, dialogClose }: RegisterProps) {
         <TextField
           autoFocus
           margin="dense"
-          id="username"
-          label="username"
-          type="text"
+          id="email"
+          label="email"
+          type="email"
           fullWidth
           onChange={handleChange}
         />
@@ -60,8 +59,8 @@ function Register({ changeLoginMode, dialogClose }: RegisterProps) {
         <TextField
           autoFocus
           margin="dense"
-          id="name"
-          label="name"
+          id="full_name"
+          label="full_name"
           type="text"
           fullWidth
           onChange={handleChange}

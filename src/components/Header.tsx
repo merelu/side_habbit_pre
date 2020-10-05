@@ -3,13 +3,14 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import HomeIcon from "@material-ui/icons/Home";
 import IconButton from "@material-ui/core/IconButton";
-import AddIcon from "@material-ui/icons/Add";
-import SettingsIcon from "@material-ui/icons/Settings";
-//import TodayIcon from "@material-ui/icons/Today";
+import PaletteIcon from "@material-ui/icons/Palette";
 import Grid from "@material-ui/core/Grid";
 import AuthDialog from "./auth/AuthDialog";
 import { Link } from "react-router-dom";
 import { History } from "history";
+import AddhabitDialog from "./addHabit/AddhabitDialog";
+import { RootState } from "../store/reducers";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +28,7 @@ function Header({ history }: HeaderProps) {
   const handleBack = () => {
     history.goBack();
   };
+  const { loggedIn } = useSelector((state: RootState) => state.loginReducer);
   return (
     <>
       <Grid container alignItems="center">
@@ -42,19 +44,14 @@ function Header({ history }: HeaderProps) {
         </Grid>
         <Grid className={classes.right}>
           <AuthDialog />
-          {/* <Link to="/calendar">
-            <IconButton>
-              <TodayIcon />
-            </IconButton>
-          </Link> */}
-          <Link to="/add">
-            <IconButton>
-              <AddIcon />
-            </IconButton>
-          </Link>
-          <IconButton>
-            <SettingsIcon />
-          </IconButton>
+          {loggedIn && (
+            <>
+              <AddhabitDialog />
+              <IconButton>
+                <PaletteIcon />
+              </IconButton>
+            </>
+          )}
         </Grid>
       </Grid>
     </>
