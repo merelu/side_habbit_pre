@@ -14,7 +14,7 @@ function AuthDialog() {
   //mode - true: login / false: register
   const [mode, setMode] = useState(true);
   const loggedIn = useSelector(
-    (state: RootState) => state.loginReducer.loggedIn
+    (state: RootState) => state.authReducer.loggedIn
   );
   const dispatch = useDispatch();
 

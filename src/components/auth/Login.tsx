@@ -20,7 +20,7 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
   });
   // const [submitted, setSubmitted] = useState(false);
   const { loggingIn, loggedIn } = useSelector(
-    (state: RootState) => state.loginReducer
+    (state: RootState) => state.authReducer
   );
   const dispatch = useDispatch();
 

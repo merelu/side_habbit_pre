@@ -32,7 +32,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
     color: "",
     checkedDayOfWeek: [false, false, false, false, false, false, false],
   });
-  const { loggedIn } = useSelector((state: RootState) => state.loginReducer);
+  const { loggedIn } = useSelector((state: RootState) => state.authReducer);
   const dayOfWeek = [
     { id: 0, value: "Sun" },
     { id: 1, value: "Mon" },
@@ -71,7 +71,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
   };
   //작성해야할것
   const handleSubmit = () => {
-    //dispatch(addHabitRequest(inputs, token, startDate));
+    dispatch(addHabitRequest(inputs));
   };
 
   return (

@@ -8,7 +8,6 @@ const initialState: authState =
   token !== null
     ? {
         loggedIn: true,
-        token,
       }
     : {};
 

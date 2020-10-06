@@ -22,11 +22,16 @@ export async function authRegister(user: User) {
 }
 
 export async function authLogin(email: string, password: string) {
+  // const body = JSON.stringify({
+  //   email: email,
+  //   password: password,
+  // });
+  // console.log(body);
   const body = new FormData();
   body.append("email", email);
   body.append("password", password);
 
-  const response = await axios.post(`/account/login/`, body);
+  const response = await axios.post("/account/login/", body);
   setCookie("auth", response.data.token, 1);
   return response;
 }

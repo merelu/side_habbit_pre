@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const useStyles = makeStyles(paperStyle);
 function HabitMain() {
   const classes = useStyles();
-  const { loggedIn } = useSelector((state: RootState) => state.loginReducer);
+  const { loggedIn } = useSelector((state: RootState) => state.authReducer);
   return (
     <>
       {loggedIn ? (

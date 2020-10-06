@@ -28,7 +28,7 @@ function Header({ history }: HeaderProps) {
   const handleBack = () => {
     history.goBack();
   };
-  const { loggedIn } = useSelector((state: RootState) => state.loginReducer);
+  const { loggedIn } = useSelector((state: RootState) => state.authReducer);
   return (
     <>
       <Grid container alignItems="center">
