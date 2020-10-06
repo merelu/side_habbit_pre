@@ -13,9 +13,9 @@ function HabitList() {
   const { habits } = useSelector((state: RootState) => state.habitsReducer);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getHabitsRequest(username, new Date()));
-  // }, [dispatch, username]);
+  useEffect(() => {
+    dispatch(getHabitsRequest());
+  }, [dispatch]);
 
   return (
     <List className={classes.list}>

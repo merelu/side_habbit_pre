@@ -1,7 +1,12 @@
 import axios from "axios";
 
+let AUTH_TOKEN = null;
+if (getCookie("auth")) {
+  AUTH_TOKEN = "token " + getCookie("auth");
+}
+console.log(AUTH_TOKEN);
 axios.defaults.baseURL = "http://localhost:8000";
-// axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
+axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export interface User {
@@ -11,28 +16,27 @@ export interface User {
 }
 
 export async function authRegister(user: User) {
-  const body = new FormData();
-  body.append("email", user.email);
-  body.append("password", user.password);
-  body.append("full_name", user.full_name);
+  const body = {
+    email: user.email,
+    password: user.password,
+    full_name: user.full_name,
+  };
 
-  const response = await axios.post(`/account/registration/`, body);
-  console.log(response);
+  const response = await axios.post("/account/registration/", body);
   return response;
 }
 
 export async function authLogin(email: string, password: string) {
-  // const body = JSON.stringify({
-  //   email: email,
-  //   password: password,
-  // });
-  // console.log(body);
-  const body = new FormData();
-  body.append("email", email);
-  body.append("password", password);
+  const body = {
+    email: email,
+    password: password,
+  };
 
   const response = await axios.post("/account/login/", body);
+  console.log(response.data.token);
   setCookie("auth", response.data.token, 1);
+  AUTH_TOKEN = "token " + getCookie("auth");
+  console.log(AUTH_TOKEN);
   return response;
 }
 
