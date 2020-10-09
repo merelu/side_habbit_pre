@@ -1,6 +1,6 @@
-import { Theme } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core";
 
-export const paperStyle = (theme: Theme) => ({
+export const paperStyle = makeStyles((theme: Theme) => ({
   layout: {
     width: "auto",
     marginLeft: theme.spacing(2),
@@ -28,9 +28,9 @@ export const paperStyle = (theme: Theme) => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
-});
+}));
 
-export const listStyle = (theme: Theme, color?: string) => ({
+export const listStyle = makeStyles((theme: Theme, color?: string) => ({
   list: {
     width: "100%",
     maxWidth: 600,
@@ -43,4 +43,10 @@ export const listStyle = (theme: Theme, color?: string) => ({
         : theme.palette.primary.light,
     marginBottom: theme.spacing(1),
   },
-});
+}));
+
+export const backgroundStyle = makeStyles((theme: Theme) => ({
+  "*": { margin: 0, padding: 0 },
+  background: {},
+  particle: {},
+}));

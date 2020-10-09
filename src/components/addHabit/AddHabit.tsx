@@ -5,7 +5,6 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   InputAdornment,
   MenuItem,
@@ -24,10 +23,9 @@ type AddHabitProps = {
 };
 
 function AddHabit({ dialogClose }: AddHabitProps) {
-  const useStyles = makeStyles(paperStyle);
-  const classes = useStyles();
+  const style = paperStyle();
   const [inputs, setInputs] = useState<AddHabitInputsType>({
-    habit_Name: "",
+    name: "",
     period: 0,
     color: "",
     checkedDayOfWeek: [false, false, false, false, false, false, false],
@@ -84,7 +82,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
           <Grid item xs={12}>
             <TextField
               required
-              id="habit_Name"
+              id="name"
               label="Habit name"
               fullWidth
               onChange={handleChange}
@@ -146,9 +144,9 @@ function AddHabit({ dialogClose }: AddHabitProps) {
         </Grid>
       </DialogContent>
       <DialogActions>
-        <div className={classes.buttons}>
+        <div className={style.buttons}>
           <Button
-            className={classes.button}
+            className={style.button}
             variant="contained"
             onClick={handleSubmit}
             color="primary"
@@ -156,7 +154,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
             SAVE
           </Button>
           <Button
-            className={classes.button}
+            className={style.button}
             variant="contained"
             onClick={dialogClose}
             color="secondary"

@@ -2,23 +2,23 @@ import { put, call, takeLatest } from "redux-saga/effects";
 
 import { callHabit, removeHabit } from "../../services";
 import {
-  GET_HABITS_REQUEST,
+  CALL_HABITS_REQUEST,
   REMOVE_HABIT_REQUEST,
-  getHabitsRequest,
-  getHabitsSuccess,
-  getHabitsFailure,
+  callHabitsRequest,
+  callHabitsSuccess,
+  callHabitsFailure,
   removeHabitRequest,
   removeHabitFailure,
   removeHabitSuccess,
 } from "../actions";
 
-function* getHabitsSaga(action: ReturnType<typeof getHabitsRequest>) {
+function* callHabitsSaga(action: ReturnType<typeof callHabitsRequest>) {
   //const { payload } = action;
   try {
     const response = yield call(callHabit);
-    yield put(getHabitsSuccess(response));
+    yield put(callHabitsSuccess(response));
   } catch (e) {
-    yield put(getHabitsFailure(e));
+    yield put(callHabitsFailure(e));
   }
 }
 
@@ -33,6 +33,6 @@ function* removeHabitSaga(action: ReturnType<typeof removeHabitRequest>) {
 }
 
 export function* habitsSaga() {
-  yield takeLatest(GET_HABITS_REQUEST, getHabitsSaga);
+  yield takeLatest(CALL_HABITS_REQUEST, callHabitsSaga);
   yield takeLatest(REMOVE_HABIT_REQUEST, removeHabitSaga);
 }

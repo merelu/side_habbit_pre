@@ -1,7 +1,7 @@
 import {
-  GET_HABITS_FAILURE,
-  GET_HABITS_REQUEST,
-  GET_HABITS_SUCCESS,
+  CALL_HABITS_FAILURE,
+  CALL_HABITS_REQUEST,
+  CALL_HABITS_SUCCESS,
   REMOVE_HABIT_FAILURE,
   REMOVE_HABIT_REQUEST,
   REMOVE_HABIT_SUCCESS,
@@ -10,15 +10,15 @@ import { HabitsState, HabitsAction } from "../types/Habits.types";
 
 const habitsReducer = (state: HabitsState = {}, action: HabitsAction) => {
   switch (action.type) {
-    case GET_HABITS_REQUEST:
+    case CALL_HABITS_REQUEST:
       return {
         loading: true,
       };
-    case GET_HABITS_SUCCESS:
+    case CALL_HABITS_SUCCESS:
       return {
         habits: action.payload,
       };
-    case GET_HABITS_FAILURE:
+    case CALL_HABITS_FAILURE:
       return {
         error: action.payload,
       };

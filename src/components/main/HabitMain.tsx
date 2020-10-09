@@ -1,25 +1,27 @@
 import React from "react";
-import { makeStyles, Paper } from "@material-ui/core";
-import { paperStyle } from "../../styles/styles";
+import { Paper, Typography } from "@material-ui/core";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import { backgroundStyle, paperStyle } from "../../styles/styles";
 import HabitList from "./HabitList";
 import { RootState } from "../../store/reducers";
 import { useSelector } from "react-redux";
 
-const useStyles = makeStyles(paperStyle);
 function HabitMain() {
-  const classes = useStyles();
+  const style = { paper: paperStyle(), background: backgroundStyle() };
   const { loggedIn } = useSelector((state: RootState) => state.authReducer);
   return (
     <>
       {loggedIn ? (
-        <main className={classes.layout}>
-          <Paper className={classes.paper}>
-            <HabitList />
-          </Paper>
+        <main className={style.background.background}>
+          <div className={style.paper.layout}>
+            <Paper className={style.paper.paper}>
+              <HabitList />
+            </Paper>
+          </div>
         </main>
       ) : (
         <>
-          <div>로그인해주세요</div>
+          <Typography>로그인해주세요</Typography>
         </>
       )}
     </>

@@ -1,17 +1,17 @@
 import { Habit } from "../../services";
 import {
-  getHabitsRequest,
-  getHabitsSuccess,
-  getHabitsFailure,
+  callHabitsRequest,
+  callHabitsSuccess,
+  callHabitsFailure,
   removeHabitSuccess,
   removeHabitRequest,
   removeHabitFailure,
 } from "../actions";
 
 export type HabitsAction =
-  | ReturnType<typeof getHabitsRequest>
-  | ReturnType<typeof getHabitsSuccess>
-  | ReturnType<typeof getHabitsFailure>
+  | ReturnType<typeof callHabitsRequest>
+  | ReturnType<typeof callHabitsSuccess>
+  | ReturnType<typeof callHabitsFailure>
   | ReturnType<typeof removeHabitRequest>
   | ReturnType<typeof removeHabitSuccess>
   | ReturnType<typeof removeHabitFailure>;

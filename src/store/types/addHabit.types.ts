@@ -11,7 +11,7 @@ export type AddHabitState = {
 };
 
 export type AddHabitInputsType = {
-  habit_Name: string;
+  name: string;
   period: number;
   color: string;
   checkedDayOfWeek: boolean[];

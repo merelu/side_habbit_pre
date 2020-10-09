@@ -1,6 +1,16 @@
 import axios from "axios";
 import { AddHabitInputsType } from "../store/types";
 
+export interface Habit {
+  name: string;
+  period: number;
+  checkedDayOfWeek: boolean[];
+  startDate: Date;
+  color: string;
+  endDate: Date;
+  NumOfTodo: number;
+}
+//-------------------------------Add habit-------------------------------------
 function calEndDate(startDate: Date, period: number) {
   let endDate = new Date(startDate);
   endDate.setDate(endDate.getDate() + period);
@@ -50,7 +60,7 @@ export async function addHabit(habit: AddHabitInputsType) {
   const start_date = new Date();
   const end_date = calEndDate(start_date, habit.period);
   const body = {
-    name: habit.habit_Name,
+    name: habit.name,
     start_date: dateFormat(start_date),
     end_date: dateFormat(end_date),
     check_day_of_week: habit.checkedDayOfWeek,
@@ -77,12 +87,15 @@ export async function addHabit(habit: AddHabitInputsType) {
 //   });
 // }
 
+//-------------------------------Call habit-------------------------------------
 export async function callHabit() {
   const response = await axios.get("/habit/my_habits/");
   console.log(response.data);
+  return response.data;
   //let habits = await habitOfDate(response.data, date);
 }
 
+//-------------------------------Delete habit-------------------------------------
 // 수정 필요 db.json 형식 변화 하거나 delete를 안쓰거나
 export async function removeHabit(username: string, id: number) {
   await axios.delete(`/habits`, {
@@ -90,14 +103,4 @@ export async function removeHabit(username: string, id: number) {
   });
   const response = await axios.get(`/habits?username=${username}`);
   return response.data;
-}
-
-export interface Habit {
-  habit_Name: string;
-  period: number;
-  checkedDayOfWeek: boolean[];
-  startDate: Date;
-  color: string;
-  endDate: Date;
-  NumOfTodo: number;
 }

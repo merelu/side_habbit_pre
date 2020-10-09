@@ -6,9 +6,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
-  useTheme,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import { listStyle } from "../../styles/styles";
 import HabitItemMenu from "./HabitItemMenu";
@@ -22,9 +20,7 @@ type HabitItemProps = {
 };
 
 function HabitItem({ id, habitName, color }: HabitItemProps) {
-  const theme = useTheme();
-  const useStyles = makeStyles(listStyle(theme, color));
-  const classes = useStyles();
+  const style = listStyle(color);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const dispatch = useDispatch();
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -39,7 +35,7 @@ function HabitItem({ id, habitName, color }: HabitItemProps) {
   };
   return (
     <>
-      <ListItem className={classes.listItem} dense button>
+      <ListItem className={style.listItem} dense button>
         <ListItemIcon>
           <Checkbox edge="end" />
         </ListItemIcon>
