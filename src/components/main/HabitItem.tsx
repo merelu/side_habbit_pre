@@ -1,28 +1,17 @@
 import React, { MouseEvent, useState } from "react";
-import {
-  ListItem,
-  Checkbox,
-  ListItemIcon,
-  ListItemText,
-  ListItemSecondaryAction,
-  IconButton,
-} from "@material-ui/core";
+import { Grid, IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { listStyle } from "../../styles/styles";
 import HabitItemMenu from "./HabitItemMenu";
-import { useDispatch } from "react-redux";
-import { removeHabitRequest } from "../../store/actions";
 
 type HabitItemProps = {
   id: number;
   habitName: string;
-  color?: string;
 };
 
-function HabitItem({ id, habitName, color }: HabitItemProps) {
-  const style = listStyle(color);
+function HabitItem({ id, habitName }: HabitItemProps) {
+  const style = listStyle();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const dispatch = useDispatch();
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget);
   };
@@ -35,12 +24,15 @@ function HabitItem({ id, habitName, color }: HabitItemProps) {
   };
   return (
     <>
-      <ListItem className={style.listItem} dense button>
-        <ListItemIcon>
-          <Checkbox edge="end" />
-        </ListItemIcon>
-        <ListItemText primary={habitName} />
-        <ListItemSecondaryAction>
+      <Grid container alignItems="center">
+        <Grid>
+          <label>
+            <input type="checkbox" name="" />
+            <i></i>
+            <div className="text">{habitName}</div>
+          </label>
+        </Grid>
+        <Grid className={style.right}>
           <IconButton edge="end" aria-haspopup="true" onClick={handleClick}>
             <MenuIcon />
           </IconButton>
@@ -49,8 +41,8 @@ function HabitItem({ id, habitName, color }: HabitItemProps) {
             handleClose={handleClose}
             handleDelete={handleDelete}
           />
-        </ListItemSecondaryAction>
-      </ListItem>
+        </Grid>
+      </Grid>
     </>
   );
 }

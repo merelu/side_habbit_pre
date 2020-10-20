@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -14,23 +14,22 @@ import {
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { addHabitRequest } from "../../store/actions/addHabit.actions";
-import { paperStyle } from "../../styles/styles";
-import { RootState } from "../../store/reducers";
+import { buttonStyle } from "../../styles";
 import { AddHabitInputsType } from "../../store/types";
+import { RootState } from "../../store/reducers";
 
 type AddHabitProps = {
   dialogClose: () => void;
 };
 
 function AddHabit({ dialogClose }: AddHabitProps) {
-  const style = paperStyle();
+  const style = buttonStyle();
   const [inputs, setInputs] = useState<AddHabitInputsType>({
     name: "",
     period: 0,
     color: "",
     checkedDayOfWeek: [false, false, false, false, false, false, false],
   });
-  const { loggedIn } = useSelector((state: RootState) => state.authReducer);
   const dayOfWeek = [
     { id: 0, value: "Sun" },
     { id: 1, value: "Mon" },
@@ -48,6 +47,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
       value: "red",
     },
   ];
+  const { loading } = useSelector((state: RootState) => state.addHabitReducer);
   const dispatch = useDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value, type } = e.target;
@@ -67,6 +67,12 @@ function AddHabit({ dialogClose }: AddHabitProps) {
       ),
     }));
   };
+  useEffect(() => {
+    if (loading === false) {
+      dialogClose();
+      console.log("닫힘");
+    }
+  }, [dialogClose, loading])
   //작성해야할것
   const handleSubmit = () => {
     dispatch(addHabitRequest(inputs));

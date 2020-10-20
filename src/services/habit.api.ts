@@ -18,26 +18,26 @@ function calEndDate(startDate: Date, period: number) {
   return endDate;
 }
 
-function countDay(startDate: Date, period: number, arr: boolean[]) {
-  let count = 0;
-  let tmp;
-  for (var i = 0; i <= period; i++) {
-    tmp = new Date(startDate);
-    tmp.setDate(tmp.getDate() + i);
-    if (arr[tmp.getDay()] === true) {
-      count++;
-    }
-  }
-  return count;
-}
+// function countDay(startDate: Date, period: number, arr: boolean[]) {
+//   let count = 0;
+//   let tmp;
+//   for (var i = 0; i <= period; i++) {
+//     tmp = new Date(startDate);
+//     tmp.setDate(tmp.getDate() + i);
+//     if (arr[tmp.getDay()] === true) {
+//       count++;
+//     }
+//   }
+//   return count;
+// }
 
-function calNumOfdoDay(
-  startDate: Date,
-  period: number,
-  checkedDayOfWeek: boolean[]
-) {
-  return new Promise(function (resolve) {});
-}
+// function calNumOfdoDay(
+//   startDate: Date,
+//   period: number,
+//   checkedDayOfWeek: boolean[]
+// ) {
+//   return new Promise(function (resolve) {});
+// }
 
 function dateFormat(date: Date) {
   const numFormat = (num: number): string => {

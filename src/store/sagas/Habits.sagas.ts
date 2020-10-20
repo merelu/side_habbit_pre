@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from "redux-saga/effects";
+import { put, call, takeLatest, takeEvery } from "redux-saga/effects";
 
 import { callHabit, removeHabit } from "../../services";
 import {
@@ -10,6 +10,7 @@ import {
   removeHabitRequest,
   removeHabitFailure,
   removeHabitSuccess,
+  ADDHABIT_SUCCESS,
 } from "../actions";
 
 function* callHabitsSaga(action: ReturnType<typeof callHabitsRequest>) {
@@ -35,4 +36,5 @@ function* removeHabitSaga(action: ReturnType<typeof removeHabitRequest>) {
 export function* habitsSaga() {
   yield takeLatest(CALL_HABITS_REQUEST, callHabitsSaga);
   yield takeLatest(REMOVE_HABIT_REQUEST, removeHabitSaga);
+  yield takeEvery(ADDHABIT_SUCCESS, callHabitsSaga);
 }

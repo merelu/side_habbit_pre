@@ -1,29 +1,26 @@
 import React from "react";
-import Header from "./components/header/Header";
 import { History } from "history";
 import { Route } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
-import AddHabit from "./components/addHabit/AddHabit";
-import HabitMain from "./components/main/HabitMain";
 import "./styles/app.css";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { paperStyle } from "./styles";
+import HabitBody from "./components/main/HabitBody";
 
 interface AppProps {
   history: History;
 }
 
+//폰트 적용
 const theme = createMuiTheme({
-  typography: {
-  },
+  typography: {},
 });
 
 const App = ({ history }: AppProps) => {
   return (
     <ThemeProvider theme={theme}>
       <ConnectedRouter history={history}>
-        <Route path="/" component={Header} />
-        <Route path="/" component={HabitMain} exact />
-        <Route path="/add" component={AddHabit} />
+        <Route path="/" component={HabitBody} />
       </ConnectedRouter>
     </ThemeProvider>
   );

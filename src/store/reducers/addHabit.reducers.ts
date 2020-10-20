@@ -8,7 +8,9 @@ const addHabitReducer = (state: AddHabitState = {}, action: AddHabitAction) => {
         loading: true,
       };
     case actions.ADDHABIT_SUCCESS:
-      return {};
+      return {
+        loading: false,
+      };
     case actions.ADDHABIT_FAILURE:
       return {
         error: action.payload,
