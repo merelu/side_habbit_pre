@@ -8,12 +8,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginRequest } from "../../store/actions/auth.actions";
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
+import { boxStyle } from "../../styles";
 
 interface LoginProps {
   dialogClose: () => void;
   changeRegisterMode: () => void;
 }
 function Login({ dialogClose, changeRegisterMode }: LoginProps) {
+  const style = boxStyle();
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -42,7 +44,9 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
 
   return (
     <>
-      <DialogTitle id="Login-dialog-title">Login</DialogTitle>
+      <DialogTitle id="Login-dialog-title" className={style.text}>
+        <div className={style.box}>Login</div>
+      </DialogTitle>
       <DialogContent>
         <TextField
           autoFocus

@@ -9,12 +9,14 @@ import { User } from "../../services";
 import { registerRequest } from "../../store/actions/register.acitons";
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
+import { boxStyle } from "../../styles";
 
 interface RegisterProps {
   changeLoginMode: () => void;
   dialogClose: () => void;
 }
 function Register({ changeLoginMode, dialogClose }: RegisterProps) {
+  const style = boxStyle();
   const [inputs, setInputs] = useState<User>({
     email: "",
     password: "",
@@ -37,7 +39,9 @@ function Register({ changeLoginMode, dialogClose }: RegisterProps) {
 
   return (
     <>
-      <DialogTitle id="Register-dialog-title">Register</DialogTitle>
+      <DialogTitle id="Register-dialog-title" className={style.text}>
+        <div className={style.box}>Register</div>
+      </DialogTitle>
       <DialogContent>
         <TextField
           autoFocus

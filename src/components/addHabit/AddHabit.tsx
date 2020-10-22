@@ -11,10 +11,11 @@ import {
   Button,
   DialogContent,
   DialogActions,
+  DialogTitle,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { addHabitRequest } from "../../store/actions/addHabit.actions";
-import { buttonStyle } from "../../styles";
+import { boxStyle, buttonStyle } from "../../styles";
 import { AddHabitInputsType } from "../../store/types";
 import { RootState } from "../../store/reducers";
 
@@ -23,7 +24,7 @@ type AddHabitProps = {
 };
 
 function AddHabit({ dialogClose }: AddHabitProps) {
-  const style = buttonStyle();
+  const style = { button: buttonStyle(), box: boxStyle() };
   const [inputs, setInputs] = useState<AddHabitInputsType>({
     name: "",
     period: 0,
@@ -72,7 +73,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
       dialogClose();
       console.log("닫힘");
     }
-  }, [dialogClose, loading])
+  }, [dialogClose, loading]);
   //작성해야할것
   const handleSubmit = () => {
     dispatch(addHabitRequest(inputs));
@@ -80,10 +81,10 @@ function AddHabit({ dialogClose }: AddHabitProps) {
 
   return (
     <>
+      <DialogTitle id="Login-dialog-title" className={style.box.text}>
+        <div className={style.box.box}>Create habit</div>
+      </DialogTitle>
       <DialogContent style={{ overflow: "hidden" }}>
-        <Typography variant="h4" gutterBottom>
-          Create habit
-        </Typography>
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <TextField
@@ -150,9 +151,9 @@ function AddHabit({ dialogClose }: AddHabitProps) {
         </Grid>
       </DialogContent>
       <DialogActions>
-        <div className={style.buttons}>
+        <div className={style.button.buttons}>
           <Button
-            className={style.button}
+            className={style.button.button}
             variant="contained"
             onClick={handleSubmit}
             color="primary"
@@ -160,7 +161,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
             SAVE
           </Button>
           <Button
-            className={style.button}
+            className={style.button.button}
             variant="contained"
             onClick={dialogClose}
             color="secondary"

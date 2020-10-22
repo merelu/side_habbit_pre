@@ -22,32 +22,30 @@ function Header({ history }: HeaderProps) {
   };
   const { loggedIn } = useSelector((state: RootState) => state.authReducer);
   return (
-    <div className={style.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <div className={style.left}>
-            <IconButton onClick={handleBack}>
-              <ArrowBackIcon />
+    <AppBar position="static" className={style.root}>
+      <Toolbar>
+        <div className={style.left}>
+          <IconButton onClick={handleBack}>
+            <ArrowBackIcon />
+          </IconButton>
+          <Link to="/">
+            <IconButton>
+              <HomeIcon />
             </IconButton>
-            <Link to="/">
-              <IconButton>
-                <HomeIcon />
-              </IconButton>
-            </Link>
-          </div>
+          </Link>
+        </div>
 
-          <AuthDialog />
-          {loggedIn && (
-            <>
-              <AddhabitDialog />
-              <IconButton>
-                <PaletteIcon />
-              </IconButton>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
+        <AuthDialog />
+        {loggedIn && (
+          <>
+            <AddhabitDialog />
+            <IconButton>
+              <PaletteIcon />
+            </IconButton>
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
 

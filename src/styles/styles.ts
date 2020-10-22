@@ -10,7 +10,22 @@ export const buttonStyle = makeStyles((theme: Theme) => ({
     marginLeft: theme.spacing(1),
   },
 }));
-
+export const boxStyle = makeStyles((theme: Theme) => ({
+  box: {
+    background: theme.palette.primary.dark,
+    boxSizing: "border-box",
+    width: "200px",
+    position: "absolute",
+    left: "0px",
+    textAlign: "center",
+    borderRadius: "0 10px 10px 0",
+  },
+  text: {
+    color: theme.palette.primary.contrastText,
+    marginBottom: "20px",
+    overflow: "visible",
+  },
+}));
 export const listStyle = makeStyles((theme: Theme, color?: string) => ({
   list: {
     width: "100%",
@@ -77,19 +92,29 @@ export const listStyle = makeStyles((theme: Theme, color?: string) => ({
 export const appBarStyle = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
+    background: theme.palette.primary.dark,
   },
-  left: { flexGrow: 1 },
+  left: {
+    flexGrow: 1,
+  },
 }));
 
 export const paperStyle = makeStyles((theme: Theme) => ({
   background: {
     display: "flex",
     justifyContent: "center",
-    background: "linear-gradient(to top, #eee7ae, #87bde8)",
+    flexDirection: "column",
+    background: theme.palette.primary.main,
+  },
+  header: {
+    width: "100%",
   },
   body: {
-    width: "600px",
-    height: "100vh",
-    background: "#fff",
+    display: "flex",
+    justifyContent: "center",
+    alignSelf: "center",
+    maxWidth: "1500px",
+    minHeight: "100vh",
+    margin: "auto",
   },
 }));

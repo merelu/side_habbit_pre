@@ -31,12 +31,10 @@ export async function authLogin(email: string, password: string) {
     email: email,
     password: password,
   };
-
   const response = await axios.post("/account/login/", body);
-  console.log(response.data.token);
   setCookie("auth", response.data.token, 1);
   AUTH_TOKEN = "token " + getCookie("auth");
-  console.log(AUTH_TOKEN);
+  axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
   return response;
 }
 

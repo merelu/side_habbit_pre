@@ -42,23 +42,28 @@ function AuthDialog() {
           <ExitToAppIcon />
         </IconButton>
       ) : (
-          <IconButton onClick={dialogOpen}>
-            <AccountCircle />
-          </IconButton>
-        )}
+        <IconButton onClick={dialogOpen}>
+          <AccountCircle />
+        </IconButton>
+      )}
 
-      <Dialog open={open} onClose={dialogClose} aria-labelledby="Login-dialog">
+      <Dialog
+        open={open}
+        onClose={dialogClose}
+        aria-labelledby="Login-dialog"
+        style={{ overflow: "visible" }}
+      >
         {mode ? (
           <Login
             dialogClose={dialogClose}
             changeRegisterMode={changeRegiseterMode}
           />
         ) : (
-            <Register
-              dialogClose={dialogClose}
-              changeLoginMode={changeLoginMode}
-            />
-          )}
+          <Register
+            dialogClose={dialogClose}
+            changeLoginMode={changeLoginMode}
+          />
+        )}
       </Dialog>
     </>
   );
