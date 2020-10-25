@@ -1,10 +1,11 @@
 import React from "react";
-import { History } from "history";
-import { Route } from "react-router";
+import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 import "./styles/app.css";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import HabitBody from "./components/main/HabitBody";
+import ErrorPage from "./components/error/ErrorPage";
+import { History } from "history";
 
 interface AppProps {
   history: History;
@@ -31,7 +32,16 @@ const App = ({ history }: AppProps) => {
   return (
     <ThemeProvider theme={theme}>
       <ConnectedRouter history={history}>
-        <Route path="/" component={HabitBody} />
+        <Switch>
+          <Route exact path="/" component={HabitBody} />
+          <Route
+            path="/networkerror"
+            render={() => (
+              <ErrorPage status="---" description="Network Error" />
+            )}
+          />
+          <Route component={ErrorPage} />
+        </Switch>
       </ConnectedRouter>
     </ThemeProvider>
   );

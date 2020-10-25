@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -10,20 +10,23 @@ import { registerRequest } from "../../store/actions/register.acitons";
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
 import { boxStyle } from "../../styles";
+import { History } from "history";
 
 interface RegisterProps {
   changeLoginMode: () => void;
-  dialogClose: () => void;
+  history: History;
 }
-function Register({ changeLoginMode, dialogClose }: RegisterProps) {
+function Register({ changeLoginMode, history }: RegisterProps) {
   const style = boxStyle();
   const [inputs, setInputs] = useState<User>({
     email: "",
     password: "",
     full_name: "",
   });
-  const loading = useSelector(
-    (state: RootState) => state.registerReducer.loading
+  const { email, password, full_name } = inputs;
+  const [submitted, setSubmitted] = useState(false);
+  const { loading, registered, error } = useSelector(
+    (state: RootState) => state.registerReducer
   );
   const dispatch = useDispatch();
 
@@ -32,10 +35,24 @@ function Register({ changeLoginMode, dialogClose }: RegisterProps) {
     setInputs((inputs) => ({ ...inputs, [id]: value }));
   };
 
-  const registerSubmit = () => {
-    dispatch(registerRequest(inputs));
-    changeLoginMode();
+  const registerSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setSubmitted(true);
+    if (email && password && full_name) {
+      dispatch(registerRequest(inputs));
+    }
   };
+  useEffect(() => {
+    if (registered) {
+      changeLoginMode();
+    }
+  });
+
+  useEffect(() => {
+    if (error?.message === "Network Error") {
+      history.push("/networkerror");
+    }
+  }, [error, history]);
 
   return (
     <>
@@ -45,27 +62,32 @@ function Register({ changeLoginMode, dialogClose }: RegisterProps) {
       <DialogContent>
         <TextField
           autoFocus
+          error={submitted && !email ? true : false}
           margin="dense"
           id="email"
-          label="email"
+          label="Email"
           type="email"
+          helperText={submitted && !email && "Email is required"}
           fullWidth
           onChange={handleChange}
         />
         <TextField
+          error={submitted && !password ? true : false}
           margin="dense"
           id="password"
           label="Password"
           type="password"
+          helperText={submitted && !password && "Password is required"}
           fullWidth
           onChange={handleChange}
         />
         <TextField
-          autoFocus
+          error={submitted && !full_name ? true : false}
           margin="dense"
           id="full_name"
-          label="full_name"
+          label="Full name"
           type="text"
+          helperText={submitted && !full_name && "Full name is required"}
           fullWidth
           onChange={handleChange}
         />

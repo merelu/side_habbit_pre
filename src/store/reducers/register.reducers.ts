@@ -8,7 +8,9 @@ const registerReducer = (state: RegisterState = {}, action: RegisterAction) => {
         loading: true,
       };
     case actions.REGISTER_SUCCESS:
-      return {};
+      return {
+        registered: true,
+      };
     case actions.REGISTER_FAILURE:
       return {
         error: action.payload,

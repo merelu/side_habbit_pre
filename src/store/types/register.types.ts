@@ -7,5 +7,6 @@ export type RegisterAction =
 
 export type RegisterState = {
   loading?: boolean;
+  registered?: boolean;
   error?: Error;
 };

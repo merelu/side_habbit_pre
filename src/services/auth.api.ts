@@ -32,9 +32,11 @@ export async function authLogin(email: string, password: string) {
     password: password,
   };
   const response = await axios.post("/account/login/", body);
-  setCookie("auth", response.data.token, 1);
-  AUTH_TOKEN = "token " + getCookie("auth");
-  axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
+  if (response) {
+    setCookie("auth", response.data.token, 1);
+    AUTH_TOKEN = "token " + getCookie("auth");
+    axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
+  }
   return response;
 }
 
@@ -64,4 +66,13 @@ export function getCookie(key: string) {
     return false;
   });
   return result;
+}
+
+export function verifyEmail(value: string): boolean {
+  const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+  if (value.match(regExp) != null) {
+    return true;
+  }
+  return false;
 }

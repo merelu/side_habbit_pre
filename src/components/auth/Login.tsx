@@ -9,19 +9,23 @@ import { loginRequest } from "../../store/actions/auth.actions";
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
 import { boxStyle } from "../../styles";
+import { History } from "history";
 
 interface LoginProps {
   dialogClose: () => void;
   changeRegisterMode: () => void;
+  history: History;
+  open: boolean;
 }
-function Login({ dialogClose, changeRegisterMode }: LoginProps) {
+function Login({ open, dialogClose, changeRegisterMode, history }: LoginProps) {
   const style = boxStyle();
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
-  // const [submitted, setSubmitted] = useState(false);
-  const { loggingIn, loggedIn } = useSelector(
+  const { email, password } = inputs;
+  const [submitted, setSubmitted] = useState(false);
+  const { loggingIn, loggedIn, error } = useSelector(
     (state: RootState) => state.authReducer
   );
   const dispatch = useDispatch();
@@ -30,17 +34,25 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
     if (loggedIn) {
       dialogClose();
     }
-  }, [dialogClose, loggedIn]);
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [id]: value }));
   };
   //trigger를 만들어서
-  const handleSubmit = () => {
-    //setSubmitted(true);
-    dispatch(loginRequest(inputs.email, inputs.password));
+  const loginSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setSubmitted(true);
+    if (email && password) {
+      dispatch(loginRequest(inputs.email, inputs.password));
+    }
   };
+  useEffect(() => {
+    if (error?.message === "Network Error") {
+      history.push("/networkerror");
+    }
+  }, [error, history]);
 
   return (
     <>
@@ -50,25 +62,29 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
       <DialogContent>
         <TextField
           autoFocus
+          error={submitted && !email ? true : false}
           margin="dense"
           id="email"
-          label="email"
+          label="Email"
           type="email"
+          helperText={submitted && !email && "Email is required"}
           fullWidth
           onChange={handleChange}
         />
         <TextField
+          error={submitted && !password ? true : false}
           margin="dense"
           id="password"
           label="Password"
           type="password"
+          helperText={submitted && !password && "Password is required"}
           fullWidth
           onChange={handleChange}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={changeRegisterMode}>Register</Button>
-        <Button onClick={handleSubmit}>
+        <Button onClick={loginSubmit}>
           {loggingIn && <CircularProgress size={30} />}
           Login
         </Button>

@@ -35,7 +35,7 @@ function Header({ history }: HeaderProps) {
           </Link>
         </div>
 
-        <AuthDialog />
+        <AuthDialog history={history} />
         {loggedIn && (
           <>
             <AddhabitDialog />

@@ -30,6 +30,8 @@ function authReducer(state: authState = initialState, action: authAction) {
       return {
         loggedIn: false,
       };
+    case actions.LOGIN_RESET:
+      return initialState;
     default:
       return state;
   }
