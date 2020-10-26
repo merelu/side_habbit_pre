@@ -104,7 +104,7 @@ export const paperStyle = makeStyles((theme: Theme) => ({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    background: theme.palette.primary.main,
+    background: theme.palette.primary.light,
   },
   header: {
     width: "100%",

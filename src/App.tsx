@@ -5,11 +5,7 @@ import "./styles/app.css";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import HabitBody from "./components/main/HabitBody";
 import ErrorPage from "./components/error/ErrorPage";
-import { History } from "history";
-
-interface AppProps {
-  history: History;
-}
+import { history } from "./configureStore";
 
 //폰트 적용
 const theme = createMuiTheme({
@@ -25,10 +21,16 @@ const theme = createMuiTheme({
       main: "#ECA4A6",
       light: "#F9D5D3",
     },
+    success: {
+      main: "#807F89",
+    },
+    error: {
+      main: "#ECA4A6",
+    },
   },
 });
 
-const App = ({ history }: AppProps) => {
+const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <ConnectedRouter history={history}>

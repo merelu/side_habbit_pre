@@ -12,5 +12,4 @@ export type authState = {
   loggingIn?: boolean;
   loggedIn?: boolean;
   error?: AxiosError;
-  token?: string;
 };

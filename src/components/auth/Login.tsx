@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -9,15 +9,12 @@ import { loginRequest } from "../../store/actions/auth.actions";
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
 import { boxStyle } from "../../styles";
-import { History } from "history";
 
 interface LoginProps {
   dialogClose: () => void;
   changeRegisterMode: () => void;
-  history: History;
-  open: boolean;
 }
-function Login({ open, dialogClose, changeRegisterMode, history }: LoginProps) {
+function Login({ dialogClose, changeRegisterMode }: LoginProps) {
   const style = boxStyle();
   const [inputs, setInputs] = useState({
     email: "",
@@ -25,16 +22,10 @@ function Login({ open, dialogClose, changeRegisterMode, history }: LoginProps) {
   });
   const { email, password } = inputs;
   const [submitted, setSubmitted] = useState(false);
-  const { loggingIn, loggedIn, error } = useSelector(
+  const { loggingIn, loggedIn } = useSelector(
     (state: RootState) => state.authReducer
   );
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (loggedIn) {
-      dialogClose();
-    }
-  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -48,11 +39,12 @@ function Login({ open, dialogClose, changeRegisterMode, history }: LoginProps) {
       dispatch(loginRequest(inputs.email, inputs.password));
     }
   };
+
   useEffect(() => {
-    if (error?.message === "Network Error") {
-      history.push("/networkerror");
+    if (loggedIn) {
+      dialogClose();
     }
-  }, [error, history]);
+  });
 
   return (
     <>

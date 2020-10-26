@@ -1,9 +1,9 @@
 import { AxiosError } from "axios";
 import { AddHabitInputsType } from "../types";
 
-export const ADDHABIT_REQUEST = "ADDHABIT_REQUEST" as const;
-export const ADDHABIT_SUCCESS = "ADDHABIT_SUCCESS" as const;
-export const ADDHABIT_FAILURE = "ADDHABIT_FAILURE" as const;
+export const ADDHABIT_REQUEST = "USER_ADDHABIT_REQUEST" as const;
+export const ADDHABIT_SUCCESS = "USER_ADDHABIT_SUCCESS" as const;
+export const ADDHABIT_FAILURE = "USER_ADDHABIT_FAILURE" as const;
 
 export const addHabitRequest = (inputs: AddHabitInputsType) => ({
   type: ADDHABIT_REQUEST,

@@ -1,11 +1,11 @@
 import { AxiosError } from "axios";
 import { setCookie } from "../../services";
 
-export const LOGIN_REQUEST = "LOGIN_REQUEST" as const;
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS" as const;
-export const LOGIN_FAILURE = "LOGIN_FAILURE" as const;
-export const LOGOUT = "LOGOUT" as const;
-export const LOGIN_RESET = "LOGIN_RESET" as const;
+export const LOGIN_REQUEST = "USER_LOGIN_REQUEST" as const;
+export const LOGIN_SUCCESS = "USER_LOGIN_SUCCESS" as const;
+export const LOGIN_FAILURE = "USER_LOGIN_FAILURE" as const;
+export const LOGOUT = "USER_LOGOUT" as const;
+export const LOGIN_RESET = "USER_LOGIN_RESET" as const;
 
 export const loginRequest = (email: string, password: string) => ({
   type: LOGIN_REQUEST,

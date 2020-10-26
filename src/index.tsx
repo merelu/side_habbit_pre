@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import configureStore, { history } from "./configureStore";
+import configureStore from "./configureStore";
 import { Provider } from "react-redux";
 
 const store = configureStore();
@@ -11,7 +11,7 @@ const store = configureStore();
 ReactDOM.render(
   <AppContainer>
     <Provider store={store}>
-      <App history={history} />
+      <App />
     </Provider>
   </AppContainer>,
   document.getElementById("root")

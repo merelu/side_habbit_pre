@@ -13,7 +13,7 @@ export default function configureStore(preloadedstate?: any) {
   const composeEnhancer: typeof compose =
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
-    rootReducer(history),
+    rootReducer(),
     preloadedstate,
     composeEnhancer(
       applyMiddleware(routerMiddleware(history), logger, sagaMiddleware)

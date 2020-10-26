@@ -10,42 +10,42 @@ import { RootState } from "../../store/reducers";
 import { useSelector } from "react-redux";
 import { appBarStyle } from "../../styles";
 import { AppBar, Toolbar } from "@material-ui/core";
-import { History } from "history";
+import { history } from "../../configureStore";
 
-interface HeaderProps {
-  history: History;
-}
-function Header({ history }: HeaderProps) {
+function Header() {
   const style = appBarStyle();
   const handleBack = () => {
     history.goBack();
   };
   const { loggedIn } = useSelector((state: RootState) => state.authReducer);
-  return (
-    <AppBar position="static" className={style.root}>
-      <Toolbar>
-        <div className={style.left}>
-          <IconButton onClick={handleBack}>
-            <ArrowBackIcon />
-          </IconButton>
-          <Link to="/">
-            <IconButton>
-              <HomeIcon />
-            </IconButton>
-          </Link>
-        </div>
 
-        <AuthDialog history={history} />
-        {loggedIn && (
-          <>
-            <AddhabitDialog />
-            <IconButton>
-              <PaletteIcon />
+  return (
+    <>
+      <AppBar position="static" className={style.root}>
+        <Toolbar>
+          <div className={style.left}>
+            <IconButton onClick={handleBack}>
+              <ArrowBackIcon />
             </IconButton>
-          </>
-        )}
-      </Toolbar>
-    </AppBar>
+            <Link to="/">
+              <IconButton>
+                <HomeIcon />
+              </IconButton>
+            </Link>
+          </div>
+
+          <AuthDialog />
+          {loggedIn && (
+            <>
+              <AddhabitDialog />
+              <IconButton>
+                <PaletteIcon />
+              </IconButton>
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+    </>
   );
 }
 

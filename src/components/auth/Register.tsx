@@ -6,17 +6,18 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useSelector, useDispatch } from "react-redux";
 import { User } from "../../services";
-import { registerRequest } from "../../store/actions/register.acitons";
+import {
+  registerRequest,
+  registerReset,
+} from "../../store/actions/register.acitons";
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
 import { boxStyle } from "../../styles";
-import { History } from "history";
 
 interface RegisterProps {
   changeLoginMode: () => void;
-  history: History;
 }
-function Register({ changeLoginMode, history }: RegisterProps) {
+function Register({ changeLoginMode }: RegisterProps) {
   const style = boxStyle();
   const [inputs, setInputs] = useState<User>({
     email: "",
@@ -25,7 +26,7 @@ function Register({ changeLoginMode, history }: RegisterProps) {
   });
   const { email, password, full_name } = inputs;
   const [submitted, setSubmitted] = useState(false);
-  const { loading, registered, error } = useSelector(
+  const { loading, registered } = useSelector(
     (state: RootState) => state.registerReducer
   );
   const dispatch = useDispatch();
@@ -45,14 +46,9 @@ function Register({ changeLoginMode, history }: RegisterProps) {
   useEffect(() => {
     if (registered) {
       changeLoginMode();
+      dispatch(registerReset());
     }
   });
-
-  useEffect(() => {
-    if (error?.message === "Network Error") {
-      history.push("/networkerror");
-    }
-  }, [error, history]);
 
   return (
     <>

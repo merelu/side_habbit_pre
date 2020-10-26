@@ -1,9 +1,9 @@
 import { AxiosError } from "axios";
 import { Habit } from "../../services";
 
-export const CALL_HABITS_REQUEST = "CALL_HABITS_REQUEST" as const;
-export const CALL_HABITS_SUCCESS = "CALL_HABITS_SUCCESS" as const;
-export const CALL_HABITS_FAILURE = "CALL_HABITS_FAILURE" as const;
+export const CALL_HABITS_REQUEST = "USER_CALL_HABITS_REQUEST" as const;
+export const CALL_HABITS_SUCCESS = "USER_CALL_HABITS_SUCCESS" as const;
+export const CALL_HABITS_FAILURE = "USER_CALL_HABITS_FAILURE" as const;
 
 export const callHabitsRequest = () => ({
   type: CALL_HABITS_REQUEST,

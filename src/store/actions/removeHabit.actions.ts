@@ -1,9 +1,9 @@
 import { AxiosError } from "axios";
 import { Habit } from "../../services";
 
-export const REMOVE_HABIT_REQUEST = "REMOVE_HABIT_REQUEST" as const;
-export const REMOVE_HABIT_SUCCESS = "REMOVE_HABIT_SUCCESS" as const;
-export const REMOVE_HABIT_FAILURE = "REMOVE_HABIT_FAILURE" as const;
+export const REMOVE_HABIT_REQUEST = "USER_REMOVE_HABIT_REQUEST" as const;
+export const REMOVE_HABIT_SUCCESS = "USER_REMOVE_HABIT_SUCCESS" as const;
+export const REMOVE_HABIT_FAILURE = "USER_REMOVE_HABIT_FAILURE" as const;
 
 export const removeHabitRequest = (username: string, id: number) => ({
   type: REMOVE_HABIT_REQUEST,

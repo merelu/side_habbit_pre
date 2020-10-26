@@ -8,11 +8,8 @@ import Register from "./Register";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/reducers";
 import { logout } from "../../store/actions/auth.actions";
-import { History } from "history";
-interface AuthDialogProps {
-  history: History;
-}
-function AuthDialog({ history }: AuthDialogProps) {
+
+function AuthDialog() {
   const [open, setOpen] = useState(false);
   //mode - true: login / false: register
   const [mode, setMode] = useState(true);
@@ -59,13 +56,11 @@ function AuthDialog({ history }: AuthDialogProps) {
       >
         {mode ? (
           <Login
-            open={open}
-            history={history}
             dialogClose={dialogClose}
             changeRegisterMode={changeRegiseterMode}
           />
         ) : (
-          <Register history={history} changeLoginMode={changeLoginMode} />
+          <Register changeLoginMode={changeLoginMode} />
         )}
       </Dialog>
     </>

@@ -1,20 +1,13 @@
 import { Habit } from "../../services";
-import {
-  callHabitsRequest,
-  callHabitsSuccess,
-  callHabitsFailure,
-  removeHabitSuccess,
-  removeHabitRequest,
-  removeHabitFailure,
-} from "../actions";
+import * as actions from "../actions";
 
 export type HabitsAction =
-  | ReturnType<typeof callHabitsRequest>
-  | ReturnType<typeof callHabitsSuccess>
-  | ReturnType<typeof callHabitsFailure>
-  | ReturnType<typeof removeHabitRequest>
-  | ReturnType<typeof removeHabitSuccess>
-  | ReturnType<typeof removeHabitFailure>;
+  | ReturnType<typeof actions.callHabitsRequest>
+  | ReturnType<typeof actions.callHabitsSuccess>
+  | ReturnType<typeof actions.callHabitsFailure>
+  | ReturnType<typeof actions.removeHabitRequest>
+  | ReturnType<typeof actions.removeHabitSuccess>
+  | ReturnType<typeof actions.removeHabitFailure>;
 
 export type HabitsState = {
   loading?: boolean;

@@ -1,8 +1,6 @@
 import { Button } from "@material-ui/core";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { Link } from "react-router-dom";
-import { loginReset } from "../../store/actions";
 import "../../styles/errorPage.css";
 
 interface ErrorPageProps {
@@ -13,10 +11,6 @@ function ErrorPage({
   status = "404",
   description = "Page Not Found",
 }: ErrorPageProps) {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loginReset());
-  });
   return (
     <>
       <div className="error_container">
