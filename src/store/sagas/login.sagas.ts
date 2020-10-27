@@ -4,6 +4,7 @@ import {
   loginSuccess,
   loginFailure,
   sb_success,
+  nomal_error,
 } from "../actions";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { authLogin } from "../../services";
@@ -18,6 +19,9 @@ function* loginRequestSaga(action: ReturnType<typeof loginRequest>) {
     history.push("/");
   } catch (e) {
     yield put(loginFailure(e));
+    if (e.response.status === 400) {
+      yield put(nomal_error(e?.response.data.message));
+    }
     if (e?.message === "Network Error") {
       history.push("/networkerror");
     }

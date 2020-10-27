@@ -13,6 +13,8 @@ import {
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
 import { boxStyle } from "../../styles";
+import Alert from "@material-ui/lab/Alert";
+import { clear } from "../../store/actions";
 
 interface RegisterProps {
   changeLoginMode: () => void;
@@ -28,6 +30,9 @@ function Register({ changeLoginMode }: RegisterProps) {
   const [submitted, setSubmitted] = useState(false);
   const { loading, registered } = useSelector(
     (state: RootState) => state.registerReducer
+  );
+  const { alert_type, message } = useSelector(
+    (state: RootState) => state.alertReducer
   );
   const dispatch = useDispatch();
 
@@ -56,6 +61,17 @@ function Register({ changeLoginMode }: RegisterProps) {
         <div className={style.box}>Register</div>
       </DialogTitle>
       <DialogContent>
+        {message && (
+          <Alert
+            variant="outlined"
+            severity={alert_type}
+            onClose={() => {
+              dispatch(clear());
+            }}
+          >
+            {message}
+          </Alert>
+        )}
         <TextField
           autoFocus
           error={submitted && !email ? true : false}

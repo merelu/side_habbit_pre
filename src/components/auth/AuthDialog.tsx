@@ -8,6 +8,7 @@ import Register from "./Register";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/reducers";
 import { logout } from "../../store/actions/auth.actions";
+import { clear } from "../../store/actions";
 
 function AuthDialog() {
   const [open, setOpen] = useState(false);
@@ -28,8 +29,10 @@ function AuthDialog() {
   const changeLoginMode = () => {
     setMode(true);
   };
+
   const changeRegiseterMode = () => {
     setMode(false);
+    dispatch(clear());
   };
 
   return (
