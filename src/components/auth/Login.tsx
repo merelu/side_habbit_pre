@@ -9,6 +9,8 @@ import { loginRequest } from "../../store/actions/auth.actions";
 import { RootState } from "../../store/reducers";
 import { CircularProgress } from "@material-ui/core";
 import { boxStyle } from "../../styles";
+import Alert from "@material-ui/lab/Alert";
+import { clear } from "../../store/actions";
 
 interface LoginProps {
   dialogClose: () => void;
@@ -25,13 +27,16 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
   const { loggingIn, loggedIn } = useSelector(
     (state: RootState) => state.authReducer
   );
+  const { alert_type, message } = useSelector(
+    (state: RootState) => state.alertReducer
+  );
   const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [id]: value }));
   };
-  //trigger를 만들어서
+
   const loginSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSubmitted(true);
@@ -52,6 +57,17 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
         <div className={style.box}>Login</div>
       </DialogTitle>
       <DialogContent>
+        {message && (
+          <Alert
+            variant="outlined"
+            severity={alert_type}
+            onClose={() => {
+              dispatch(clear());
+            }}
+          >
+            {message}
+          </Alert>
+        )}
         <TextField
           autoFocus
           error={submitted && !email ? true : false}
@@ -80,7 +96,14 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
           {loggingIn && <CircularProgress size={30} />}
           Login
         </Button>
-        <Button onClick={dialogClose}>Cancel</Button>
+        <Button
+          onClick={() => {
+            dialogClose();
+            dispatch(clear());
+          }}
+        >
+          Cancel
+        </Button>
       </DialogActions>
     </>
   );

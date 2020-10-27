@@ -9,6 +9,7 @@ import { Snackbar } from "@material-ui/core";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { clear } from "../../store/actions";
 
+//alert override snackbar로 사용하기위해 옵션 줌
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
