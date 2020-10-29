@@ -18,11 +18,15 @@ function* registerRequestSaga(action: ReturnType<typeof registerRequest>) {
     yield put(sb_success("회원가입이 완료되었습니다!"));
   } catch (e) {
     yield put(registerFailure(e));
-    if (e.response.status === 400) {
-      yield put(nomal_error(e?.response.data.email));
-    }
     if (e?.message === "Network Error") {
       history.push("/networkerror");
+    }
+    if (e.response) {
+      if (e.response.status === 400) {
+        yield put(nomal_error(e?.response.data.email));
+      } else if (e.response.status === 403) {
+        yield put(nomal_error(e.response.data.detail));
+      }
     }
   }
 }

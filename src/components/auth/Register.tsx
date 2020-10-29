@@ -28,10 +28,10 @@ function Register({ changeLoginMode }: RegisterProps) {
   });
   const { email, password, full_name } = inputs;
   const [submitted, setSubmitted] = useState(false);
-  const { loading, registered } = useSelector(
+  const { registered } = useSelector(
     (state: RootState) => state.registerReducer
   );
-  const { alert_type, message } = useSelector(
+  const { alert_type, message, sbOpen } = useSelector(
     (state: RootState) => state.alertReducer
   );
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ function Register({ changeLoginMode }: RegisterProps) {
         <div className={style.box}>Register</div>
       </DialogTitle>
       <DialogContent>
-        {message && (
+        {message && !sbOpen && (
           <Alert
             variant="outlined"
             severity={alert_type}
@@ -105,11 +105,15 @@ function Register({ changeLoginMode }: RegisterProps) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={registerSubmit}>
-          {loading && <CircularProgress size={30} />}
-          confirm
+        <Button onClick={registerSubmit}>confirm</Button>
+        <Button
+          onClick={() => {
+            changeLoginMode();
+            dispatch(clear());
+          }}
+        >
+          Cancel
         </Button>
-        <Button onClick={changeLoginMode}>Cancel</Button>
       </DialogActions>
     </>
   );

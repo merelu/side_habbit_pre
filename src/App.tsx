@@ -2,10 +2,13 @@ import React from "react";
 import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 import "./styles/app.css";
+import "./styles/errorPage.css";
+import "./styles/loading.css";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import HabitBody from "./components/main/HabitBody";
 import ErrorPage from "./components/error/ErrorPage";
 import { history } from "./configureStore";
+import Loading from "./components/error/Loading";
 
 //폰트 적용
 const theme = createMuiTheme({
@@ -42,6 +45,7 @@ const App = () => {
               <ErrorPage status="---" description="Network Error" />
             )}
           />
+          <Route path="/loading" component={Loading} />
           <Route component={ErrorPage} />
         </Switch>
       </ConnectedRouter>

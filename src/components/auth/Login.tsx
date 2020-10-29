@@ -7,7 +7,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { useSelector, useDispatch } from "react-redux";
 import { loginRequest } from "../../store/actions/auth.actions";
 import { RootState } from "../../store/reducers";
-import { CircularProgress } from "@material-ui/core";
 import { boxStyle } from "../../styles";
 import Alert from "@material-ui/lab/Alert";
 import { clear } from "../../store/actions";
@@ -27,7 +26,7 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
   const { loggingIn, loggedIn } = useSelector(
     (state: RootState) => state.authReducer
   );
-  const { alert_type, message } = useSelector(
+  const { alert_type, message, sbOpen } = useSelector(
     (state: RootState) => state.alertReducer
   );
   const dispatch = useDispatch();
@@ -57,7 +56,7 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
         <div className={style.box}>Login</div>
       </DialogTitle>
       <DialogContent>
-        {message && (
+        {message && !sbOpen && (
           <Alert
             variant="outlined"
             severity={alert_type}
@@ -92,10 +91,7 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
       </DialogContent>
       <DialogActions>
         <Button onClick={changeRegisterMode}>Register</Button>
-        <Button onClick={loginSubmit}>
-          {loggingIn && <CircularProgress size={30} />}
-          Login
-        </Button>
+        <Button onClick={loginSubmit}>Login</Button>
         <Button
           onClick={() => {
             dialogClose();

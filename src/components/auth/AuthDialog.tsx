@@ -9,14 +9,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/reducers";
 import { logout } from "../../store/actions/auth.actions";
 import { clear } from "../../store/actions";
+import Loading from "../error/Loading";
+import { DialogContent } from "@material-ui/core";
 
 function AuthDialog() {
   const [open, setOpen] = useState(false);
   //mode - true: login / false: register
   const [mode, setMode] = useState(true);
-  const loggedIn = useSelector(
-    (state: RootState) => state.authReducer.loggedIn
+  const { loggedIn, loggingIn } = useSelector(
+    (state: RootState) => state.authReducer
   );
+  const { loading } = useSelector((state: RootState) => state.registerReducer);
   const dispatch = useDispatch();
 
   const dialogOpen = () => {
@@ -55,9 +58,21 @@ function AuthDialog() {
         open={open}
         onClose={dialogClose}
         aria-labelledby="Login-dialog"
-        style={{ overflow: "visible" }}
+        disableBackdropClick={true}
+        PaperProps={
+          loggingIn || loading
+            ? {
+                style: {
+                  backgroundColor: "transparent",
+                  boxShadow: "none",
+                },
+              }
+            : {}
+        }
       >
-        {mode ? (
+        {loggingIn || loading ? (
+          <Loading />
+        ) : mode ? (
           <Login
             dialogClose={dialogClose}
             changeRegisterMode={changeRegiseterMode}

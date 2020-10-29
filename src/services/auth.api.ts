@@ -22,7 +22,7 @@ export async function authRegister(user: User) {
     full_name: user.full_name,
   };
 
-  const response = await axios.post("/account/registration/", body);
+  const response = await axios.post("/account/", body);
   return response;
 }
 
