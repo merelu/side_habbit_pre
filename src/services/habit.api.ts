@@ -3,6 +3,7 @@ import { AddHabitInputsType } from "../store/types";
 
 export interface Habit {
   name: string;
+  pk: number;
   period: number;
   checkedDayOfWeek: boolean[];
   startDate: Date;

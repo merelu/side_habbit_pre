@@ -1,4 +1,4 @@
-.container {
+.intro-container {
   position: relative;
   max-width: 100%;
   display: grid;
@@ -8,9 +8,10 @@
   grid-auto-flow: dense;
   grid-row-gap: 10px;
   grid-column-gap: 10px;
+  height: 100%;
 }
 
-.container .box {
+.intro-container .box {
   background: #807f89;
   padding: 20px;
   display: grid;
@@ -21,46 +22,46 @@
   transition: 0.5s;
 }
 
-.container .box:hover {
+.intro-container .box:hover {
   background: #eca4a6;
 }
 
-.container .box img {
+.intro-container .box img {
   position: relative;
   max-width: 100px;
   margin: 10px;
 }
 
-.container .box:nth-child(1) {
+.intro-container .box:nth-child(1) {
   grid-column: span 2;
   grid-row: span 1;
 }
-.container .box:nth-child(3) {
+.intro-container .box:nth-child(3) {
   grid-column: span 1;
   grid-row: span 2;
 }
-.container .box:nth-child(4) {
+.intro-container .box:nth-child(4) {
   grid-column: span 1;
   grid-row: span 2;
 }
-.container .box:nth-child(7) {
+.intro-container .box:nth-child(7) {
   grid-column: span 3;
   grid-row: span 1;
 }
 
 @media (max-width: 991px) {
-  .container {
+  .intro-container {
     grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
     grid-template-rows: minmax(auto, auto);
   }
-  .container .box {
+  .intro-container .box {
     grid-column: unset !important;
     grid-row: unset !important;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1300px) {
-  .container {
+  .intro-container {
     grid-template-columns: repeat(3, minmax(300px, 1fr));
     grid-template-rows: minmax(100px, auto);
   }

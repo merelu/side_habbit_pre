@@ -15,6 +15,8 @@ const addHabitReducer = (state: AddHabitState = {}, action: AddHabitAction) => {
       return {
         error: action.payload,
       };
+    case actions.ADDHABIT_RESET:
+      return {};
     default:
       return state;
   }

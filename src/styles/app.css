@@ -8,3 +8,17 @@
 a {
   text-decoration: none;
 }
+
+.habit-body {
+  display: flex;
+  flex-direction: column;
+  background: #bbc7ba;
+  height: 100vh;
+}
+
+main {
+  display: flex;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+}

@@ -18,6 +18,8 @@ import { addHabitRequest } from "../../store/actions/addHabit.actions";
 import { boxStyle, buttonStyle } from "../../styles";
 import { AddHabitInputsType } from "../../store/types";
 import { RootState } from "../../store/reducers";
+import Alert from "@material-ui/lab/Alert";
+import { clear } from "../../store/actions";
 
 type AddHabitProps = {
   dialogClose: () => void;
@@ -49,6 +51,9 @@ function AddHabit({ dialogClose }: AddHabitProps) {
     },
   ];
   const { loading } = useSelector((state: RootState) => state.addHabitReducer);
+  const { alert_type, message, sbOpen } = useSelector(
+    (state: RootState) => state.alertReducer
+  );
   const dispatch = useDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value, type } = e.target;
@@ -71,9 +76,8 @@ function AddHabit({ dialogClose }: AddHabitProps) {
   useEffect(() => {
     if (loading === false) {
       dialogClose();
-      console.log("닫힘");
     }
-  }, [dialogClose, loading]);
+  });
   //작성해야할것
   const handleSubmit = () => {
     dispatch(addHabitRequest(inputs));
@@ -85,6 +89,17 @@ function AddHabit({ dialogClose }: AddHabitProps) {
         <div className={style.box.box}>Create habit</div>
       </DialogTitle>
       <DialogContent style={{ overflow: "hidden" }}>
+        {message && !sbOpen && (
+          <Alert
+            variant="outlined"
+            severity={alert_type}
+            onClose={() => {
+              dispatch(clear());
+            }}
+          >
+            {message}
+          </Alert>
+        )}
         <Grid container spacing={4}>
           <Grid item xs={12}>
             <TextField

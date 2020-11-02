@@ -3,15 +3,18 @@ import Dialog from "@material-ui/core/Dialog";
 import AddHabit from "./AddHabit";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
+import { useDispatch } from "react-redux";
+import { addHabitReset } from "../../store/actions";
 
 function AddhabitDialog() {
   const [open, setOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const dialogOpen = () => {
     setOpen(true);
   };
   const dialogClose = () => {
     setOpen(false);
+    dispatch(addHabitReset());
   };
   return (
     <>

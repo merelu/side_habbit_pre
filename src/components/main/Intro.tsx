@@ -13,7 +13,7 @@ import clock from "../../img/clock.png";
 function Intro() {
   return (
     <>
-      <div className="container">
+      <div className="intro-container">
         <div className="box">
           <div className="content">
             <img src={user} alt="user" />

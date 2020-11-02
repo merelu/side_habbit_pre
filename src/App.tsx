@@ -4,6 +4,7 @@ import { ConnectedRouter } from "connected-react-router";
 import "./styles/app.css";
 import "./styles/errorPage.css";
 import "./styles/loading.css";
+import "./styles/habitList.css";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import HabitBody from "./components/main/HabitBody";
 import ErrorPage from "./components/error/ErrorPage";

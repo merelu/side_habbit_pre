@@ -26,68 +26,6 @@ export const boxStyle = makeStyles((theme: Theme) => ({
     overflow: "visible",
   },
 }));
-export const listStyle = makeStyles((theme: Theme, color?: string) => ({
-  list: {
-    width: "100%",
-    "& label": {
-      position: "relative",
-      display: "block",
-      fontSize: "20px",
-      margin: "10px 0px 10px 20px",
-      color: "#000",
-      cursor: "pointer",
-    },
-    "& input[type='checkbox']": {
-      WebkitAppearance: "none",
-      "&:checked ~ $i": {
-        top: "1px",
-        borderTop: "none",
-        borderRight: "none",
-        height: "15px",
-        width: "25px",
-        transform: "rotate(-45deg)",
-      },
-      "&:checked ~ .text": {
-        "&:before": {
-          transform: "translateY(-50%) scaleX(1)",
-          transformOrigin: "left",
-          transition: "transform 0.5s",
-        },
-        color: "#2e2e3a",
-      },
-    },
-    "& i": {
-      position: "absolute",
-      top: "2px",
-      display: "inline-block",
-      width: "25px",
-      height: "25px",
-      border: "2px solid #000",
-    },
-    "& .text": {
-      display: "inline",
-      position: "relative",
-      left: "40px",
-      transition: "0.5s",
-      "&:before": {
-        content: "''",
-        position: "absolute",
-        top: "50%",
-        left: 0,
-        width: "100%",
-        height: "1px",
-        background: "#000",
-        transform: "translateY(-50%) scaleX(0)",
-        transformOrigin: "right",
-        transition: "transform 0.5s",
-      },
-    },
-  },
-  right: {
-    marginLeft: "auto",
-    marginRight: "20px",
-  },
-}));
 
 export const appBarStyle = makeStyles((theme: Theme) => ({
   root: {
@@ -99,22 +37,31 @@ export const appBarStyle = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const paperStyle = makeStyles((theme: Theme) => ({
-  background: {
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
+export const habitListStyle = makeStyles((theme: Theme) => ({
+  root: {
+    padding: `${theme.spacing(1)}px ${theme.spacing(1)}px`,
     background: theme.palette.primary.light,
   },
-  header: {
-    width: "100%",
+  listItem: {
+    height: theme.spacing(9),
+    background: theme.palette.primary.contrastText,
   },
-  body: {
-    display: "flex",
-    justifyContent: "center",
-    alignSelf: "center",
-    maxWidth: "1500px",
-    minHeight: "100vh",
-    margin: "auto",
+  avatar: {
+    background: theme.palette.secondary.main,
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginRight: theme.spacing(2),
+    "& img": {
+      filter: "invert(100%)",
+      width: "80%",
+      height: "80%",
+    },
+  },
+}));
+
+export const habitDetailStyle = makeStyles((theme: Theme) => ({
+  root: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
   },
 }));

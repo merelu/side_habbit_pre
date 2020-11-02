@@ -1,49 +1,67 @@
-import React, { MouseEvent, useState } from "react";
-import { Grid, IconButton } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import { listStyle } from "../../styles/styles";
-import HabitItemMenu from "./HabitItemMenu";
+import React, { useState } from "react";
+import {
+  Avatar,
+  Checkbox,
+  Divider,
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
+} from "@material-ui/core";
+import clock from "../../img/clock.svg";
+import dumbbell from "../../img/dumbbell.svg";
+import study from "../../img/study.svg";
+import { habitListStyle } from "../../styles";
 
 type HabitItemProps = {
-  id: number;
   habitName: string;
+  pk: number;
+  selectedIndex: number;
+  checked: number[];
+  handleListItemClick: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number
+  ) => void;
+  handleToggle: (pk: number) => () => void;
 };
 
-function HabitItem({ id, habitName }: HabitItemProps) {
-  const style = listStyle();
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(e.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleDelete = () => {
-    //dispatch(removeHabitRequest(username, id));
-    setAnchorEl(null);
-  };
+function HabitItem({
+  habitName,
+  pk,
+  selectedIndex,
+  checked,
+  handleListItemClick,
+  handleToggle,
+}: HabitItemProps) {
+  const classes = habitListStyle();
+
   return (
-    <>
-      <Grid container alignItems="center">
-        <Grid>
-          <label>
-            <input type="checkbox" name="" />
-            <i></i>
-            <div className="text">{habitName}</div>
-          </label>
-        </Grid>
-        <Grid className={style.right}>
-          <IconButton edge="end" aria-haspopup="true" onClick={handleClick}>
-            <MenuIcon />
-          </IconButton>
-          <HabitItemMenu
-            anchorEl={anchorEl}
-            handleClose={handleClose}
-            handleDelete={handleDelete}
+    <React.Fragment>
+      <ListItem
+        button
+        selected={selectedIndex === pk}
+        onClick={(e) => handleListItemClick(e, pk)}
+        className={classes.listItem}
+      >
+        <ListItemAvatar>
+          <Avatar
+            variant="square"
+            src={dumbbell}
+            alt="dumbbell"
+            className={classes.avatar}
+          ></Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={habitName} />
+        <ListItemSecondaryAction>
+          <Checkbox
+            edge="end"
+            onChange={handleToggle(pk)}
+            checked={checked.indexOf(pk) !== -1}
           />
-        </Grid>
-      </Grid>
-    </>
+        </ListItemSecondaryAction>
+      </ListItem>
+      <Divider />
+    </React.Fragment>
   );
 }
 

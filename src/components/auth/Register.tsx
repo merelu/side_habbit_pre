@@ -11,7 +11,6 @@ import {
   registerReset,
 } from "../../store/actions/register.acitons";
 import { RootState } from "../../store/reducers";
-import { CircularProgress } from "@material-ui/core";
 import { boxStyle } from "../../styles";
 import Alert from "@material-ui/lab/Alert";
 import { clear } from "../../store/actions";

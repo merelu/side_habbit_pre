@@ -10,7 +10,6 @@ import { RootState } from "../../store/reducers";
 import { logout } from "../../store/actions/auth.actions";
 import { clear } from "../../store/actions";
 import Loading from "../error/Loading";
-import { DialogContent } from "@material-ui/core";
 
 function AuthDialog() {
   const [open, setOpen] = useState(false);
