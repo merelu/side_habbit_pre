@@ -21,7 +21,7 @@ function Header() {
 
   return (
     <>
-      <AppBar position="static" className={style.root}>
+      <AppBar className={style.root}>
         <Toolbar>
           <div className={style.left}>
             <IconButton onClick={handleBack}>

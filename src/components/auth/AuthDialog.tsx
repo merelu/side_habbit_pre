@@ -10,6 +10,7 @@ import { RootState } from "../../store/reducers";
 import { logout } from "../../store/actions/auth.actions";
 import { clear } from "../../store/actions";
 import Loading from "../error/Loading";
+import { setCookie } from "../../services";
 
 function AuthDialog() {
   const [open, setOpen] = useState(false);
@@ -43,6 +44,8 @@ function AuthDialog() {
         <IconButton
           onClick={() => {
             dispatch(logout());
+            setCookie("auth", "", -1);
+            localStorage.clear();
           }}
         >
           <ExitToAppIcon />

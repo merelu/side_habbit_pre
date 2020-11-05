@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/reducers";
-import { callHabitsRequest } from "../../store/actions";
+import { todayHabitsRequest } from "../../store/actions";
 import { List } from "@material-ui/core";
 import HabitItem from "./HabitItem";
 import { habitListStyle } from "../../styles";
 
-function HabitList() {
+interface HabitListProps {
+  toggleDetailed: (value: boolean) => void;
+  detailed: boolean;
+}
+function HabitList({ detailed, toggleDetailed }: HabitListProps) {
   const classes = habitListStyle();
   const { habits } = useSelector((state: RootState) => state.habitsReducer);
-  const dispatch = useDispatch();
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [checked, setChecked] = useState<number[]>([]);
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
   ) => {
-    setSelectedIndex(index);
+    if (selectedIndex < 0) {
+      setSelectedIndex(index);
+      toggleDetailed(true);
+    } else {
+      setSelectedIndex(-1);
+      toggleDetailed(false);
+    }
   };
   const handleToggle = (pk: number) => () => {
     const currentIndex = checked.indexOf(pk);
@@ -30,12 +39,8 @@ function HabitList() {
 
     setChecked(newChecked);
   };
-  useEffect(() => {
-    dispatch(callHabitsRequest());
-  }, [dispatch]);
-  console.log(checked);
   return (
-    <List className={classes.root}>
+    <List className={`${classes.root} ${detailed && classes.selected}`}>
       {habits &&
         habits.map((state) => (
           <HabitItem

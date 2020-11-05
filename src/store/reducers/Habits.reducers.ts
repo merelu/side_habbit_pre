@@ -1,17 +1,25 @@
 import * as actions from "../actions";
 import { HabitsState, HabitsAction } from "../types/Habits.types";
-
-const habitsReducer = (state: HabitsState = {}, action: HabitsAction) => {
+let habits = [];
+let temp = localStorage.getItem("habits");
+if (temp !== null) {
+  habits = JSON.parse(temp);
+}
+const initialState: HabitsState = habits ? { habits } : {};
+const habitsReducer = (
+  state: HabitsState = initialState,
+  action: HabitsAction
+) => {
   switch (action.type) {
-    case actions.CALL_HABITS_REQUEST:
+    case actions.TODAY_HABITS_REQUEST:
       return {
         loading: true,
       };
-    case actions.CALL_HABITS_SUCCESS:
+    case actions.TODAY_HABITS_SUCCESS:
       return {
         habits: action.payload,
       };
-    case actions.CALL_HABITS_FAILURE:
+    case actions.TODAY_HABITS_FAILURE:
       return {
         error: action.payload,
       };

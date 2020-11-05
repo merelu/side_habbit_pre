@@ -5,8 +5,7 @@ export type authAction =
   | ReturnType<typeof actions.loginRequest>
   | ReturnType<typeof actions.loginSuccess>
   | ReturnType<typeof actions.loginFailure>
-  | ReturnType<typeof actions.logout>
-  | ReturnType<typeof actions.loginReset>;
+  | ReturnType<typeof actions.logout>;
 
 export type authState = {
   loggingIn?: boolean;

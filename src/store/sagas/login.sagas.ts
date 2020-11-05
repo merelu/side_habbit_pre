@@ -5,6 +5,7 @@ import {
   loginFailure,
   sb_success,
   nomal_error,
+  todayHabitsRequest,
 } from "../actions";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { authLogin } from "../../services";
@@ -15,6 +16,7 @@ function* loginRequestSaga(action: ReturnType<typeof loginRequest>) {
   try {
     const response = yield call(authLogin, payload.email, payload.password);
     yield put(loginSuccess(response));
+    yield put(todayHabitsRequest());
     yield put(sb_success("로그인 되었습니다!"));
     history.push("/");
   } catch (e) {

@@ -40,7 +40,8 @@ function calEndDate(startDate: Date, period: number) {
 //   return new Promise(function (resolve) {});
 // }
 
-function dateFormat(date: Date) {
+type DateFormatMode = "create" | "search";
+function dateFormat(date: Date, mode: DateFormatMode) {
   const numFormat = (num: number): string => {
     if (num > 9) {
       return String(num);
@@ -48,12 +49,18 @@ function dateFormat(date: Date) {
       return "0" + num;
     }
   };
-  const result = `${date.getFullYear()}-${numFormat(
-    date.getMonth() + 1
-  )}-${numFormat(date.getDate())} ${numFormat(date.getHours())}:${numFormat(
-    date.getMinutes()
-  )}`;
-  console.log(result);
+  let result = "";
+  if (mode === "create") {
+    result = `${date.getFullYear()}-${numFormat(
+      date.getMonth() + 1
+    )}-${numFormat(date.getDate())} ${numFormat(date.getHours())}:${numFormat(
+      date.getMinutes()
+    )}`;
+  } else if (mode === "search") {
+    result = `${date.getFullYear()}-${numFormat(
+      date.getMonth() + 1
+    )}-${numFormat(date.getDate())}`;
+  }
   return result;
 }
 
@@ -62,8 +69,8 @@ export async function addHabit(habit: AddHabitInputsType) {
   const end_date = calEndDate(start_date, habit.period);
   const body = {
     name: habit.name,
-    start_date: dateFormat(start_date),
-    end_date: dateFormat(end_date),
+    start_date: dateFormat(start_date, "create"),
+    end_date: dateFormat(end_date, "create"),
     check_day_of_week: habit.checkedDayOfWeek,
   };
 
@@ -92,6 +99,14 @@ export async function addHabit(habit: AddHabitInputsType) {
 export async function callHabit() {
   const response = await axios.get("/habit/my_habits/");
   console.log(response.data);
+  return response.data;
+  //let habits = await habitOfDate(response.data, date);
+}
+export async function callTodayHabit() {
+  const response = await axios.get(`/habit/my_habits/`);
+  if (response) {
+    localStorage.setItem("habits", JSON.stringify(response.data));
+  }
   return response.data;
   //let habits = await habitOfDate(response.data, date);
 }

@@ -1,5 +1,6 @@
 .intro-container {
   position: relative;
+  padding-top: 70px;
   max-width: 100%;
   display: grid;
   grid-template-columns: repeat(4, minmax(300px, 1fr));

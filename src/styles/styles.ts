@@ -29,6 +29,7 @@ export const boxStyle = makeStyles((theme: Theme) => ({
 
 export const appBarStyle = makeStyles((theme: Theme) => ({
   root: {
+    position: "absolute",
     flexGrow: 1,
     background: theme.palette.primary.dark,
   },
@@ -39,8 +40,19 @@ export const appBarStyle = makeStyles((theme: Theme) => ({
 
 export const habitListStyle = makeStyles((theme: Theme) => ({
   root: {
+    position: "absolute",
+    paddingTop: "70px",
+    left: "50%",
+    width: "600px",
+    height: "100%",
+    transform: "translate(-50%,0)",
     padding: `${theme.spacing(1)}px ${theme.spacing(1)}px`,
     background: theme.palette.primary.light,
+    transition: "all 1s",
+  },
+  selected: {
+    left: 0,
+    transform: "translateX(0)",
   },
   listItem: {
     height: theme.spacing(9),
@@ -61,7 +73,18 @@ export const habitListStyle = makeStyles((theme: Theme) => ({
 
 export const habitDetailStyle = makeStyles((theme: Theme) => ({
   root: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    position: "absolute",
+    left: "600px",
+    paddingTop: "70px",
+    height: "100%",
+  },
+}));
+
+export const calendarStyle = makeStyles((theme: Theme) => ({
+  root: {},
+  info: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
   },
 }));

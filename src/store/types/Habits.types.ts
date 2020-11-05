@@ -2,9 +2,9 @@ import { Habit } from "../../services";
 import * as actions from "../actions";
 
 export type HabitsAction =
-  | ReturnType<typeof actions.callHabitsRequest>
-  | ReturnType<typeof actions.callHabitsSuccess>
-  | ReturnType<typeof actions.callHabitsFailure>
+  | ReturnType<typeof actions.todayHabitsRequest>
+  | ReturnType<typeof actions.todayHabitsSuccess>
+  | ReturnType<typeof actions.todayHabitsFailure>
   | ReturnType<typeof actions.removeHabitRequest>
   | ReturnType<typeof actions.removeHabitSuccess>
   | ReturnType<typeof actions.removeHabitFailure>;

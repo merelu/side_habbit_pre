@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { RootState } from "../../store/reducers";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./Header";
 import Intro from "./Intro";
-import { Container, Snackbar } from "@material-ui/core";
+import { Button, Snackbar } from "@material-ui/core";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { clear } from "../../store/actions";
 import HabitList from "./HabitList";
 import { habitDetailStyle } from "../../styles";
 import HabitDetail from "./HabitDetail";
+import { CSSTransition } from "react-transition-group";
 
 //alert override snackbar로 사용하기위해 옵션 줌
 function Alert(props: AlertProps) {
@@ -21,6 +22,10 @@ function HabitBody() {
   const { sbOpen, message, alert_type } = useSelector(
     (state: RootState) => state.alertReducer
   );
+  const [detailed, setDetailed] = useState(false);
+  const toggleDetailed = (value: boolean) => {
+    setDetailed(value);
+  };
   const dispatch = useDispatch();
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === "clickaway") {
@@ -29,13 +34,15 @@ function HabitBody() {
     dispatch(clear());
   };
   return (
-    <div className="habit-body">
+    <React.Fragment>
       <Header />
       {loggedIn ? (
-        <main>
-          <HabitList />
-          <HabitDetail />
-        </main>
+        <React.Fragment>
+          <HabitList detailed={detailed} toggleDetailed={toggleDetailed} />
+          <CSSTransition in={detailed} timeout={500} classNames="detail">
+            {detailed ? <HabitDetail /> : <React.Fragment />}
+          </CSSTransition>
+        </React.Fragment>
       ) : (
         <Intro />
       )}
@@ -44,7 +51,7 @@ function HabitBody() {
           {message}
         </Alert>
       </Snackbar>
-    </div>
+    </React.Fragment>
   );
 }
 
