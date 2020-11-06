@@ -87,4 +87,17 @@ export const calendarStyle = makeStyles((theme: Theme) => ({
     justifyContent: "space-between",
     width: "100%",
   },
+  item: {
+    width: "calc(100%/7)",
+    height: "50px",
+    padding: 0,
+  },
+  box: {
+    width: "100%",
+    height: "100%",
+  },
+  emptyBox: {
+    width: "100%",
+    height: "100%",
+  },
 }));
