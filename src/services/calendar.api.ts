@@ -30,7 +30,7 @@ export function generateCalendar(date: Date) {
   for (let i = 0; i < 6; i++) {
     for (let j = 0; j < 7; j++) {
       if (i === 0 && j < firstday) {
-        calendarList.push({ status: false, key: key++ });
+        calendarList.push({ status: false, key: key++, date: null });
       } else if (i === 0 && j >= firstday) {
         calendarList.push({
           status: true,
@@ -44,7 +44,7 @@ export function generateCalendar(date: Date) {
           date: new Date(date.getFullYear(), date.getMonth(), startDateCount++),
         });
       } else if (startDateCount > lastdate) {
-        calendarList.push({ status: false, key: key++ });
+        calendarList.push({ status: false, key: key++, date: null });
       }
     }
   }

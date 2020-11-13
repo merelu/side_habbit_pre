@@ -15,21 +15,6 @@ body {
   height: 100%;
 }
 
-.detail-enter {
-  opacity: 0;
-}
-.detail-enter-active {
-  opacity: 1;
-  transition: opacity 3s;
-}
-.detail-exit {
-  opacity: 1;
-}
-.detail-exit-active {
-  opacity: 0;
-  transition: opacity 3s;
-}
-
 .dateBox {
   display: inline-block;
   color: black;

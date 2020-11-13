@@ -57,7 +57,7 @@ function Calendar() {
       <Grid container spacing={2}>
         {dayName.map((value) => (
           <Grid item key={value} className={classes.item}>
-            <Box>
+            <Box className={classes.box}>
               <Typography align="center" variant="h6">
                 {value}
               </Typography>
@@ -66,13 +66,12 @@ function Calendar() {
         ))}
       </Grid>
       <Divider />
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className={classes.root}>
         {dateList.map((v) =>
           v.status ? (
             <Grid item key={v.key} className={classes.item}>
               <Box className={classes.box}>
-                {v.date && v.date.getDate()}
-                <CalendarItem />
+                <CalendarItem date={v.date} />
               </Box>
             </Grid>
           ) : (

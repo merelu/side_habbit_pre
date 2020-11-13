@@ -3,13 +3,12 @@ import { RootState } from "../../store/reducers";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./Header";
 import Intro from "./Intro";
-import { Button, Snackbar } from "@material-ui/core";
+import { Snackbar } from "@material-ui/core";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { clear } from "../../store/actions";
 import HabitList from "./HabitList";
-import { habitDetailStyle } from "../../styles";
+import { habitBodyStyle } from "../../styles";
 import HabitDetail from "./HabitDetail";
-import { CSSTransition } from "react-transition-group";
 
 //alert override snackbar로 사용하기위해 옵션 줌
 function Alert(props: AlertProps) {
@@ -17,12 +16,13 @@ function Alert(props: AlertProps) {
 }
 
 function HabitBody() {
-  const classes = habitDetailStyle();
+  const classes = habitBodyStyle();
   const { loggedIn } = useSelector((state: RootState) => state.authReducer);
   const { sbOpen, message, alert_type } = useSelector(
     (state: RootState) => state.alertReducer
   );
   const [detailed, setDetailed] = useState(false);
+  const [test, setTest] = useState(true);
   const toggleDetailed = (value: boolean) => {
     setDetailed(value);
   };
@@ -33,15 +33,40 @@ function HabitBody() {
     }
     dispatch(clear());
   };
+
   return (
     <React.Fragment>
       <Header />
       {loggedIn ? (
         <React.Fragment>
-          <HabitList detailed={detailed} toggleDetailed={toggleDetailed} />
-          <CSSTransition in={detailed} timeout={500} classNames="detail">
+          <div className={classes.appBarSpacer} />
+          <main className={classes.root}>
+            {test && (
+              <div
+                className={`${classes.flex} ${
+                  detailed ? classes.disable : classes.active
+                }`}
+                onAnimationEnd={() => {
+                  if (detailed) {
+                    setTest(false);
+                  }
+                }}
+              />
+            )}
+            <HabitList
+              detailed={detailed}
+              toggleDetailed={toggleDetailed}
+              setTest={setTest}
+            />
+            {test && (
+              <div
+                className={`${classes.flex} ${
+                  detailed ? classes.disable : classes.active
+                }`}
+              />
+            )}
             {detailed ? <HabitDetail /> : <React.Fragment />}
-          </CSSTransition>
+          </main>
         </React.Fragment>
       ) : (
         <Intro />

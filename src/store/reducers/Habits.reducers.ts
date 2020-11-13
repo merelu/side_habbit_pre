@@ -6,6 +6,8 @@ if (temp !== null) {
   habits = JSON.parse(temp);
 }
 const initialState: HabitsState = habits ? { habits } : {};
+console.log(initialState);
+
 const habitsReducer = (
   state: HabitsState = initialState,
   action: HabitsAction

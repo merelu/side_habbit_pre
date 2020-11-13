@@ -29,7 +29,6 @@ export const boxStyle = makeStyles((theme: Theme) => ({
 
 export const appBarStyle = makeStyles((theme: Theme) => ({
   root: {
-    position: "absolute",
     flexGrow: 1,
     background: theme.palette.primary.dark,
   },
@@ -38,27 +37,33 @@ export const appBarStyle = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const habitListStyle = makeStyles((theme: Theme) => ({
+export const habitBodyStyle = makeStyles((theme: Theme) => ({
   root: {
-    position: "absolute",
-    paddingTop: "70px",
-    left: "50%",
-    width: "600px",
-    height: "100%",
-    transform: "translate(-50%,0)",
+    display: "flex",
+    justifyContent: "center",
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  container: {
+    flex: 2,
+    transition: "all 1s linear",
+    background: "#000",
+  },
+  flex: {
+    flex: 1,
+  },
+  list_root: {
+    flex: 1,
     padding: `${theme.spacing(1)}px ${theme.spacing(1)}px`,
     background: theme.palette.primary.light,
-    transition: "all 1s",
   },
-  selected: {
-    left: 0,
-    transform: "translateX(0)",
-  },
-  listItem: {
+  list_item: {
     height: theme.spacing(9),
     background: theme.palette.primary.contrastText,
   },
-  avatar: {
+  list_avatar: {
     background: theme.palette.secondary.main,
     width: theme.spacing(7),
     height: theme.spacing(7),
@@ -69,14 +74,32 @@ export const habitListStyle = makeStyles((theme: Theme) => ({
       height: "80%",
     },
   },
-}));
-
-export const habitDetailStyle = makeStyles((theme: Theme) => ({
-  root: {
-    position: "absolute",
-    left: "600px",
-    paddingTop: "70px",
-    height: "100%",
+  active: {
+    flex: 0.00001,
+    animation: "$flexGrow 1s ease forwards",
+  },
+  detailActive: {
+    flex: 0.00001,
+    animation: "$flexGrowDetail 1s ease forwards",
+  },
+  disable: {
+    flex: 1,
+    animation: "$flexShrink 1s ease forwards",
+  },
+  "@keyframes flexGrow": {
+    to: {
+      flex: 1,
+    },
+  },
+  "@keyframes flexGrowDetail": {
+    to: {
+      flex: 2,
+    },
+  },
+  "@keyframes flexShrink": {
+    to: {
+      flex: 0.00001,
+    },
   },
 }));
 
@@ -89,8 +112,7 @@ export const calendarStyle = makeStyles((theme: Theme) => ({
   },
   item: {
     width: "calc(100%/7)",
-    height: "50px",
-    padding: 0,
+    height: "70px",
   },
   box: {
     width: "100%",

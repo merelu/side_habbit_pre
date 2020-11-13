@@ -11,7 +11,7 @@ import {
 import clock from "../../img/clock.svg";
 import dumbbell from "../../img/dumbbell.svg";
 import study from "../../img/study.svg";
-import { habitListStyle } from "../../styles";
+import { habitBodyStyle } from "../../styles";
 
 type HabitItemProps = {
   habitName: string;
@@ -33,7 +33,7 @@ function HabitItem({
   handleListItemClick,
   handleToggle,
 }: HabitItemProps) {
-  const classes = habitListStyle();
+  const classes = habitBodyStyle();
 
   return (
     <React.Fragment>
@@ -41,14 +41,14 @@ function HabitItem({
         button
         selected={selectedIndex === pk}
         onClick={(e) => handleListItemClick(e, pk)}
-        className={classes.listItem}
+        className={classes.list_item}
       >
         <ListItemAvatar>
           <Avatar
-            variant="square"
+            variant="rounded"
             src={dumbbell}
             alt="dumbbell"
-            className={classes.avatar}
+            className={classes.list_avatar}
           ></Avatar>
         </ListItemAvatar>
         <ListItemText primary={habitName} />
