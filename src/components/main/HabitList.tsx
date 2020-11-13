@@ -9,9 +9,9 @@ import { habitBodyStyle } from "../../styles";
 interface HabitListProps {
   toggleDetailed: (value: boolean) => void;
   detailed: boolean;
-  setTest: React.Dispatch<React.SetStateAction<boolean>>;
+  handlePush: (value: boolean) => void;
 }
-function HabitList({ detailed, toggleDetailed, setTest }: HabitListProps) {
+function HabitList({ detailed, toggleDetailed, handlePush }: HabitListProps) {
   const classes = habitBodyStyle();
   const { habits } = useSelector((state: RootState) => state.habitsReducer);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -26,7 +26,7 @@ function HabitList({ detailed, toggleDetailed, setTest }: HabitListProps) {
     } else if (selectedIndex === index) {
       setSelectedIndex(-1);
       toggleDetailed(false);
-      setTest(true);
+      handlePush(true);
     } else {
       setSelectedIndex(index);
     }

@@ -22,7 +22,7 @@ function HabitBody() {
     (state: RootState) => state.alertReducer
   );
   const [detailed, setDetailed] = useState(false);
-  const [test, setTest] = useState(true);
+  const [push, setPush] = useState(true);
   const toggleDetailed = (value: boolean) => {
     setDetailed(value);
   };
@@ -33,7 +33,9 @@ function HabitBody() {
     }
     dispatch(clear());
   };
-
+  const handlePush = (value: boolean) => {
+    setPush(value);
+  };
   return (
     <React.Fragment>
       <Header />
@@ -41,14 +43,14 @@ function HabitBody() {
         <React.Fragment>
           <div className={classes.appBarSpacer} />
           <main className={classes.root}>
-            {test && (
+            {push && (
               <div
                 className={`${classes.flex} ${
                   detailed ? classes.disable : classes.active
                 }`}
                 onAnimationEnd={() => {
                   if (detailed) {
-                    setTest(false);
+                    handlePush(false);
                   }
                 }}
               />
@@ -56,9 +58,9 @@ function HabitBody() {
             <HabitList
               detailed={detailed}
               toggleDetailed={toggleDetailed}
-              setTest={setTest}
+              handlePush={handlePush}
             />
-            {test && (
+            {!detailed && (
               <div
                 className={`${classes.flex} ${
                   detailed ? classes.disable : classes.active

@@ -46,7 +46,7 @@ export const habitBodyStyle = makeStyles((theme: Theme) => ({
     overflow: "auto",
   },
   appBarSpacer: theme.mixins.toolbar,
-  container: {
+  detail_root: {
     flex: 2,
     transition: "all 1s linear",
     background: "#000",
@@ -56,8 +56,6 @@ export const habitBodyStyle = makeStyles((theme: Theme) => ({
   },
   list_root: {
     flex: 1,
-    padding: `${theme.spacing(1)}px ${theme.spacing(1)}px`,
-    background: theme.palette.primary.light,
   },
   list_item: {
     height: theme.spacing(9),
@@ -78,9 +76,9 @@ export const habitBodyStyle = makeStyles((theme: Theme) => ({
     flex: 0.00001,
     animation: "$flexGrow 1s ease forwards",
   },
-  detailActive: {
-    flex: 0.00001,
-    animation: "$flexGrowDetail 1s ease forwards",
+  detail_active: {
+    opacity: 0,
+    animation: "$opacityDetail 2s ease forwards",
   },
   disable: {
     flex: 1,
@@ -91,9 +89,9 @@ export const habitBodyStyle = makeStyles((theme: Theme) => ({
       flex: 1,
     },
   },
-  "@keyframes flexGrowDetail": {
+  "@keyframes opacityDetail": {
     to: {
-      flex: 2,
+      opacity: 1,
     },
   },
   "@keyframes flexShrink": {

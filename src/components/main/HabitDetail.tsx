@@ -10,7 +10,7 @@ function HabitDetail({}: HabitDetailProps) {
   };
   return (
     <Container
-      className={`${classes.body.container} ${classes.body.detailActive}`}
+      className={`${classes.body.detail_root} ${classes.body.detail_active}`}
     >
       <Grid container spacing={2}>
         <Grid item xs={12} md={8} lg={9}>
