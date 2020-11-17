@@ -30,7 +30,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
   const [inputs, setInputs] = useState<AddHabitInputsType>({
     name: "",
     period: 0,
-    color: "",
+    habit_type: "",
     checkedDayOfWeek: [false, false, false, false, false, false, false],
   });
   const dayOfWeek = [
@@ -42,12 +42,15 @@ function AddHabit({ dialogClose }: AddHabitProps) {
     { id: 5, value: "Fri" },
     { id: 6, value: "Sat" },
   ];
-  const colors = [
+  const habitType = [
     {
-      value: "blue",
+      value: "Excercise",
     },
     {
-      value: "red",
+      value: "Study",
+    },
+    {
+      value: "Time",
     },
   ];
   const { loading } = useSelector((state: RootState) => state.addHabitReducer);
@@ -62,8 +65,8 @@ function AddHabit({ dialogClose }: AddHabitProps) {
       [id]: type === "number" ? parseInt(value) : value,
     }));
   };
-  const handleColor = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs((inputs) => ({ ...inputs, color: e.target.value }));
+  const handleHabitType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs((inputs) => ({ ...inputs, habit_type: e.target.value }));
   };
   const handlCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((inputs) => ({
@@ -128,14 +131,14 @@ function AddHabit({ dialogClose }: AddHabitProps) {
           <Grid item sm={6}>
             <TextField
               select
-              label="color"
-              value={inputs.color}
-              helperText="Please select color"
+              label="Habit Type"
+              value={inputs.habit_type}
+              helperText="Please select habit type"
               variant="outlined"
               required
-              onChange={handleColor}
+              onChange={handleHabitType}
             >
-              {colors.map((option) => (
+              {habitType.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.value}
                 </MenuItem>

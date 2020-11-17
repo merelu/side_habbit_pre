@@ -9,21 +9,20 @@ import {
 import React, { useState } from "react";
 import { generateCalendar } from "../../services/calendar.api";
 import { calendarStyle } from "../../styles";
-import CalendarItem from "./CalendarItem";
 
 const month: string[] = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
+  "January",
+  "Feburary",
+  "March",
+  "April",
   "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 const dayName: string[] = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"];
 
@@ -33,51 +32,56 @@ function Calendar() {
   let dateList = generateCalendar(_date);
   return (
     <Paper className={classes.root}>
-      <Grid container spacing={2}>
-        <Box className={classes.info}>
-          <Button
-            onClick={function () {
-              setDate(new Date(_date.getFullYear(), _date.getMonth() - 1));
-            }}
-          >
-            &#10094;
-          </Button>
-          <Typography align="center" variant="h4">
-            {month[_date.getMonth()]} {_date.getFullYear()}
+      <Grid container className={classes.info}>
+        <Button
+          onClick={function () {
+            setDate(new Date(_date.getFullYear(), _date.getMonth() - 1));
+          }}
+        >
+          &#10094;
+        </Button>
+        <Typography align="center" variant="h4">
+          {month[_date.getMonth()]}
+          <Typography align="center" variant="h6">
+            {_date.getFullYear()}
           </Typography>
-          <Button
-            onClick={function () {
-              setDate(new Date(_date.getFullYear(), _date.getMonth() + 1));
-            }}
-          >
-            &#10095;
-          </Button>
-        </Box>
+        </Typography>
+        <Button
+          onClick={function () {
+            setDate(new Date(_date.getFullYear(), _date.getMonth() + 1));
+          }}
+        >
+          &#10095;
+        </Button>
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container className={classes.dayName_container}>
         {dayName.map((value) => (
-          <Grid item key={value} className={classes.item}>
-            <Box className={classes.box}>
-              <Typography align="center" variant="h6">
-                {value}
-              </Typography>
-            </Box>
+          <Grid item key={value} className={classes.dayName}>
+            <Typography
+              align="center"
+              variant="h6"
+              className={classes.dayName_text}
+            >
+              {value}
+            </Typography>
           </Grid>
         ))}
       </Grid>
       <Divider />
-      <Grid container spacing={2} className={classes.root}>
+      <Grid container className={classes.date_container}>
         {dateList.map((v) =>
           v.status ? (
-            <Grid item key={v.key} className={classes.item}>
-              <Box className={classes.box}>
-                <CalendarItem date={v.date} />
-              </Box>
+            <Grid item key={v.key} className={classes.date_Item}>
+              <Typography
+                align="center"
+                variant="h6"
+                className={classes.item_text}
+              >
+                {v.date && v.date.getDate()}
+              </Typography>
             </Grid>
           ) : (
-            <Grid item key={v.key} className={classes.item}>
-              <Box className={classes.emptyBox}></Box>
-            </Grid>
+            <Grid item key={v.key} className={classes.date_Item}></Grid>
           )
         )}
       </Grid>

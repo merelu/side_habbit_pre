@@ -51,6 +51,7 @@ function HabitList({ detailed, toggleDetailed, handlePush }: HabitListProps) {
             key={state.pk}
             pk={state.pk}
             habitName={state.name}
+            habit_type={state.habit_type}
             selectedIndex={selectedIndex}
             handleListItemClick={handleListItemClick}
             handleToggle={handleToggle}

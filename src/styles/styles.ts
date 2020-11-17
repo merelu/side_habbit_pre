@@ -49,7 +49,7 @@ export const habitBodyStyle = makeStyles((theme: Theme) => ({
   detail_root: {
     flex: 2,
     transition: "all 1s linear",
-    background: "#000",
+    background: theme.palette.primary.light,
   },
   flex: {
     flex: 1,
@@ -102,22 +102,48 @@ export const habitBodyStyle = makeStyles((theme: Theme) => ({
 }));
 
 export const calendarStyle = makeStyles((theme: Theme) => ({
-  root: {},
+  root: {
+    background: theme.palette.primary.contrastText,
+    marginTop: "10px",
+    width: "100%",
+  },
   info: {
-    display: "flex",
     justifyContent: "space-between",
-    width: "100%",
+    background: theme.palette.secondary.main,
+    height: "80px",
+    "& .MuiTypography-root": {
+      color: theme.palette.primary.dark,
+    },
   },
-  item: {
+  dayName_container: {
+    height: "50px",
+    width: "90%",
+    margin: "auto",
+  },
+  dayName_text: {
+    marginTop: "14px",
+  },
+  dayName: {
     width: "calc(100%/7)",
-    height: "70px",
-  },
-  box: {
-    width: "100%",
     height: "100%",
+  },
+  date_container: {
+    width: "90%",
+    margin: "auto",
+    paddingBottom: "50px",
+  },
+  date_Item: {
+    width: "calc(100%/7)",
+    height: "60px",
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: theme.palette.primary.dark,
   },
   emptyBox: {
     width: "100%",
     height: "100%",
+  },
+  item_text: {
+    marginTop: "14px",
   },
 }));

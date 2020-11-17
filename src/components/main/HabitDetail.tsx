@@ -12,8 +12,8 @@ function HabitDetail({}: HabitDetailProps) {
     <Container
       className={`${classes.body.detail_root} ${classes.body.detail_active}`}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={8} lg={9}>
+      <Grid container>
+        <Grid item xs={12} sm={6} md={7}>
           <Calendar />
         </Grid>
       </Grid>

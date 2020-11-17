@@ -14,24 +14,3 @@ body {
   background: #bbc7ba;
   height: 100%;
 }
-
-.dateBox {
-  display: inline-block;
-  color: black;
-  font-size: 1rem;
-  line-height: 3.5rem;
-  width: 14.28%;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  text-decoration: none;
-}
-
-.dateBox:hover {
-  background-color: #71767c;
-}
-
-.dateBox:active,
-.dateBox:active {
-  background-color: #4381ce;
-}

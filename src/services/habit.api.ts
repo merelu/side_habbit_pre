@@ -5,9 +5,9 @@ export interface Habit {
   name: string;
   pk: number;
   period: number;
+  habit_type: string;
   checkedDayOfWeek: boolean[];
   startDate: Date;
-  color: string;
   endDate: Date;
   NumOfTodo: number;
 }
@@ -53,9 +53,7 @@ function dateFormat(date: Date, mode: DateFormatMode) {
   if (mode === "create") {
     result = `${date.getFullYear()}-${numFormat(
       date.getMonth() + 1
-    )}-${numFormat(date.getDate())} ${numFormat(date.getHours())}:${numFormat(
-      date.getMinutes()
-    )}`;
+    )}-${numFormat(date.getDate())}`;
   } else if (mode === "search") {
     result = `${date.getFullYear()}-${numFormat(
       date.getMonth() + 1
@@ -71,6 +69,7 @@ export async function addHabit(habit: AddHabitInputsType) {
     name: habit.name,
     start_date: dateFormat(start_date, "create"),
     end_date: dateFormat(end_date, "create"),
+    habit_type: habit.habit_type,
     check_day_of_week: habit.checkedDayOfWeek,
   };
 

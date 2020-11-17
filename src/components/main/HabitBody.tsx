@@ -3,7 +3,7 @@ import { RootState } from "../../store/reducers";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "./Header";
 import Intro from "./Intro";
-import { Snackbar } from "@material-ui/core";
+import { Divider, Snackbar } from "@material-ui/core";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { clear } from "../../store/actions";
 import HabitList from "./HabitList";
@@ -67,7 +67,14 @@ function HabitBody() {
                 }`}
               />
             )}
-            {detailed ? <HabitDetail /> : <React.Fragment />}
+            {detailed ? (
+              <React.Fragment>
+                <Divider orientation="vertical" flexItem />
+                <HabitDetail />{" "}
+              </React.Fragment>
+            ) : (
+              <React.Fragment />
+            )}
           </main>
         </React.Fragment>
       ) : (

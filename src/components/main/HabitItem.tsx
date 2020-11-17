@@ -17,6 +17,7 @@ type HabitItemProps = {
   habitName: string;
   pk: number;
   selectedIndex: number;
+  habit_type: string;
   checked: number[];
   handleListItemClick: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -30,11 +31,44 @@ function HabitItem({
   pk,
   selectedIndex,
   checked,
+  habit_type,
   handleListItemClick,
   handleToggle,
 }: HabitItemProps) {
   const classes = habitBodyStyle();
-
+  const selectIcon = (value: string) => {
+    switch (value) {
+      case "Excercise":
+        return (
+          <Avatar
+            variant="rounded"
+            src={dumbbell}
+            alt="excercise"
+            className={classes.list_avatar}
+          ></Avatar>
+        );
+      case "Study":
+        return (
+          <Avatar
+            variant="rounded"
+            src={study}
+            alt="study"
+            className={classes.list_avatar}
+          ></Avatar>
+        );
+      case "Time":
+        return (
+          <Avatar
+            variant="rounded"
+            src={clock}
+            alt="time"
+            className={classes.list_avatar}
+          ></Avatar>
+        );
+      default:
+        return <Avatar variant="rounded"></Avatar>;
+    }
+  };
   return (
     <React.Fragment>
       <ListItem
@@ -43,14 +77,7 @@ function HabitItem({
         onClick={(e) => handleListItemClick(e, pk)}
         className={classes.list_item}
       >
-        <ListItemAvatar>
-          <Avatar
-            variant="rounded"
-            src={dumbbell}
-            alt="dumbbell"
-            className={classes.list_avatar}
-          ></Avatar>
-        </ListItemAvatar>
+        <ListItemAvatar>{selectIcon(habit_type)}</ListItemAvatar>
         <ListItemText primary={habitName} />
         <ListItemSecondaryAction>
           <Checkbox
