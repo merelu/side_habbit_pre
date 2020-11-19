@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/reducers";
-import { todayHabitsRequest } from "../../store/actions";
+import { selectHabit, todayHabitsRequest } from "../../store/actions";
 import { List } from "@material-ui/core";
 import HabitItem from "./HabitItem";
 import { habitBodyStyle } from "../../styles";
@@ -13,22 +13,24 @@ interface HabitListProps {
 }
 function HabitList({ detailed, toggleDetailed, handlePush }: HabitListProps) {
   const classes = habitBodyStyle();
-  const { habits } = useSelector((state: RootState) => state.habitsReducer);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const { habits, selectedIndex } = useSelector(
+    (state: RootState) => state.habitsReducer
+  );
   const [checked, setChecked] = useState<number[]>([]);
+  const dispatch = useDispatch();
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
   ) => {
     if (selectedIndex < 0) {
-      setSelectedIndex(index);
+      dispatch(selectHabit(index));
       toggleDetailed(true);
     } else if (selectedIndex === index) {
-      setSelectedIndex(-1);
+      dispatch(selectHabit(-1));
       toggleDetailed(false);
       handlePush(true);
     } else {
-      setSelectedIndex(index);
+      dispatch(selectHabit(index));
     }
   };
   const handleToggle = (pk: number) => () => {
@@ -46,10 +48,11 @@ function HabitList({ detailed, toggleDetailed, handlePush }: HabitListProps) {
   return (
     <List className={`${classes.list_root}`}>
       {habits &&
-        habits.map((state) => (
+        habits.map((state, idx) => (
           <HabitItem
-            key={state.pk}
+            key={idx}
             pk={state.pk}
+            idx={idx}
             habitName={state.name}
             habit_type={state.habit_type}
             selectedIndex={selectedIndex}

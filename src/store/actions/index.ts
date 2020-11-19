@@ -4,3 +4,4 @@ export * from "./removeHabit.actions";
 export * from "./callHabits.actions";
 export * from "./register.acitons";
 export * from "./alert.actions";
+export * from "./selectHabit.actions";

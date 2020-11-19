@@ -31,7 +31,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
     name: "",
     period: 0,
     habit_type: "",
-    checkedDayOfWeek: [false, false, false, false, false, false, false],
+    check_day_of_week: [false, false, false, false, false, false, false],
   });
   const dayOfWeek = [
     { id: 0, value: "Sun" },
@@ -71,7 +71,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
   const handlCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((inputs) => ({
       ...inputs,
-      checkedDayOfWeek: inputs.checkedDayOfWeek.map((x, index) =>
+      checkedDayOfWeek: inputs.check_day_of_week.map((x, index) =>
         index === Number(e.target.name) ? e.target.checked : x
       ),
     }));
@@ -154,7 +154,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={inputs.checkedDayOfWeek[day.id]}
+                      checked={inputs.check_day_of_week[day.id]}
                       name={day.id.toString()}
                       onChange={handlCheckbox}
                     />

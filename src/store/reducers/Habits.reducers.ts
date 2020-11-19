@@ -5,7 +5,9 @@ let temp = localStorage.getItem("habits");
 if (temp !== null) {
   habits = JSON.parse(temp);
 }
-const initialState: HabitsState = habits ? { habits } : {};
+const initialState: HabitsState = habits
+  ? { habits, selectedIndex: -1 }
+  : { selectedIndex: -1 };
 console.log(initialState);
 
 const habitsReducer = (
@@ -35,6 +37,11 @@ const habitsReducer = (
       };
     case actions.REMOVE_HABIT_FAILURE:
       return { error: action.payload };
+    case actions.SELECT_HABIT:
+      return {
+        ...state,
+        selectedIndex: action.payload,
+      };
     default:
       return state;
   }

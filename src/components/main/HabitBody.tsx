@@ -18,6 +18,7 @@ function Alert(props: AlertProps) {
 function HabitBody() {
   const classes = habitBodyStyle();
   const { loggedIn } = useSelector((state: RootState) => state.authReducer);
+
   const { sbOpen, message, alert_type } = useSelector(
     (state: RootState) => state.alertReducer
   );
@@ -70,7 +71,7 @@ function HabitBody() {
             {detailed ? (
               <React.Fragment>
                 <Divider orientation="vertical" flexItem />
-                <HabitDetail />{" "}
+                <HabitDetail />
               </React.Fragment>
             ) : (
               <React.Fragment />

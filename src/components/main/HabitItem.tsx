@@ -16,6 +16,7 @@ import { habitBodyStyle } from "../../styles";
 type HabitItemProps = {
   habitName: string;
   pk: number;
+  idx: number;
   selectedIndex: number;
   habit_type: string;
   checked: number[];
@@ -29,6 +30,7 @@ type HabitItemProps = {
 function HabitItem({
   habitName,
   pk,
+  idx,
   selectedIndex,
   checked,
   habit_type,
@@ -73,8 +75,8 @@ function HabitItem({
     <React.Fragment>
       <ListItem
         button
-        selected={selectedIndex === pk}
-        onClick={(e) => handleListItemClick(e, pk)}
+        selected={selectedIndex === idx}
+        onClick={(e) => handleListItemClick(e, idx)}
         className={classes.list_item}
       >
         <ListItemAvatar>{selectIcon(habit_type)}</ListItemAvatar>

@@ -114,6 +114,9 @@ export const calendarStyle = makeStyles((theme: Theme) => ({
     "& .MuiTypography-root": {
       color: theme.palette.primary.dark,
     },
+    "& .MuiButton-root": {
+      color: theme.palette.primary.dark,
+    },
   },
   dayName_container: {
     height: "50px",
@@ -122,6 +125,9 @@ export const calendarStyle = makeStyles((theme: Theme) => ({
   },
   dayName_text: {
     marginTop: "14px",
+  },
+  dayName_sun: {
+    color: "red",
   },
   dayName: {
     width: "calc(100%/7)",
@@ -135,15 +141,27 @@ export const calendarStyle = makeStyles((theme: Theme) => ({
   date_Item: {
     width: "calc(100%/7)",
     height: "60px",
-    borderWidth: "1px",
-    borderStyle: "solid",
-    borderColor: theme.palette.primary.dark,
   },
   emptyBox: {
     width: "100%",
     height: "100%",
   },
+  item_border: {
+    position: "relative",
+    width: "50px",
+    height: "50px",
+    margin: "5px auto",
+  },
+  item_active: {
+    border: "1px solid",
+    borderColor: theme.palette.primary.dark,
+    borderRadius: "50%",
+  },
   item_text: {
-    marginTop: "14px",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    fontSize: "1.5em",
+    transform: "translate(-50%,-50%)",
   },
 }));

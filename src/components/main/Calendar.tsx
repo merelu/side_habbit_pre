@@ -1,13 +1,8 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  Paper,
-  Typography,
-} from "@material-ui/core";
+import { Button, Divider, Grid, Paper, Typography } from "@material-ui/core";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { generateCalendar } from "../../services/calendar.api";
+import { RootState } from "../../store/reducers";
 import { calendarStyle } from "../../styles";
 
 const month: string[] = [
@@ -30,6 +25,9 @@ function Calendar() {
   const classes = calendarStyle();
   const [_date, setDate] = useState<Date>(new Date());
   let dateList = generateCalendar(_date);
+  const { selectedIndex, habits } = useSelector(
+    (state: RootState) => state.habitsReducer
+  );
   return (
     <Paper className={classes.root}>
       <Grid container className={classes.info}>
@@ -42,9 +40,7 @@ function Calendar() {
         </Button>
         <Typography align="center" variant="h4">
           {month[_date.getMonth()]}
-          <Typography align="center" variant="h6">
-            {_date.getFullYear()}
-          </Typography>
+          <div>{_date.getFullYear()}</div>
         </Typography>
         <Button
           onClick={function () {
@@ -55,12 +51,14 @@ function Calendar() {
         </Button>
       </Grid>
       <Grid container className={classes.dayName_container}>
-        {dayName.map((value) => (
+        {dayName.map((value, idx) => (
           <Grid item key={value} className={classes.dayName}>
             <Typography
               align="center"
               variant="h6"
-              className={classes.dayName_text}
+              className={`${classes.dayName_text} ${
+                idx === 0 && classes.dayName_sun
+              }`}
             >
               {value}
             </Typography>
@@ -69,16 +67,26 @@ function Calendar() {
       </Grid>
       <Divider />
       <Grid container className={classes.date_container}>
-        {dateList.map((v) =>
+        {dateList.map((v, idx) =>
           v.status ? (
-            <Grid item key={v.key} className={classes.date_Item}>
-              <Typography
-                align="center"
-                variant="h6"
-                className={classes.item_text}
+            <Grid
+              item
+              key={v.key}
+              className={`${classes.date_Item} ${
+                idx % 7 === 0 && classes.dayName_sun
+              }`}
+            >
+              <div
+                className={`${classes.item_border} ${
+                  habits &&
+                  habits[selectedIndex].check_day_of_week[idx % 7] === true &&
+                  classes.item_active
+                }`}
               >
-                {v.date && v.date.getDate()}
-              </Typography>
+                <div className={classes.item_text}>
+                  {v.date && v.date.getDate()}
+                </div>
+              </div>
             </Grid>
           ) : (
             <Grid item key={v.key} className={classes.date_Item}></Grid>

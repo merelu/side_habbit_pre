@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, Container, Grid } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import { buttonStyle, habitBodyStyle } from "../../styles";
 import Calendar from "./Calendar";
-interface HabitDetailProps {}
-function HabitDetail({}: HabitDetailProps) {
+
+function HabitDetail() {
   const classes = {
     body: habitBodyStyle(),
     button: buttonStyle(),

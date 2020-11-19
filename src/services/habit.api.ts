@@ -6,7 +6,7 @@ export interface Habit {
   pk: number;
   period: number;
   habit_type: string;
-  checkedDayOfWeek: boolean[];
+  check_day_of_week: boolean[];
   startDate: Date;
   endDate: Date;
   NumOfTodo: number;
@@ -70,7 +70,7 @@ export async function addHabit(habit: AddHabitInputsType) {
     start_date: dateFormat(start_date, "create"),
     end_date: dateFormat(end_date, "create"),
     habit_type: habit.habit_type,
-    check_day_of_week: habit.checkedDayOfWeek,
+    check_day_of_week: habit.check_day_of_week,
   };
 
   const response = await axios.post("/habit/", body);
