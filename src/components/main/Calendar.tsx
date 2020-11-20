@@ -28,6 +28,36 @@ function Calendar() {
   const { selectedIndex, habits } = useSelector(
     (state: RootState) => state.habitsReducer
   );
+
+  const writeHabit_calendar = (cDate: Date, idx: number) => {
+    let sDate = new Date(habits[selectedIndex].start_date);
+    let eDate = new Date(habits[selectedIndex].end_date);
+    if (sDate.getMonth() === cDate.getMonth()) {
+      if (
+        idx + 1 >= sDate.getDate() &&
+        habits[selectedIndex].check_day_of_week[idx % 7] === true
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (eDate.getMonth() === cDate.getMonth()) {
+      if (
+        idx <= eDate.getDate() + 1 &&
+        habits[selectedIndex].check_day_of_week[idx % 7] === true
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (habits[selectedIndex].check_day_of_week[idx % 7] === true) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
   return (
     <Paper className={classes.root}>
       <Grid container className={classes.info}>
@@ -78,9 +108,7 @@ function Calendar() {
             >
               <div
                 className={`${classes.item_border} ${
-                  habits &&
-                  habits[selectedIndex].check_day_of_week[idx % 7] === true &&
-                  classes.item_active
+                  writeHabit_calendar(_date, idx) && classes.item_active
                 }`}
               >
                 <div className={classes.item_text}>

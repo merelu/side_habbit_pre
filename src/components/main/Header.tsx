@@ -11,8 +11,11 @@ import { useSelector } from "react-redux";
 import { appBarStyle } from "../../styles";
 import { AppBar, Toolbar } from "@material-ui/core";
 import { history } from "../../configureStore";
-
-function Header() {
+interface HeaderProps {
+  toggleDetailed: (value: boolean) => void;
+  handlePush: (value: boolean) => void;
+}
+function Header({ toggleDetailed, handlePush }: HeaderProps) {
   const style = appBarStyle();
   const handleBack = () => {
     history.goBack();
@@ -34,7 +37,7 @@ function Header() {
             </Link>
           </div>
 
-          <AuthDialog />
+          <AuthDialog toggleDetailed={toggleDetailed} handlePush={handlePush} />
           {loggedIn && (
             <>
               <AddhabitDialog />

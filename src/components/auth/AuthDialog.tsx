@@ -12,7 +12,11 @@ import { clear } from "../../store/actions";
 import Loading from "../error/Loading";
 import { setCookie } from "../../services";
 
-function AuthDialog() {
+interface AuthDialogProps {
+  toggleDetailed: (value: boolean) => void;
+  handlePush: (value: boolean) => void;
+}
+function AuthDialog({ toggleDetailed, handlePush }: AuthDialogProps) {
   const [open, setOpen] = useState(false);
   //mode - true: login / false: register
   const [mode, setMode] = useState(true);
@@ -46,6 +50,8 @@ function AuthDialog() {
             dispatch(logout());
             setCookie("auth", "", -1);
             localStorage.clear();
+            toggleDetailed(false);
+            handlePush(true);
           }}
         >
           <ExitToAppIcon />

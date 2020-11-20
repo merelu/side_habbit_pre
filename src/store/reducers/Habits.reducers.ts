@@ -7,7 +7,7 @@ if (temp !== null) {
 }
 const initialState: HabitsState = habits
   ? { habits, selectedIndex: -1 }
-  : { selectedIndex: -1 };
+  : { habits: {}, selectedIndex: -1 };
 console.log(initialState);
 
 const habitsReducer = (

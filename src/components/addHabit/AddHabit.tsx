@@ -71,7 +71,7 @@ function AddHabit({ dialogClose }: AddHabitProps) {
   const handlCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((inputs) => ({
       ...inputs,
-      checkedDayOfWeek: inputs.check_day_of_week.map((x, index) =>
+      check_day_of_week: inputs.check_day_of_week.map((x, index) =>
         index === Number(e.target.name) ? e.target.checked : x
       ),
     }));

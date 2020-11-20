@@ -13,6 +13,6 @@ export type HabitsAction =
 export type HabitsState = {
   loading?: boolean;
   error?: Error;
-  habits?: Habit[];
+  habits: Habit[];
   selectedIndex: number;
 };

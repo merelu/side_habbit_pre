@@ -22,6 +22,9 @@ function HabitBody() {
   const { sbOpen, message, alert_type } = useSelector(
     (state: RootState) => state.alertReducer
   );
+  const { habits, selectedIndex } = useSelector(
+    (state: RootState) => state.habitsReducer
+  );
   const [detailed, setDetailed] = useState(false);
   const [push, setPush] = useState(true);
   const toggleDetailed = (value: boolean) => {
@@ -37,9 +40,11 @@ function HabitBody() {
   const handlePush = (value: boolean) => {
     setPush(value);
   };
+  console.log("detailed:", detailed);
+  console.log("push:", push);
   return (
     <React.Fragment>
-      <Header />
+      <Header toggleDetailed={toggleDetailed} handlePush={handlePush} />
       {loggedIn ? (
         <React.Fragment>
           <div className={classes.appBarSpacer} />
@@ -57,7 +62,8 @@ function HabitBody() {
               />
             )}
             <HabitList
-              detailed={detailed}
+              habits={habits}
+              selectedIndex={selectedIndex}
               toggleDetailed={toggleDetailed}
               handlePush={handlePush}
             />

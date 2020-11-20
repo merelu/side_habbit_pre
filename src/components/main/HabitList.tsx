@@ -5,17 +5,22 @@ import { selectHabit, todayHabitsRequest } from "../../store/actions";
 import { List } from "@material-ui/core";
 import HabitItem from "./HabitItem";
 import { habitBodyStyle } from "../../styles";
+import { Habit } from "../../services";
 
 interface HabitListProps {
+  habits?: Habit[];
+  selectedIndex: number;
   toggleDetailed: (value: boolean) => void;
-  detailed: boolean;
   handlePush: (value: boolean) => void;
 }
-function HabitList({ detailed, toggleDetailed, handlePush }: HabitListProps) {
+function HabitList({
+  habits,
+  selectedIndex,
+  toggleDetailed,
+  handlePush,
+}: HabitListProps) {
   const classes = habitBodyStyle();
-  const { habits, selectedIndex } = useSelector(
-    (state: RootState) => state.habitsReducer
-  );
+
   const [checked, setChecked] = useState<number[]>([]);
   const dispatch = useDispatch();
   const handleListItemClick = (
@@ -31,6 +36,7 @@ function HabitList({ detailed, toggleDetailed, handlePush }: HabitListProps) {
       handlePush(true);
     } else {
       dispatch(selectHabit(index));
+      toggleDetailed(true);
     }
   };
   const handleToggle = (pk: number) => () => {

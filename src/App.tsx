@@ -40,6 +40,7 @@ const App = () => {
       <ConnectedRouter history={history}>
         <Switch>
           <Route exact path="/" component={HabitBody} />
+          {/* <Route path="/list" component={HabitBody}/> */}
           <Route
             path="/networkerror"
             render={() => (

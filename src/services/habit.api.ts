@@ -7,8 +7,8 @@ export interface Habit {
   period: number;
   habit_type: string;
   check_day_of_week: boolean[];
-  startDate: Date;
-  endDate: Date;
+  start_date: Date;
+  end_date: Date;
   NumOfTodo: number;
 }
 //-------------------------------Add habit-------------------------------------
