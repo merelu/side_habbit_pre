@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store/reducers";
-import { selectHabit, todayHabitsRequest } from "../../store/actions";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { selectHabit } from "../../store/actions";
 import { List } from "@material-ui/core";
 import HabitItem from "./HabitItem";
 import { habitBodyStyle } from "../../styles";
 import { Habit } from "../../services";
+import { useHistory } from "react-router";
+import { history } from "../../configureStore";
 
 interface HabitListProps {
   habits?: Habit[];
@@ -20,7 +21,6 @@ function HabitList({
   handlePush,
 }: HabitListProps) {
   const classes = habitBodyStyle();
-
   const [checked, setChecked] = useState<number[]>([]);
   const dispatch = useDispatch();
   const handleListItemClick = (
@@ -34,6 +34,7 @@ function HabitList({
       dispatch(selectHabit(-1));
       toggleDetailed(false);
       handlePush(true);
+      history.push("/list");
     } else {
       dispatch(selectHabit(index));
       toggleDetailed(true);

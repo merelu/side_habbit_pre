@@ -10,6 +10,8 @@ import HabitBody from "./components/main/HabitBody";
 import ErrorPage from "./components/error/ErrorPage";
 import { history } from "./configureStore";
 import Loading from "./components/error/Loading";
+import Header from "./components/main/Header";
+import Intro from "./components/main/Intro";
 
 //폰트 적용
 const theme = createMuiTheme({
@@ -38,16 +40,16 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <ConnectedRouter history={history}>
+        <Route path="/" component={Header} />
         <Switch>
-          <Route exact path="/" component={HabitBody} />
-          {/* <Route path="/list" component={HabitBody}/> */}
+          <Route exact path="/" component={Intro} />
+          <Route path="/list" component={HabitBody}></Route>
           <Route
             path="/networkerror"
             render={() => (
               <ErrorPage status="---" description="Network Error" />
             )}
           />
-          <Route path="/loading" component={Loading} />
           <Route component={ErrorPage} />
         </Switch>
       </ConnectedRouter>

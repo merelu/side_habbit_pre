@@ -1,6 +1,7 @@
 .loadingBody {
   width: 250px;
   height: 250px;
+  background: transparent;
 }
 .ring {
   position: absolute;

@@ -10,6 +10,7 @@ import { RootState } from "../../store/reducers";
 import { boxStyle } from "../../styles";
 import Alert from "@material-ui/lab/Alert";
 import { clear } from "../../store/actions";
+import { Link } from "react-router-dom";
 
 interface LoginProps {
   dialogClose: () => void;
@@ -23,9 +24,7 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
   });
   const { email, password } = inputs;
   const [submitted, setSubmitted] = useState(false);
-  const { loggingIn, loggedIn } = useSelector(
-    (state: RootState) => state.authReducer
-  );
+  const { loggedIn } = useSelector((state: RootState) => state.authReducer);
   const { alert_type, message, sbOpen } = useSelector(
     (state: RootState) => state.alertReducer
   );
@@ -91,7 +90,9 @@ function Login({ dialogClose, changeRegisterMode }: LoginProps) {
       </DialogContent>
       <DialogActions>
         <Button onClick={changeRegisterMode}>Register</Button>
-        <Button onClick={loginSubmit}>Login</Button>
+        <Link to="/list">
+          <Button onClick={loginSubmit}>Login</Button>
+        </Link>
         <Button
           onClick={() => {
             dialogClose();

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Avatar,
   Checkbox,
@@ -12,6 +12,7 @@ import clock from "../../img/clock.svg";
 import dumbbell from "../../img/dumbbell.svg";
 import study from "../../img/study.svg";
 import { habitBodyStyle } from "../../styles";
+import { Link } from "react-router-dom";
 
 type HabitItemProps = {
   habitName: string;

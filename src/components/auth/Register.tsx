@@ -30,7 +30,7 @@ function Register({ changeLoginMode }: RegisterProps) {
   const { registered } = useSelector(
     (state: RootState) => state.registerReducer
   );
-  const { alert_type, message, sbOpen } = useSelector(
+  const { alert_type, message } = useSelector(
     (state: RootState) => state.alertReducer
   );
   const dispatch = useDispatch();
@@ -60,7 +60,7 @@ function Register({ changeLoginMode }: RegisterProps) {
         <div className={style.box}>Register</div>
       </DialogTitle>
       <DialogContent>
-        {message && !sbOpen && (
+        {message && (
           <Alert
             variant="outlined"
             severity={alert_type}

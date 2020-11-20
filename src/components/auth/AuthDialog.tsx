@@ -8,15 +8,12 @@ import Register from "./Register";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/reducers";
 import { logout } from "../../store/actions/auth.actions";
-import { clear } from "../../store/actions";
+import { clear, sb_success } from "../../store/actions";
 import Loading from "../error/Loading";
 import { setCookie } from "../../services";
+import { Link } from "react-router-dom";
 
-interface AuthDialogProps {
-  toggleDetailed: (value: boolean) => void;
-  handlePush: (value: boolean) => void;
-}
-function AuthDialog({ toggleDetailed, handlePush }: AuthDialogProps) {
+function AuthDialog() {
   const [open, setOpen] = useState(false);
   //mode - true: login / false: register
   const [mode, setMode] = useState(true);
@@ -41,21 +38,20 @@ function AuthDialog({ toggleDetailed, handlePush }: AuthDialogProps) {
     setMode(false);
     dispatch(clear());
   };
-
+  const handleLogout = () => {
+    dispatch(logout());
+    setCookie("auth", "", -1);
+    localStorage.clear();
+    dispatch(sb_success("로그아웃 되었습니다!"));
+  };
   return (
     <>
       {loggedIn ? (
-        <IconButton
-          onClick={() => {
-            dispatch(logout());
-            setCookie("auth", "", -1);
-            localStorage.clear();
-            toggleDetailed(false);
-            handlePush(true);
-          }}
-        >
-          <ExitToAppIcon />
-        </IconButton>
+        <Link to="/">
+          <IconButton onClick={handleLogout}>
+            <ExitToAppIcon />
+          </IconButton>
+        </Link>
       ) : (
         <IconButton onClick={dialogOpen}>
           <AccountCircle />
