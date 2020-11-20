@@ -108,7 +108,9 @@ function Calendar() {
             >
               <div
                 className={`${classes.item_border} ${
-                  writeHabit_calendar(_date, idx) && classes.item_active
+                  habits &&
+                  writeHabit_calendar(_date, idx) &&
+                  classes.item_active
                 }`}
               >
                 <div className={classes.item_text}>
