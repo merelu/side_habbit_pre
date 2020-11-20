@@ -40,8 +40,6 @@ function HabitBody() {
   const handlePush = (value: boolean) => {
     setPush(value);
   };
-  console.log("detailed:", detailed);
-  console.log("push:", push);
   return (
     <React.Fragment>
       <Header toggleDetailed={toggleDetailed} handlePush={handlePush} />

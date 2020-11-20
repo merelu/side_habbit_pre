@@ -1,7 +1,7 @@
 import { Button, Divider, Grid, Paper, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { generateCalendar } from "../../services/calendar.api";
+import { generateCalendar, setFixNum } from "../../services/calendar.api";
 import { RootState } from "../../store/reducers";
 import { calendarStyle } from "../../styles";
 
@@ -32,7 +32,11 @@ function Calendar() {
   const writeHabit_calendar = (cDate: Date, idx: number) => {
     let sDate = new Date(habits[selectedIndex].start_date);
     let eDate = new Date(habits[selectedIndex].end_date);
-    if (sDate.getMonth() === cDate.getMonth()) {
+    let startDate = new Date(cDate.getFullYear(), cDate.getMonth(), 1).getDay();
+    if (
+      sDate.getFullYear() === cDate.getFullYear() &&
+      sDate.getMonth() === cDate.getMonth()
+    ) {
       if (
         idx + 1 >= sDate.getDate() &&
         habits[selectedIndex].check_day_of_week[idx % 7] === true
@@ -41,23 +45,35 @@ function Calendar() {
       } else {
         return false;
       }
-    } else if (eDate.getMonth() === cDate.getMonth()) {
+    } else if (
+      eDate.getFullYear() === cDate.getFullYear() &&
+      eDate.getMonth() === cDate.getMonth()
+    ) {
       if (
-        idx <= eDate.getDate() + 1 &&
+        idx + 1 <= eDate.getDate() + startDate &&
         habits[selectedIndex].check_day_of_week[idx % 7] === true
       ) {
+        console.log("eDate", idx);
         return true;
       } else {
         return false;
       }
-    } else {
+    } else if (
+      `${cDate.getFullYear()}${setFixNum(cDate.getMonth())}` >
+        `${sDate.getFullYear()}${setFixNum(sDate.getMonth())}` &&
+      `${cDate.getFullYear()}${setFixNum(cDate.getMonth())}` <
+        `${eDate.getFullYear()}${setFixNum(eDate.getMonth())}`
+    ) {
       if (habits[selectedIndex].check_day_of_week[idx % 7] === true) {
         return true;
       } else {
         return false;
       }
+    } else {
+      return false;
     }
   };
+
   return (
     <Paper className={classes.root}>
       <Grid container className={classes.info}>
@@ -108,7 +124,7 @@ function Calendar() {
             >
               <div
                 className={`${classes.item_border} ${
-                  habits &&
+                  habits[selectedIndex] &&
                   writeHabit_calendar(_date, idx) &&
                   classes.item_active
                 }`}
