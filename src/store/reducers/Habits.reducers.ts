@@ -27,15 +27,14 @@ const habitsReducer = (
       return {
         error: action.payload,
       };
-    case actions.REMOVE_HABIT_REQUEST:
+    case actions.DELETE_HABIT_REQUEST:
       return {
+        ...state,
         loading: true,
       };
-    case actions.REMOVE_HABIT_SUCCESS:
-      return {
-        habits: action.payload,
-      };
-    case actions.REMOVE_HABIT_FAILURE:
+    case actions.DELETE_HABIT_SUCCESS:
+      return { ...state, loading: false };
+    case actions.DELETE_HABIT_FAILURE:
       return { error: action.payload };
     case actions.SELECT_HABIT:
       return {

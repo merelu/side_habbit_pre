@@ -11,13 +11,13 @@ import { history } from "../../configureStore";
 interface HabitListProps {
   habits?: Habit[];
   selectedIndex: number;
-  toggleDetailed: (value: boolean) => void;
+  handleDetailed: (value: boolean) => void;
   handlePush: (value: boolean) => void;
 }
 function HabitList({
   habits,
   selectedIndex,
-  toggleDetailed,
+  handleDetailed,
   handlePush,
 }: HabitListProps) {
   const classes = habitBodyStyle();
@@ -29,15 +29,15 @@ function HabitList({
   ) => {
     if (selectedIndex < 0) {
       dispatch(selectHabit(index));
-      toggleDetailed(true);
+      handleDetailed(true);
     } else if (selectedIndex === index) {
       dispatch(selectHabit(-1));
-      toggleDetailed(false);
+      handleDetailed(false);
       handlePush(true);
       history.push("/list");
     } else {
       dispatch(selectHabit(index));
-      toggleDetailed(true);
+      handleDetailed(true);
     }
   };
   const handleToggle = (pk: number) => () => {

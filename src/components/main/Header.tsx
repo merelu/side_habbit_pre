@@ -19,12 +19,9 @@ function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-interface HeaderProps {
-  toggleDetailed: (value: boolean) => void;
-  handlePush: (value: boolean) => void;
-}
+interface HeaderProps {}
 
-function Header({ toggleDetailed, handlePush }: HeaderProps) {
+function Header() {
   const style = appBarStyle();
   const { sbOpen, message, alert_type } = useSelector(
     (state: RootState) => state.alertReducer

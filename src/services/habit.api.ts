@@ -112,10 +112,6 @@ export async function callTodayHabit() {
 
 //-------------------------------Delete habit-------------------------------------
 // 수정 필요 db.json 형식 변화 하거나 delete를 안쓰거나
-export async function removeHabit(username: string, id: number) {
-  await axios.delete(`/habits`, {
-    params: { id: String(id), username: username },
-  });
-  const response = await axios.get(`/habits?username=${username}`);
-  return response.data;
+export async function deleteHabit(pk: number) {
+  await axios.delete(`/habit/${pk}/`);
 }

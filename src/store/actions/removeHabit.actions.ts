@@ -1,25 +1,23 @@
 import { AxiosError } from "axios";
 import { Habit } from "../../services";
 
-export const REMOVE_HABIT_REQUEST = "USER_REMOVE_HABIT_REQUEST" as const;
-export const REMOVE_HABIT_SUCCESS = "USER_REMOVE_HABIT_SUCCESS" as const;
-export const REMOVE_HABIT_FAILURE = "USER_REMOVE_HABIT_FAILURE" as const;
+export const DELETE_HABIT_REQUEST = "USER_DELETE_HABIT_REQUEST" as const;
+export const DELETE_HABIT_SUCCESS = "USER_DELETE_HABIT_SUCCESS" as const;
+export const DELETE_HABIT_FAILURE = "USER_DELETE_HABIT_FAILURE" as const;
 
-export const removeHabitRequest = (username: string, id: number) => ({
-  type: REMOVE_HABIT_REQUEST,
+export const deleteHabitRequest = (pk: number) => ({
+  type: DELETE_HABIT_REQUEST,
   payload: {
-    username,
-    id,
+    pk,
   },
 });
 
-export const removeHabitSuccess = (habits: Habit) => ({
-  type: REMOVE_HABIT_SUCCESS,
-  payload: habits,
+export const deleteHabitSuccess = () => ({
+  type: DELETE_HABIT_SUCCESS,
 });
 
-export const removeHabitFailure = (e: AxiosError) => ({
-  type: REMOVE_HABIT_FAILURE,
+export const deleteHabitFailure = (e: AxiosError) => ({
+  type: DELETE_HABIT_FAILURE,
   error: true,
   payload: e,
 });

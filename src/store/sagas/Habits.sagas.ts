@@ -1,7 +1,8 @@
 import { put, call, takeLatest, takeEvery } from "redux-saga/effects";
 
-import { callTodayHabit, removeHabit } from "../../services";
+import { callTodayHabit, deleteHabit } from "../../services";
 import * as actions from "../actions";
+import { sb_success } from "../actions";
 
 function* callTodayHabitsSaga(
   action: ReturnType<typeof actions.todayHabitsRequest>
@@ -16,19 +17,21 @@ function* callTodayHabitsSaga(
 }
 
 function* removeHabitSaga(
-  action: ReturnType<typeof actions.removeHabitRequest>
+  action: ReturnType<typeof actions.deleteHabitRequest>
 ) {
   try {
     const { payload } = action;
-    const response = yield call(removeHabit, payload.username, payload.id);
-    yield put(actions.removeHabitSuccess(response));
+    yield call(deleteHabit, payload.pk);
+    yield put(actions.deleteHabitSuccess());
+    yield put(sb_success("습관삭제가 완료 되었습니다!"));
   } catch (e) {
-    yield put(actions.removeHabitFailure(e));
+    yield put(actions.deleteHabitFailure(e));
   }
 }
 
 export function* habitsSaga() {
   yield takeLatest(actions.TODAY_HABITS_REQUEST, callTodayHabitsSaga);
-  yield takeLatest(actions.REMOVE_HABIT_REQUEST, removeHabitSaga);
+  yield takeLatest(actions.DELETE_HABIT_REQUEST, removeHabitSaga);
+  yield takeLatest(actions.DELETE_HABIT_SUCCESS, callTodayHabitsSaga);
   yield takeEvery(actions.ADDHABIT_SUCCESS, callTodayHabitsSaga);
 }

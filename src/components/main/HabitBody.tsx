@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { RootState } from "../../store/reducers";
 import { useSelector } from "react-redux";
-
 import { Divider } from "@material-ui/core";
 import HabitList from "./HabitList";
 import { habitBodyStyle } from "../../styles";
 import HabitDetail from "./HabitDetail";
+import Header from "./Header";
 
 //alert override snackbar로 사용하기위해 옵션 줌
 
@@ -16,7 +16,7 @@ function HabitBody() {
   );
   const [detailed, setDetailed] = useState(false);
   const [push, setPush] = useState(true);
-  const toggleDetailed = (value: boolean) => {
+  const handleDetailed = (value: boolean) => {
     setDetailed(value);
   };
 
@@ -25,6 +25,7 @@ function HabitBody() {
   };
   return (
     <React.Fragment>
+      <Header />
       <div className={classes.appBarSpacer} />
       <main className={classes.root}>
         {push && (
@@ -42,7 +43,7 @@ function HabitBody() {
         <HabitList
           habits={habits}
           selectedIndex={selectedIndex}
-          toggleDetailed={toggleDetailed}
+          handleDetailed={handleDetailed}
           handlePush={handlePush}
         />
         {!detailed && (
@@ -55,7 +56,10 @@ function HabitBody() {
         {detailed ? (
           <React.Fragment>
             <Divider orientation="vertical" flexItem />
-            <HabitDetail />
+            <HabitDetail
+              handleDetailed={handleDetailed}
+              handlePush={handlePush}
+            />
           </React.Fragment>
         ) : (
           <React.Fragment />

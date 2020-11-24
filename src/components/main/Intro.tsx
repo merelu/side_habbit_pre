@@ -9,10 +9,12 @@ import plan from "../../img/plan.png";
 import route from "../../img/route.png";
 import trophy from "../../img/trophy.png";
 import clock from "../../img/clock.png";
+import Header from "./Header";
 
 function Intro() {
   return (
     <>
+      <Header />
       <div className="intro-container">
         <div className="box">
           <div className="content">

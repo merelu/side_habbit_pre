@@ -43,7 +43,10 @@ export const habitBodyStyle = makeStyles((theme: Theme) => ({
     justifyContent: "center",
     flexGrow: 1,
     height: "100vh",
-    overflow: "auto",
+    "@media screen and (max-width: 1000px)": {
+      flexDirection: "column",
+      height: "auto",
+    },
   },
   appBarSpacer: theme.mixins.toolbar,
   detail_root: {
@@ -80,6 +83,7 @@ export const habitBodyStyle = makeStyles((theme: Theme) => ({
     opacity: 0,
     animation: "$opacityDetail 2s ease forwards",
   },
+
   disable: {
     flex: 1,
     animation: "$flexShrink 1s ease forwards",

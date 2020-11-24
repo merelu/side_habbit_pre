@@ -40,10 +40,9 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <ConnectedRouter history={history}>
-        <Route path="/" component={Header} />
         <Switch>
           <Route exact path="/" component={Intro} />
-          <Route path="/list" component={HabitBody}></Route>
+          <Route path="/list" component={HabitBody} />
           <Route
             path="/networkerror"
             render={() => (
